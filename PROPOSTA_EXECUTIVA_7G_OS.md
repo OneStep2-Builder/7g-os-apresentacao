@@ -3,248 +3,164 @@
 **Dedicado a:** Direção Geral e Proprietária do **7g Roaster** & **7g Apartments**  
 **Localização:** Rua de França 52, Vila Nova de Gaia, Portugal  
 **Desenvolvido por:** Equipe de Tecnologia & Operações (OneStepTo / GestãoChef)  
-**Data:** Outubro de 2026 | **Versão:** 1.0 — Executiva e Confidencial  
+**Data:** Outubro de 2026 | **Versão:** 2.0 — Executiva, Aprofundada e Confidencial  
 
 ---
 
-## 1. RESUMO EXECUTIVO (O Pitch de 60 Segundos)
+## 1. RESUMO EXECUTIVO (A Visão Geral em 60 Segundos)
 
-O **7g Roaster** e o **7g Apartments** construíram uma das marcas mais sólidas e respeitadas de Vila Nova de Gaia e do Norte de Portugal, unindo a excelência do café de especialidade, um brunch de alta gastronomia e uma hospitalidade premiada em alojamento local.
+O **7g Roaster** e o **7g Apartments** tornaram-se uma referência de qualidade em Vila Nova de Gaia e no Norte de Portugal, unindo a arte do café de especialidade, um brunch de alta gastronomia e uma hospitalidade premiada em alojamento local.
 
-No entanto, o sucesso trouxe um desafio que todo negócio em rápida expansão enfrenta: **a fragmentação operacional**.
-Hoje, a operação divide-se entre grupos de WhatsApp informais, escalas de turnos em planilhas ou papel, cadernos manuais de controle de férias e feriados a compensar, custos de ingredientes calculados por estimativa e relatórios que só chegam dias depois do fechamento contábil.
+Porém, gerir 3 frentes distintas ao mesmo tempo gera um custo silencioso e desgastante: **a fragmentação operacional**.
+Hoje, a operação divide-se entre grupos informais de WhatsApp, escalas enviadas por fotos, apontamentos manuais em caderno de férias e feriados compensatórios, reajustes de fornecedores que passam despercebidos e a falta de comunicação em tempo real entre a recepção dos apartamentos e a governança.
 
-A proposta do **7G OS** é simples e transformadora: **reunir 100% da operação do 7G debaixo de um único teto digital proprietário**, desenvolvido sob medida para a nossa identidade e sem depender de assinaturas caras de softwares genéricos que não conversam entre si.
+A proposta do **7G OS** é unificar 100% da operação do 7G debaixo de um único teto digital proprietário:
+* **7G Staff & RH**: O fim das escalas no WhatsApp. Controle de horários, ponto digital no Wi-Fi, pedidos de férias automáticos e trocas de turno inteligentes em 3 vias.
+* **GestãoChef 7G Edition**: Fichas técnicas dinâmicas para o Brunch e Cafeteria com leitura automática de faturas de fornecedores (OCR), cálculo exato de CMV e margens de lucro em tempo real.
+* **7G Torrefação 360°**: Cálculo automático da perda de peso da torra (quebra de 14% a 16%), divisão do lote torrado nos 4 destinos e controle de frescura (pico aromático).
+* **7G Apartments Hub**: Quadro visual da governança dos 7 apartamentos com baixa automática de cápsulas de café 7G, chamados de manutenção com foto e guia digital do hóspede com voucher de incentivo para consumo no brunch.
+* **Cockpit Executivo da Proprietária**: Uma única tela no seu telemóvel para acompanhar faturamento consolidado, custos, margens e fecho pré-contábil sem depender de ninguém.
 
-### O Que Entregamos:
-1. **7G Staff App**: O telemóvel de cada funcionário vira a ferramenta oficial de trabalho (escalas de turnos, ponto digital com conformidade legal em Portugal, pedidos de férias em 1 clique e canal oficial de avisos, acabando de vez com o ruído no WhatsApp pessoal).
-2. **GestãoChef 7G Edition**: Fichas técnicas dinâmicas para o Brunch e Cafeteria com leitura automática de faturas de fornecedores (OCR), cálculo exato de CMV (Custo das Mercadorias Vendidas) e margens de lucro em tempo real.
-3. **Inventário 360° & Torrefação**: Controle da jornada completa do café (grão verde → lote torrado → sacos B2C e-commerce / revenda B2B / consumo da cafeteria / cortesias dos apartamentos).
-4. **7G Apartments Hub**: Painel de governança e arrumação de quartos em tempo real, reposição de consumíveis integrada ao estoque geral e experiência personalizada para o hóspede.
-5. **Cockpit Executivo da Dona**: Uma tela no seu telemóvel onde você acompanha, ao vivo, a faturação do dia, custo com mão de obra, margem de lucro e ocupação, sem precisar pedir relatórios a ninguém.
-
-> **Impacto Estimado:** Economia imediata de **+30 horas mensais** de trabalho administrativo da gerência, redução de **3% a 5%** em desperdícios e perdas de estoque, e blindagem trabalhista total perante a legislação portuguesa.
+> **Impacto Estimado:** Economia de **+30 horas mensais** da gerência, redução de **3% a 5%** em desperdícios e perdas de estoque, blindagem trabalhista total perante a ACT e a criação de um **ativo tecnológico próprio** que valoriza a marca 7G.
 
 ---
 
-## 2. O DIAGNÓSTICO: OS 5 GARGALOS INVISÍVEIS DA OPERAÇÃO ATUAL
+## 2. O QUE CADA FERRAMENTA TEM DE DIFERENTE? (A Divisão Cirúrgica)
 
-Quando uma empresa cresce com excelência como a 7G, os custos da falta de processos integrados não aparecem de imediato no extrato bancário, mas corroem silenciosamente o tempo e o lucro:
-
-| Área Operacional | Como Funciona Hoje (O Gargalo) | O Custo Real para a 7G |
-| :--- | :--- | :--- |
-| **Escalas & Comunicação** | Horários enviados em PDF ou foto no WhatsApp; avisos importantes perdidos entre conversas informais; mensagens de trabalho fora do expediente. | Risco de esquecimentos, atrasos nos turnos de pico, insatisfação da equipe e risco de quebra de regras de desconexão profissional. |
-| **Férias e Feriados Compensatórios** | Apontamentos em caderno manual ou planilhas isoladas (ex: "Saldo Caderno Julho", compensação do 15 de Agosto trabalhado, dias ganhos x gozados). | Horas da liderança calculando saldos na ponta do lápis; desfalques na cozinha ou balcão por sobreposição de folgas; vulnerabilidade em inspeções da ACT. |
-| **Controle de CMV & Faturas** | Faturas da Makro, Recheio e distribuidores guardadas em pastas físicas; os preços dos ovos, leite vegetal ou grão sobem, mas a ficha técnica continua com o preço antigo. | Margem de lucro esmagada sem a direção perceber; pratos que parecem lucrativos podem estar dando prejuízo operacional. |
-| **Torrefação vs. Consumo** | O café verde é torrado, mas o destino dos lotes (venda no site, pacotes de 250g no balcão, uso no espresso bar e amenities nos quartos) não é baixado de forma unificada. | Divergência de estoque, perda de rastreabilidade de lotes e dificuldade de planejar compras internacionais de sacas verdes. |
-| **Visão da Proprietária** | Para saber o lucro real do mês, é necessário esperar o balancete da contabilidade semanas depois. | Decisões estratégicas tomadas com base no retrovisor, e não no painel de bordo em tempo real. |
-
----
-
-## 3. A SOLUÇÃO: OS 4 MÓDULOS DO ECOSSISTEMA 7G OS
-
-O **7G OS** foi concebido não como um software engessado de prateleira, mas como um ecossistema moldado exatamente para as rotinas do 7g Roaster e dos 7g Apartments.
-
-```
-       ┌─────────────────────────────────────────────────────────────┐
-       │             7G OS — COCKPIT DA PROPRIETÁRIA                │
-       │    Faturação Consolidada · Margens · Ocupação · Pessoal     │
-       └──────────────────────────────┬──────────────────────────────┘
-                                      │
-         ┌────────────────────────────┼────────────────────────────┐
-         ▼                            ▼                            ▼
-┌──────────────────┐        ┌──────────────────┐        ┌──────────────────┐
-│  7G STAFF & TEAM │        │   GESTÃOCHEF &   │        │  7G APARTMENTS   │
-│  (RH & Escalas)  │        │    INVENTÁRIO    │        │       HUB        │
-├──────────────────┤        ├──────────────────┤        ├──────────────────┤
-│• Escalas Semanais│        │• OCR de Faturas  │        │• Status Limpeza  │
-│• Ponto Digital   │        │• Fichas Técnicas │        │• Reposição 7G    │
-│• Saldo de Férias │        │• CMV em Tempo Real│       │• Kits Hóspedes   │
-│• Mural Oficial   │        │• Rastreio Torra  │        │• Vouchers Café   │
-└──────────────────┘        └──────────────────┘        └──────────────────┘
-```
-
----
-
-### MÓDULO 1: 7G STAFF APP (Comunicação, Escalas e RH)
-*O aplicativo oficial no telemóvel de cada barista, cozinheiro e colaborador da governança.*
-
-* **Escalas de Turno no Bolso:** Cada colaborador consulta seu horário semanal atualizado em tempo real. Trocas de turno só acontecem com consentimento mútuo e aprovação da gerência em 1 toque.
-* **Ponto Digital com Conformidade Legal:** Registo de entrada, saída e pausas com validação por geolocalização ou rede Wi-Fi da 7G (em estrito cumprimento do Código do Trabalho português para fiscalização da ACT).
-* **Gestão Automatizada de Férias e Feriados:**
-  - Substituição definitiva do "caderno de papel".
-  - O sistema calcula automaticamente os dias ganhos no ano, dias gozados e feriados trabalhados a compensar (ex: folga compensatória do feriado de 15 de Agosto).
-  - O funcionário submete o pedido pelo app; a gerência vê o impacto no calendário geral (evitando que dois baristas seniores fiquem de férias no mesmo fim de semana) e aprova instantaneamente.
-* **Mural de Comunicados e Procedimentos (SOPs):**
-  - Comunicados operacionais oficiais com confirmação de leitura ("Aviso: novo lote de café da Etiópia disponível para calibração").
-  - Acesso aos manuais de serviço: receitas padrão, regras de abertura e fecho da cafeteria e checklist de higienização.
-
----
-
-### MÓDULO 2: GESTÃOCHEF 7G EDITION (Engenharia de Custos, Faturas & CMV)
-*O cérebro financeiro da cozinha e do balcão de café.*
-
-* **Leitura Automática de Faturas (OCR Inteligente):**
-  - Basta fotografar ou subir o PDF da fatura do fornecedor (Makro, fornecedores de hortifrúti, laticínios, embalagens).
-  - O sistema extrai os itens, quantidades e valores em segundos, atualizando o custo unitário dos ingredientes no banco de dados.
-* **Fichas Técnicas Vivas (Brunch & Barista):**
-  - Cada receita (ex: *Brunch Bowl, Tosta de Salmão, Flat White de Origem Única, Cold Brew*) tem seu custo real recalculado a cada nova compra.
-  - Alerta imediato se a margem de contribuição de um prato cair abaixo da meta estabelecida.
-* **Análise de Lucratividade:**
-  - Identificação clara dos pratos "Estrela" (alta margem e alta venda) e dos pratos que geram prejuízo disfarçado, permitindo ajustes no cardápio com precisão cirúrgica.
-
----
-
-### MÓDULO 3: INVENTÁRIO 360° & RASTREAMENTO DA TORREFAÇÃO
-*Controle absoluto da saca verde até a chávena do cliente.*
-
-* **Jornada do Café Integrada:**
-  - Entrada de Sacas Verdes (origem, produtor, altitude, custo por kg).
-  - Registo de Lotes de Torra (peso verde inserido, curva de torra, peso torrado final, cálculo exato da quebra/perda de massa).
-  - Distribuição Inteligente do Lote:
-    * X kg para pacotes de 250g / 1kg (Loja online e revenda B2B).
-    * Y kg para os moinhos da cafeteria (consumo interno).
-    * Z kg para cápsulas e kits de boas-vindas dos hóspedes do 7g Apartments.
-* **Baixa Automática e Alerta de Ruptura:**
-  - Sempre que a cafeteria vende cafés ou a governança consome pacotes para os quartos, o estoque atualiza.
-  - Alertas no telemóvel do responsável: *"Estoque de Leite de Aveia abaixo do mínimo — encomendar até quinta-feira para o fim de semana"*.
-
----
-
-### MÓDULO 4: 7G APARTMENTS HUB (Governança & Experiência do Hóspede)
-*Sincronização perfeita entre hospitalidade e cafeteria.*
-
-* **Painel da Governança (Housekeeping):**
-  - Tela simplificada no tablet/telemóvel da equipe de limpeza: apartamentos em status *Livre*, *Ocupado*, *Aguardando Limpeza*, *Limpo & Inspecionado* ou *Em Manutenção*.
-  - Elimina chamadas e mensagens no WhatsApp entre recepção e camareiras.
-* **Reposição Automática de Amenities:**
-  - Ao finalizar a arrumação, a camareira valida a reposição de café 7g, água e amenidades com um toque, debitando diretamente do inventário central.
-* **Sinergia Café + Alojamento:**
-  - Controle de vouchers de desconto para brunch e workshops de café incluídos nas reservas diretas, aumentando o faturamento médio por hóspede (*cross-selling*).
-
----
-
-### COCKPIT EXECUTIVO DA PROPRIETÁRIA (A Torre de Controle)
-*A tranquilidade de ter a empresa inteira na palma da mão.*
-
-No telemóvel da dona, acessível de qualquer lugar do mundo:
-1. **Faturação Consolidada:** Total do dia dividido por Cafeteria, Venda de Café/Torra e Alojamento Local.
-2. **Termômetro de CMV:** Percentual de custo de mercadoria em relação à venda do dia.
-3. **Custo de Pessoal (Labor Cost):** Custo de staff em tempo real e horas trabalhadas vs. orçadas.
-4. **Fechamento para a Contabilidade:** Em um clique, relatórios organizados de despesas e faturas prontos para envio ao contabilista, sem pastas cheias de papéis amassados.
-
----
-
-## 4. CASOS DE USO REAIS: O DIA A DIA NO 7G COM O NOVO SISTEMA
-
-Para visualizar o impacto concreto, vejamos 4 situações comuns que acontecem todas as semanas:
-
-### Exemplo 1: O Pedido de Férias e Escala da Cozinha
-* **Cenário Atual:** A cozinheira Carla quer marcar férias de 01 a 21 de setembro. Ela avisa verbalmente ou manda no WhatsApp. O gerente precisa abrir o caderno antigo, conferir quantos dias de férias ela acumulou, checar se ela trabalhou no feriado de 15 de agosto para compensar, e conferir na cabeça se o Sazzad ou o Rabin não estarão de folga no mesmo período. Horas perdidas e risco de erro.
-* **Com o 7G OS:** A Carla abre o 7G Staff App no telemóvel e clica em "Solicitar Férias". O app mostra instantaneamente o saldo dela: *22 dias disponíveis + 1 dia de feriado a compensar*. Ela seleciona as datas. A gerência recebe uma notificação com a visualização do calendário da cozinha (confirmando que há cobertura necessária) e clica em **"Aprovar"**. O saldo da Carla é atualizado automaticamente, a escala mensal bloqueia as datas e o recibo digital fica arquivado para qualquer fiscalização.
-
-### Exemplo 2: O Leite Vegetal e o Custo do Flat White
-* **Cenário Atual:** O fornecedor de leite de aveia e amêndoa aumenta o preço em 12%. A fatura chega, é assinada e vai para a contabilidade. Ninguém atualiza a ficha técnica do café. A 7G vende centenas de Flat Whites achando que tem 75% de margem, mas a margem caiu para 61%.
-* **Com o 7G OS:** A fatura do fornecedor é fotografada no GestãoChef. O sistema identifica o reajuste do leite, atualiza o custo unitário e avisa: *"O custo do ingrediente 'Leite de Aveia' aumentou 12%. A margem do Flat White agora é 61%. Deseja recalcular o preço sugerido ou manter?"*. A direção tem o poder de decidir imediatamente com dados reais.
-
-### Exemplo 3: A Arrumação do Apartamento 4
-* **Cenário Atual:** O hóspede do Apartamento 4 faz check-out às 11h. A recepção manda mensagem no WhatsApp para a governança. No meio da correria do almoço da cafeteria, a mensagem passa batida. Às 14h30, o novo hóspede chega e o quarto ainda não foi liberado.
-* **Com o 7G OS:** Às 11h, o check-out é acionado no sistema. O painel da governança atualiza automaticamente para *"Apartamento 4: Aguardando Limpeza (Check-in previsto: 15h)"*. A camareira inicia a arrumação, dá baixa em 4 cápsulas 7G e 2 garrafas de água no inventário e marca como *"Inspecionado"*. A recepção e a dona veem em verde no telemóvel que o quarto está impecável.
-
-### Exemplo 4: O Fecho do Fim de Semana
-* **Cenário Atual:** Domingo à noite. Para entender se o fim de semana foi lucrativo, é preciso esperar os dados do POS, a contagem de clientes dos apartamentos e as compras de emergência feitas na sexta-feira.
-* **Com o 7G OS:** Domingo às 20h, a proprietária abre o Cockpit Executivo no telemóvel: vê a faturação exata da cafeteria, o volume de café moído e vendido em grão, a taxa de ocupação de 100% dos apartamentos e o CMV consolidado do fim de semana. Zero ansiedade, total previsibilidade.
-
----
-
-## 5. RETORNO SOBRE O INVESTIMENTO (ROI)
-
-Quanto custa não modernizar versus o retorno do 7G OS?
+Para garantir clareza absoluta, cada ferramenta tem uma fronteira muito bem definida:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   ECONOMIA ESTIMADA POR ANO NA 7G                      │
-├────────────────────────────────────────────────────┬───────────────────┤
-│ Redução de tempo gerencial (30h/mês @ 15€/h)       │    5.400 € / ano  │
-│ Controle de CMV & Redução de Desperdício (3% em F&B)│    4.800 € / ano  │
-│ Eliminação de assinaturas de softwares avulsos     │    1.800 € / ano  │
-│ Prevenção de multas laborais e horas extras erradas│    3.000 € / ano  │
-├────────────────────────────────────────────────────┼───────────────────┤
-│ VALOR TOTAL GERADO EM EFICIÊNCIA E ECONOMIA:       │  +15.000 € / ano  │
-└────────────────────────────────────────────────────┴───────────────────┘
+│                        7G OS (O NÚCLEO)                                │
+├───────────────────┬───────────────────┬────────────────────────────────┤
+│ 👥 7G STAFF & RH  │ ☕ 7G TORREFAÇÃO   │ 🏨 7G APARTMENTS               │
+│ O foco são as     │ O foco é a        │ O foco é a hospitalidade, a    │
+│ PESSOAS: escalas, │ PRODUÇÃO do café  │ LIMPEZA dos 7 apartamentos e a │
+│ horários e paz    │ verde e a sua     │ experiência do hóspede.        │
+│ trabalhista.      │ distribuição.     │                                │
+├───────────────────┴───────────────────┴────────────────────────────────┤
+│ 🍽️ GESTÃOCHEF: Cuida da COZINHA/F&B, faturas e margens dos pratos.      │
+│ 📱 COCKPIT DA DONA: A tela única onde os números de tudo se encontram. │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Os 4 Grandes Ativos Estratégicos para a Proprietária:
-1. **Paz de Espírito:** Acabar com o fluxo incessante de mensagens de rotina no WhatsApp pessoal fora do horário.
-2. **Eficiência e Cultura de Time:** Equipe engajada, sabendo suas escalas com antecedência e sentindo que trabalha em uma empresa de ponta.
-3. **Independência Tecnológica:** O software é desenvolvido internamente, adaptado à realidade da 7G, sem risco de cancelamento de planos ou aumentos abusivos de fornecedores estrangeiros.
-4. **Valor de Marca (Valuation):** Um negócio de restauração e alojamento que possui tecnologia e processos próprios vale substancialmente mais no mercado do que um negócio desorganizado.
+---
+
+## 3. DETALHAMENTO DO 7G STAFF & RH (As Duas Pontas)
+
+O módulo de Staff foi concebido para resolver o maior gargalo humano do dia a dia: a gestão de horários, folgas e comunicação da equipe.
+
+### A) LADO DA ADMINISTRAÇÃO (Gerentes e Dona)
+1. **Ficha Cadastral Centralizada do Colaborador:**
+   * Nome, NIF, IBAN, contato de emergência, cargo (Barista, Cozinha, Sala, Governança), tipo de contrato e data de admissão.
+   * Arquivo de documentos obrigatórios (ex: comprovativo de curso de higiene alimentar HACCP, atestado médico).
+2. **Montador Visual de Escalas com Alertas da Lei Trabalhista Portuguesa:**
+   * Montagem visual e rápida através de modelos pré-definidos ("Semana Normal", "Semana com Evento").
+   * **Alertas automáticos contra infrações da ACT:**
+     - Alerta em vermelho se houver violação das **11 horas mínimas de descanso obrigatório** entre o fecho de um turno e a abertura do próximo.
+     - Alerta de ultrapassagem do limite semanal de 40 horas ou folga semanal obrigatória não cumprida.
+3. **Gestão de Modificações e Trocas de Turno:**
+   * O gestor recebe no painel a solicitação pré-aprovada entre dois funcionários e autoriza com 1 toque.
+   * **A escala geral atualiza-se sozinha em tempo real** para todos os funcionários, sem necessidade de reenviar PDFs ou fotos em grupos.
+4. **Cálculo Automático de Férias e Feriados Compensatórios:**
+   * Fim definitivo dos apontamentos em papel e folhas soltas de Excel.
+   * Cálculo automático de dias ganhos no ano, dias gozados e saldo restante.
+   * **Banco de Feriados Trabalhados:** Se a equipe trabalhou em um feriado oficial (ex: 15 de Agosto), o sistema credita automaticamente +1 dia de folga compensatória no perfil de quem esteve em serviço.
+5. **Comunicação Direta & Mural Oficial de Avisos:**
+   * Envio de comunicados gerais ou segmentados por setor (ex: aviso exclusivo para Baristas ou Cozinha).
+   * **Confirmação Obrigatória ("Leu e Confirmou"):** O colaborador clica para confirmar que leu o aviso operacional. A chefia sabe exatamente quem está informado.
+6. **Calendário de Eventos da Empresa:**
+   * Marcação de workshops de café, eventos especiais, provas de café (cupping), feriados e dias de previsão de casa cheia, visível para toda a equipe.
+
+### B) LADO DO FUNCIONÁRIO (No Telemóvel)
+1. **Minha Semana no Bolso:**
+   * Acesso rápido e limpo: horário de amanhã, folgas da semana e com quais colegas vai partilhar o turno.
+2. **Saldo Real de Férias e Feriados:**
+   * O funcionário consulta seu saldo na hora (*ex: 18 dias de férias + 1 dia de feriado a compensar*), eliminando a necessidade de interromper o gerente.
+3. **Fluxo de Troca de Turno Inteligente (3 Vias):**
+   * O funcionário A precisa da folga de quinta-feira → Seleciona o colega B da mesma função e propõe a troca pelo app.
+   * O funcionário B recebe uma notificação e dá o "Aceite".
+   * A solicitação sobe para o Gerente com o status: *"Troca aceita entre A e B. Autorizar?"*.
+   * O gerente autoriza com 1 clique e a escala de ambos é alterada automaticamente.
+4. **Biblioteca de Manuais de Bolso (SOPs):**
+   * Acesso direto a guias rápidos de serviço para consulta rápida:
+     - *"Como calibrar o moinho de espresso pela manhã"*;
+     - *"Checklist de fecho e higienização da cozinha"*;
+     - *"Receita padrão do Cold Brew 7G"*.
+5. **Ponto Digital com Geolocalização / Wi-Fi da 7G:**
+   * Registro de entrada, saída e pausas validado pela conexão à rede Wi-Fi da loja, garantindo 100% de conformidade com a legislação portuguesa perante inspeções da ACT.
 
 ---
 
-## 6. CRONOGRAMA DE IMPLEMENTAÇÃO EM 3 FASES (Piloto Suave)
+## 4. DETALHAMENTO DA TORREFAÇÃO 360° (Desmistificada na Prática)
 
-Para garantir que a operação nunca seja interrompida, propomos um roteiro modular em que cada etapa traz benefícios imediatos (*quick wins*):
+O 7g Roaster possui uma fábrica artesanal de café dentro da sua operação. O novo módulo cuida da produção do café cru até a sua distribuição final.
 
-```mermaid
-gantt
-    title Cronograma de Implementação 7G OS
-    dateFormat  YYYY-MM-DD
-    section Fase 1: Staff & RH
-    Setup da Plataforma & Cadastros        :2026-11-01, 10d
-    Lançamento do 7G Staff App (Escalas/Férias) :2026-11-10, 15d
-    Treinamento da Equipe & Piloto Suave   :2026-11-20, 10d
-    section Fase 2: GestãoChef & Estoque
-    OCR de Faturas & Mapeamento Insumos   :2026-12-01, 15d
-    Fichas Técnicas Brunch & Cafeteria     :2026-12-15, 15d
-    Módulo de Torrefação & Lotes           :2026-12-20, 15d
-    section Fase 3: Apartamentos & Cockpit
-    Painel de Governança dos Apartamentos  :2027-01-05, 15d
-    Cockpit da Dona & Relatórios Contábeis:2027-01-20, 15d
-```
+### O Problema Operacional Real:
+1. **A Quebra de Peso da Torra:** Quando 15 kg de café verde (cru) entram no torrador, a perda de umidade faz saírem cerca de 12,8 kg de café torrado (perda de peso de 14% a 16%). Se o custo não for recalculado sobre o peso torrado final, a empresa tem prejuízo invisível.
+2. **A Divisão do Lote em 4 Destinos Simultâneos:**
+   * Destino 1: Sacos de 250g (para venda na loja online e prateleiras da loja).
+   * Destino 2: Sacos de 1kg (para revenda B2B / Wholesale a outros restaurantes).
+   * Destino 3: Moinhos do espresso bar (consumo interno da cafeteria).
+   * Destino 4: Kits de café e cápsulas para os 7g Apartments.
+3. **Alerta de Frescura (Peak Flavor):** Café especial tem seu pico sensorial entre 7 e 35 dias após a torra. Sem rastreabilidade de datas de lote, pacotes antigos podem ficar esquecidos no armazém.
 
-* **Fase 1 (Semanas 1 a 4) — O Alívio Imediato da Gestão:**
-  - Implantação do **7G Staff App**.
-  - Migração de todos os dados de funcionários e histórico de férias/feriados.
-  - Publicação das escalas da semana diretamente no telemóvel da equipe.
-* **Fase 2 (Semanas 5 a 8) — O Controle do Dinheiro:**
-  - Ativação do **GestãoChef 7G Edition**.
-  - Entrada do OCR de faturas e estruturação das fichas técnicas do menu de brunch e cafés.
-  - Sincronização do estoque de café verde e café torrado.
-* **Fase 3 (Semanas 9 a 12) — A Integração Completa:**
-  - Painel de Housekeeping dos 7 apartamentos.
-  - Entrega do Cockpit Executivo no telemóvel da dona.
-  - Alinhamento de relatórios de exportação com a assessoria contábil.
+### Como Funciona no 7G OS:
+* **Entrada de Sacas Verdes:** Cadastro de origem, produtor, processo e custo por kg.
+* **Registro da Sessão de Torra:** O torrefador informa o peso verde colocado e o peso torrado final. O sistema calcula a taxa de quebra na hora e define o custo real unitário.
+* **Distribuição Automática com 1 Clique:** O torrefador distribui os quilos torrados entre os 4 destinos, alimentando o estoque de cada setor sem qualquer lançamento manual duplicado.
+* **Alerta de Maturação:** O sistema avisa quando um lote deve ser colocado no balcão para garantir o café sempre fresco ao cliente.
 
 ---
 
-## 7. PROPOSTA DE PRÓXIMOS PASSOS (Sem Risco para a 7G)
+## 5. DETALHAMENTO DO 7G APARTMENTS HUB (Governança & Hóspede)
 
-Não é necessário tomar uma decisão definitiva hoje para toda a empresa. Propomos um início consciente e transparente:
+O complexo conta com **7 apartamentos de alojamento local** no mesmo endereço. O módulo resolve a comunicação entre recepção, governança e cafeteria.
 
-> **A Proposta:**  
-> Iniciar um **Piloto de 30 Dias da Fase 1 (7G Staff App)** exclusivamente com a equipe da cozinha e baristas.  
-> Se em 30 dias a gestão de escalas e férias não se tornar pelo menos **50% mais rápida e organizada**, encerramos o processo sem qualquer fricção ou custo fixo acumulado.
+### O Problema Operacional Real:
+* O hóspede do Apartamento 2 faz check-out às 11h. A camareira só sabe se alguém mandar mensagem no WhatsApp. Se a mensagem for esquecida, o quarto atrasa e o novo hóspede das 15h fica insatisfeito.
+* Não há registro das cápsulas de café 7G, águas e amenidades repostas, parecendo que os produtos "somem" da cafeteria.
+* Avarias (como uma lâmpada queimada ou torneira pingando) são esquecidas no boca a boca.
+* O hóspede dorme no 7G, mas toma o café da manhã na rua por falta de incentivo integrado.
+
+### Como Funciona no 7G OS:
+* **Quadro Visual de Housekeeping (em tablet ou telemóvel da limpeza):**
+  - Mostra os 7 apartamentos com status claros por cores:
+    * 🔴 **Ocupado** (hóspede no quarto).
+    * 🔵 **Aguardando Limpeza** (check-out realizado, próximo check-in às 15h).
+    * 🟡 **Em Limpeza** (camareira aciona ao entrar).
+    * 🟢 **Limpo & Inspecionado** (pronto para o próximo hóspede).
+* **Baixa Automática de Reposição:** Ao marcar o quarto como limpo, a governança valida os itens repostos (ex: 2 kits de café 7G e 2 águas), debitando diretamente do estoque central.
+* **Chamados de Manutenção Rápida com Foto:** A camareira identifica um problema, tira uma foto pelo telemóvel e abre o chamado em 10 segundos para a equipe de manutenção.
+* **Guia Digital do Hóspede (QR Code no Quarto):**
+  - O hóspede aponta a câmera e tem acesso a: senha do Wi-Fi, instruções dos equipamentos e da máquina de café 7G, e um **Voucher de 10% de desconto no Brunch da cafeteria**, aumentando o faturamento cruzado (*cross-selling*).
+
+---
+
+## 6. A VISÃO ESTRATÉGICA: DA OPERAÇÃO INTERNA A UM NOVO ATIVO COMERCIAL
+
+Nenhuma cafeteria de especialidade com torrefação e alojamento de charme em Portugal possui um ecossistema operacional desenhado sob medida para esse modelo híbrido.
+
+### A Oportunidade de Parceria (Joint Venture / Spin-off):
+1. **O 7G como Laboratório Oficial ("Flagship Case"):**
+   - O sistema é refinado e testado no dia a dia do 7g Roaster & Apartments.
+   - A 7G torna-se a vitrine de tecnologia e eficiência para o setor de café especial em Portugal e na Europa.
+2. **Comercialização Conjunta (SaaS para outras marcas):**
+   - Centenas de torrefações e cafés no Porto, Lisboa, Madrid, Barcelona e Berlim sofrem com os mesmos gargalos.
+   - O sistema pode ser empacotado como um produto comercializável por assinatura mensal.
+   - **Estrutura de Sociedade:**
+     * **OneStepTo (Tecnologia & Produto):** Responsável por 100% do desenvolvimento, código, infraestrutura e suporte contínuo.
+     * **7G (Chancela de Marca & Validação):** Uso vitalício e gratuito para as suas unidades + **participação de lucros (25% a 30%)** em todas as vendas futuras para o mercado externo.
 
 ---
 
-## 8. GUIA DE APRESENTAÇÃO: COMO CONVERSAR COM A DONA
+## 7. PROPOSTA DE IMPLEMENTAÇÃO: PILOTO DE 30 DIAS SEM RISCO
 
-*(Roteiro estratégico para o desenvolvedor conduzir a reunião presencial)*
+Para iniciar de forma consciente, prática e sem interromper o funcionamento da casa:
 
-### 1. Abertura Empática (Criando Conexão):
-> *"O 7G atingiu um nível de produto, estética e café que é referência em Gaia e no Porto. Mas sei o quanto você e os gerentes dedicam horas de vida apagando incêndios invisíveis: é escala que muda no WhatsApp, funcionário perguntando saldo de férias, planilha de feriado para compensar, e compras de fornecedores que oscilam de preço. Eu tenho uma proposta para resolver isso de forma elegante, moderna e definitiva."*
-
-### 2. Demonstração Visual (Abra o Pitch Deck Interativo no Tablet/Telemóvel):
-> *"Não vim falar de teorias de computador. Quero te mostrar funcionando na prática. Olha como fica o celular de um barista para ver a escala e pedir férias, e olha como fica a sua tela no domingo à noite com o controle de tudo."*
-
-### 3. Respostas para Possíveis Dúvidas da Proprietária:
-* **Objeção:** *"A equipe vai ter dificuldade de mexer em aplicativo?"*
-  * **Resposta:** *"O app foi desenhado para ser mais fácil do que o Instagram ou WhatsApp. São botões grandes, claros e em português. No primeiro dia, o barista já abre para ver que horas entra amanhã. É intuitivo e sem complicação."*
-* **Objeção:** *"Vai exigir muito do meu tempo agora?"*
-  * **Resposta:** *"Pelo contrário. O desenvolvimento e a alimentação dos cadastros serão feitos por mim. O seu papel é apenas usar e usufruir da economia de tempo que isso vai te devolver a cada semana."*
-* **Objeção:** *"Por que criar o nosso em vez de contratar um software pronto da internet?"*
-  * **Resposta:** *"Softwares genéricos cobram mensalidades caras em euro por cada funcionário, não conversam entre cafeteria, torra e apartamentos, e você fica refém das regras deles. O 7G OS é um patrimônio da 7G, feito sob medida para a nossa rotina e sem mensalidades abusivas para terceiros."*
+> **O Compromisso do Piloto:**  
+> Iniciaremos a **Fase 1 (7G Staff & RH)** exclusivamente com a equipe da cozinha e balcão.  
+> Se em 30 dias a gestão de escalas, férias e comunicação não estiver pelo menos **50% mais rápida e organizada**, encerramos o processo sem qualquer vínculo ou custo residual para a 7G.
 
 ---
-*Documento elaborado para a direção do 7g Roaster & 7g Apartments. Todos os direitos reservados.*
+*Proposta comercial confidencial desenvolvida para a administração do 7g Roaster & 7g Apartments.*

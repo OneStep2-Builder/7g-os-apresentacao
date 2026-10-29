@@ -59,11 +59,11 @@
             box-shadow: 0 0 35px -5px rgba(197, 160, 89, 0.25);
         }
         .phone-frame {
-            width: 320px;
-            height: 640px;
+            width: 325px;
+            height: 650px;
             border: 10px solid #232736;
             border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 160, 89, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px rgba(197, 160, 89, 0.18);
             background: #0f1118;
             position: relative;
             overflow: hidden;
@@ -87,99 +87,108 @@
             background: #2b3145;
             border-radius: 10px;
         }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-coffee-500 selection:text-white">
 
-    <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-40 backdrop-blur-md bg-darkbg/90 border-b border-darkborder px-4 lg:px-8 py-3.5">
+    <!-- Header de Navegação Superior -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-darkbg/90 border-b border-darkborder px-4 lg:px-8 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="goToSlide(0)">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-coffee-400 to-coffee-600 flex items-center justify-center font-bold text-darkbg shadow-md text-lg tracking-wider">
                     7G
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
                         <h1 class="text-base font-bold tracking-tight text-white">7G OS</h1>
-                        <span class="px-2 py-0.5 text-[10px] uppercase font-semibold bg-coffee-400/10 text-coffee-300 border border-coffee-400/30 rounded-full">Proposta Estratégica</span>
+                        <span class="px-2 py-0.5 text-[10px] uppercase font-semibold bg-coffee-400/10 text-coffee-300 border border-coffee-400/30 rounded-full">Pitch Estratégico</span>
                     </div>
                     <p class="text-xs text-slate-400">7g Roaster & 7g Apartments · Vila Nova de Gaia</p>
                 </div>
             </div>
 
-            <!-- Slide Navigation Pills -->
-            <nav class="hidden md:flex items-center space-x-1 bg-darkcard p-1 rounded-xl border border-darkborder text-xs">
+            <!-- Navegação por Pílulas -->
+            <nav class="hidden lg:flex items-center space-x-1 bg-darkcard p-1 rounded-xl border border-darkborder text-xs">
                 <button onclick="goToSlide(0)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-white bg-coffee-500/20 text-coffee-300 border border-coffee-400/30" data-slide="0">Visão Geral</button>
                 <button onclick="goToSlide(1)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="1">Diagnóstico</button>
-                <button onclick="goToSlide(2)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="2">App Staff</button>
+                <button onclick="goToSlide(2)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="2">Staff & RH</button>
                 <button onclick="goToSlide(3)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="3">GestãoChef</button>
-                <button onclick="goToSlide(4)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="4">Apartamentos</button>
-                <button onclick="goToSlide(5)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="5">Cockpit Dona</button>
-                <button onclick="goToSlide(6)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="6">Calculadora ROI</button>
-                <button onclick="goToSlide(7)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="7">Cronograma</button>
+                <button onclick="goToSlide(4)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="4">Torrefação</button>
+                <button onclick="goToSlide(5)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="5">Apartamentos</button>
+                <button onclick="goToSlide(6)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="6">Cockpit Dona</button>
+                <button onclick="goToSlide(7)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="7">Calculadora ROI</button>
+                <button onclick="goToSlide(8)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="8">Co-Sociedade</button>
+                <button onclick="goToSlide(9)" class="nav-btn px-3 py-1.5 rounded-lg font-medium transition text-slate-400 hover:text-white" data-slide="9">Piloto 30 Dias</button>
             </nav>
 
             <div class="flex items-center space-x-2">
-                <button onclick="goToSlide(7)" class="inline-flex items-center space-x-2 bg-gradient-to-r from-coffee-400 to-coffee-500 text-darkbg font-semibold px-4 py-2 rounded-xl text-xs hover:brightness-110 shadow-lg shadow-coffee-500/20 transition">
-                    <span>Proposta de Piloto</span>
+                <button onclick="goToSlide(9)" class="inline-flex items-center space-x-2 bg-gradient-to-r from-coffee-400 to-coffee-500 text-darkbg font-semibold px-4 py-2 rounded-xl text-xs hover:brightness-110 shadow-lg shadow-coffee-500/20 transition">
+                    <span>Piloto sem Risco</span>
                     <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container with Slides -->
+    <!-- Conteúdo Principal Dinâmico -->
     <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 flex-1 w-full flex flex-col justify-center">
 
         <!-- SLIDE 0: Capa / Visão Geral -->
-        <section id="slide-0" class="slide-panel block">
+        <section id="slide-0" class="slide-panel block animate-fadeIn">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-6">
                     <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-coffee-500/10 border border-coffee-400/30 text-coffee-300 text-xs font-semibold">
                         <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                        <span>Inovação Operacional Própria para o 7G</span>
+                        <span>Tecnologia Proprietária Sob Medida para o 7G</span>
                     </div>
 
                     <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                        Toda a operação do <span class="gradient-gold font-serif italic">7G</span> reunida na palma da mão.
+                        Toda a operação do <span class="gradient-gold font-serif italic">7G</span> unificada na palma da mão.
                     </h2>
 
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
-                        Uma plataforma proprietária sob medida para o <strong>7g Roaster</strong> e <strong>7g Apartments</strong>. Da escala da equipe e controle de férias no telemóvel ao cálculo automático de CMV, torrefação e arrumação de quartos. Sem mensalidades abusivas e com 100% de controle para a proprietária.
+                        Uma plataforma única desenvolvida para o <strong>7g Roaster</strong> e <strong>7g Apartments</strong>. Da escala da equipe com trocas de turno no telemóvel ao cálculo da quebra de torra, governança de quartos e custos automáticos por fatura.
                     </p>
 
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                         <div class="bg-darkcard border border-darkborder p-3.5 rounded-xl">
                             <div class="text-coffee-400 font-bold text-2xl">+30h</div>
-                            <div class="text-slate-400 text-xs mt-0.5">Poupadas por mês na gestão de escalas</div>
+                            <div class="text-slate-400 text-xs mt-0.5">Poupadas/mês em escalas e recados</div>
                         </div>
                         <div class="bg-darkcard border border-darkborder p-3.5 rounded-xl">
                             <div class="text-emerald-400 font-bold text-2xl">3 a 5%</div>
-                            <div class="text-slate-400 text-xs mt-0.5">Redução de desperdício e fuga de CMV</div>
+                            <div class="text-slate-400 text-xs mt-0.5">Economia em desperdícios e CMV</div>
                         </div>
                         <div class="bg-darkcard border border-darkborder p-3.5 rounded-xl">
                             <div class="text-blue-400 font-bold text-2xl">0</div>
-                            <div class="text-slate-400 text-xs mt-0.5">Papéis, cadernos e WhatsApp de trabalho</div>
+                            <div class="text-slate-400 text-xs mt-0.5">Cadernos de férias e papéis perdidos</div>
                         </div>
                         <div class="bg-darkcard border border-darkborder p-3.5 rounded-xl">
                             <div class="text-amber-400 font-bold text-2xl">100%</div>
-                            <div class="text-slate-400 text-xs mt-0.5">Conformidade com o Código do Trabalho PT</div>
+                            <div class="text-slate-400 text-xs mt-0.5">Conformidade Legal (ACT / Código Trab.)</div>
                         </div>
                     </div>
 
                     <div class="flex flex-wrap gap-3 pt-3">
                         <button onclick="goToSlide(2)" class="bg-coffee-400 text-darkbg font-bold px-6 py-3 rounded-xl text-sm hover:bg-coffee-300 transition flex items-center space-x-2 shadow-lg shadow-coffee-400/20">
                             <i data-lucide="smartphone" class="w-4 h-4"></i>
-                            <span>Ver o App da Staff ao Vivo</span>
+                            <span>Ver App da Staff (Simulador)</span>
                         </button>
                         <button onclick="goToSlide(1)" class="bg-darkcard hover:bg-darkborder/60 text-slate-200 border border-darkborder font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center space-x-2">
                             <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
-                            <span>Conhecer o Diagnóstico</span>
+                            <span>O Diagnóstico Atual</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Card visual de destaque -->
+                <!-- Card visual dos 4 Pilares -->
                 <div class="lg:col-span-5">
                     <div class="bg-gradient-to-br from-darkcard to-darkbg border border-darkborder p-6 rounded-3xl glow-gold relative overflow-hidden">
                         <div class="absolute -right-12 -top-12 w-48 h-48 bg-coffee-500/10 rounded-full blur-3xl"></div>
@@ -187,53 +196,53 @@
                             <div class="flex items-center space-x-3">
                                 <div class="w-9 h-9 rounded-lg bg-coffee-400/20 border border-coffee-400/30 flex items-center justify-center text-coffee-300 font-bold text-sm">7G</div>
                                 <div>
-                                    <h3 class="text-sm font-bold text-white">Ecossistema Integrado</h3>
-                                    <p class="text-[11px] text-slate-400">Vila Nova de Gaia · 4 Módulos Conectados</p>
+                                    <h3 class="text-sm font-bold text-white">Ecossistema 7G OS</h3>
+                                    <p class="text-[11px] text-slate-400">Rua de França 52 · 4 Módulos Conectados</p>
                                 </div>
                             </div>
-                            <span class="px-2 py-0.5 text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md font-medium">Pronto p/ Piloto</span>
+                            <span class="px-2 py-0.5 text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md font-medium">Pronto p/ Testar</span>
                         </div>
 
                         <div class="space-y-3">
-                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-coffee-500/40 transition cursor-pointer" onclick="goToSlide(2)">
+                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-blue-500/40 transition cursor-pointer" onclick="goToSlide(2)">
                                 <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center"><i data-lucide="users" class="w-4 h-4"></i></div>
                                 <div class="flex-1">
-                                    <h4 class="text-xs font-semibold text-white">1. 7G Staff App & RH</h4>
-                                    <p class="text-[11px] text-slate-400">Escalas, ponto digital, pedidos de férias e avisos oficiais</p>
+                                    <h4 class="text-xs font-semibold text-white">1. 7G Staff & RH</h4>
+                                    <p class="text-[11px] text-slate-400">Escalas, troca de turnos em 3 vias, férias e manuais SOPs</p>
                                 </div>
                                 <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
                             </div>
 
-                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-coffee-500/40 transition cursor-pointer" onclick="goToSlide(3)">
+                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-amber-500/40 transition cursor-pointer" onclick="goToSlide(3)">
                                 <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center"><i data-lucide="receipt" class="w-4 h-4"></i></div>
                                 <div class="flex-1">
-                                    <h4 class="text-xs font-semibold text-white">2. GestãoChef 7G & Custos</h4>
-                                    <p class="text-[11px] text-slate-400">OCR de faturas, fichas técnicas de brunch e CMV vivo</p>
+                                    <h4 class="text-xs font-semibold text-white">2. GestãoChef 7G Edition</h4>
+                                    <p class="text-[11px] text-slate-400">OCR de faturas, fichas técnicas de brunch e CMV em tempo real</p>
                                 </div>
                                 <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
                             </div>
 
                             <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-coffee-500/40 transition cursor-pointer" onclick="goToSlide(4)">
-                                <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center"><i data-lucide="building-2" class="w-4 h-4"></i></div>
+                                <div class="w-8 h-8 rounded-lg bg-coffee-500/10 text-coffee-400 flex items-center justify-center"><i data-lucide="flame" class="w-4 h-4"></i></div>
                                 <div class="flex-1">
-                                    <h4 class="text-xs font-semibold text-white">3. 7G Apartments Hub</h4>
-                                    <p class="text-[11px] text-slate-400">Governança, reposição de café e check-ins integrados</p>
+                                    <h4 class="text-xs font-semibold text-white">3. 7G Torrefação 360°</h4>
+                                    <p class="text-[11px] text-slate-400">Quebra da torra, divisão em 4 canais e alerta de frescura</p>
                                 </div>
                                 <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
                             </div>
 
-                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-coffee-500/40 transition cursor-pointer" onclick="goToSlide(5)">
-                                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center"><i data-lucide="bar-chart-3" class="w-4 h-4"></i></div>
+                            <div class="p-3 rounded-xl bg-darkbg/70 border border-darkborder/80 flex items-center space-x-3 hover:border-purple-500/40 transition cursor-pointer" onclick="goToSlide(5)">
+                                <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center"><i data-lucide="hotel" class="w-4 h-4"></i></div>
                                 <div class="flex-1">
-                                    <h4 class="text-xs font-semibold text-white">4. Cockpit da Proprietária</h4>
-                                    <p class="text-[11px] text-slate-400">Visão executiva em tempo real: vendas, margens e staff</p>
+                                    <h4 class="text-xs font-semibold text-white">4. 7G Apartments Hub</h4>
+                                    <p class="text-[11px] text-slate-400">Painel de governança, reposição de café e guia do hóspede</p>
                                 </div>
                                 <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
                             </div>
                         </div>
 
                         <div class="mt-5 p-3 rounded-xl bg-coffee-500/10 border border-coffee-400/20 text-center">
-                            <p class="text-xs text-coffee-300 font-medium">Feito por quem já conhece a rotina da 7G por dentro.</p>
+                            <p class="text-xs text-coffee-300 font-medium">Um sistema proprietário que valoriza o patrimônio da 7G.</p>
                         </div>
                     </div>
                 </div>
@@ -241,78 +250,74 @@
         </section>
 
         <!-- SLIDE 1: O Diagnóstico Oculto -->
-        <section id="slide-1" class="slide-panel hidden">
+        <section id="slide-1" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-4xl mx-auto space-y-8">
                 <div class="text-center space-y-2">
                     <span class="text-xs uppercase tracking-widest text-coffee-400 font-bold">Diagnóstico Operacional</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">Onde o tempo e o lucro estão escapando hoje?</h2>
-                    <p class="text-slate-400 text-sm max-w-2xl mx-auto">Não se trata de falta de esforço da equipe, mas do uso de ferramentas que não foram feitas para a complexidade da 7G.</p>
+                    <p class="text-slate-400 text-sm max-w-2xl mx-auto">Não é falta de dedicação da equipe; é o atrito causado por ferramentas improvisadas que não conversam entre si.</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
-                    <!-- Ponto 1 -->
-                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl relative overflow-hidden">
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl">
                         <div class="flex items-start space-x-4">
                             <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center shrink-0"><i data-lucide="message-circle-off" class="w-5 h-5"></i></div>
                             <div>
                                 <h3 class="text-base font-bold text-white">Comunicação e Escalas no WhatsApp</h3>
                                 <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                                    Escalas enviadas por fotos ou PDF. Pedidos de troca de turno misturados com conversas pessoais. Funcionários mandando mensagem fora do horário de expediente, gerando atrito e risco legal perante as regras de desconexão em Portugal.
+                                    Escalas enviadas em fotos; recados urgentes soterrados por conversas; mensagens de trabalho fora de hora gerando atrito e risco legal perante o direito à desconexão em Portugal.
                                 </p>
                                 <div class="mt-3 pt-3 border-t border-darkborder/60 text-xs text-coffee-400 font-medium flex items-center space-x-1.5">
                                     <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-                                    <span>Solução 7G: Escala oficial no telemóvel com confirmação em 1 toque.</span>
+                                    <span>Solução 7G: Escala oficial no telemóvel e comunicados com confirmação de leitura.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Ponto 2 -->
-                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl relative overflow-hidden">
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl">
                         <div class="flex items-start space-x-4">
                             <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0"><i data-lucide="calendar-clock" class="w-5 h-5"></i></div>
                             <div>
-                                <h3 class="text-base font-bold text-white">Férias em "Caderno" e Planilhas</h3>
+                                <h3 class="text-base font-bold text-white">Férias em Caderno & Trocas Caóticas</h3>
                                 <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                                    Controle manual de férias acumuladas, saídas de contrato e a clássica compensação de feriados trabalhados (ex: 15 de Agosto). A gerência perde horas calculando saldos e corre risco de desfalcar o balcão ou a cozinha.
+                                    Saldos manuais, dias ganhos x gozados e a complexa compensação de feriados trabalhados (ex: 15 de Agosto). Trocas de turno combinadas de boca que desfalcam a cozinha.
                                 </p>
                                 <div class="mt-3 pt-3 border-t border-darkborder/60 text-xs text-coffee-400 font-medium flex items-center space-x-1.5">
                                     <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-                                    <span>Solução 7G: Saldo de férias e feriados automático com calendário integrado.</span>
+                                    <span>Solução 7G: Saldo automático e troca de turno em 3 vias com aprovação do gerente.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Ponto 3 -->
-                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl relative overflow-hidden">
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl">
                         <div class="flex items-start space-x-4">
                             <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0"><i data-lucide="trending-down" class="w-5 h-5"></i></div>
                             <div>
-                                <h3 class="text-base font-bold text-white">Fichas Técnicas & Reajustes de Fornecedor</h3>
+                                <h3 class="text-base font-bold text-white">Reajustes Ocultos de Fornecedores</h3>
                                 <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                                    Quando a Makro ou distribuidores de leite vegetal e ovos sobem os preços, as fichas técnicas em papel continuam antigas. A 7G vende pratos achando que tem 75% de margem, mas a margem caiu para 60% sem ninguém perceber.
+                                    O leite vegetal, abacate ou salmão sobem de preço na fatura da Makro, mas as fichas de custos continuam com valores antigos. A margem real é esmagada no silêncio.
                                 </p>
                                 <div class="mt-3 pt-3 border-t border-darkborder/60 text-xs text-coffee-400 font-medium flex items-center space-x-1.5">
                                     <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-                                    <span>Solução 7G: Leitura de faturas por OCR com atualização automática de CMV.</span>
+                                    <span>Solução 7G: Leitura de faturas por OCR com atualização automática de custos e CMV.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Ponto 4 -->
-                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl relative overflow-hidden">
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl">
                         <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0"><i data-lucide="coffee" class="w-5 h-5"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0"><i data-lucide="hotel" class="w-5 h-5"></i></div>
                             <div>
-                                <h3 class="text-base font-bold text-white">Torrefação, Cafeteria e Quartos Separados</h3>
+                                <h3 class="text-base font-bold text-white">Desconexão: Torra, Quartos e Café</h3>
                                 <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                                    O café verde torrado vai para o site, para o espresso bar e para os kits de boas-vindas dos 7 apartamentos. Como esses sistemas não conversam, não há baixa unificada e o estoque fica sempre com discrepâncias.
+                                    O café verde torrado vai para o e-commerce, balcão e kits dos apartamentos sem rastreio de perda de peso. A limpeza dos quartos depende de perguntas no WhatsApp.
                                 </p>
                                 <div class="mt-3 pt-3 border-t border-darkborder/60 text-xs text-coffee-400 font-medium flex items-center space-x-1.5">
                                     <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-                                    <span>Solução 7G: Inventário 360° com rastreio da saca verde até os quartos.</span>
+                                    <span>Solução 7G: Rastreio de lotes 360° e painel visual de governança com baixa de estoque.</span>
                                 </div>
                             </div>
                         </div>
@@ -321,64 +326,103 @@
 
                 <div class="flex justify-center pt-2">
                     <button onclick="goToSlide(2)" class="bg-coffee-400 text-darkbg font-bold px-6 py-2.5 rounded-xl text-xs hover:bg-coffee-300 transition flex items-center space-x-2">
-                        <span>Veja Como o App da Staff Funciona</span>
+                        <span>Ver o Módulo de Staff & RH em Ação</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 2: 7G Staff App (Simulador Interativo) -->
-        <section id="slide-2" class="slide-panel hidden">
+        <!-- SLIDE 2: 7G Staff & RH (Visão Administração vs Funcionário) -->
+        <section id="slide-2" class="slide-panel hidden animate-fadeIn">
             <div class="grid lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
-                <!-- Explicação do Módulo -->
-                <div class="lg:col-span-6 space-y-5">
+                <!-- Explicação do Módulo e Abas de Perspectiva -->
+                <div class="lg:col-span-6 space-y-4">
                     <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
-                        <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                        <i data-lucide="users" class="w-3.5 h-3.5"></i>
                         <span>Módulo 1 · 7G Staff & RH</span>
                     </div>
 
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white leading-tight">
-                        O telemóvel da equipe organizado e profissional.
+                    <h2 class="text-3xl font-bold text-white leading-tight">
+                        Duas pontas conectadas: Administração no controle e Equipe no bolso.
                     </h2>
 
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Cada barista, cozinheiro e membro da equipe tem seu acesso individual. Zero grupos desorganizados de WhatsApp e zero papéis perdidos.
-                    </p>
+                    <!-- Seletor de Perspectiva: Admin vs Funcionário -->
+                    <div class="flex p-1 bg-darkcard rounded-xl border border-darkborder text-xs">
+                        <button onclick="toggleStaffRole('admin')" id="tab-btn-admin" class="flex-1 py-2 font-bold rounded-lg transition bg-coffee-500/20 text-coffee-300 border border-coffee-400/30">
+                            🏢 Visão da Administração
+                        </button>
+                        <button onclick="toggleStaffRole('staff')" id="tab-btn-staff" class="flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white">
+                            📱 Visão do Funcionário
+                        </button>
+                    </div>
 
-                    <div class="space-y-3 pt-2 text-xs">
-                        <div class="flex items-start space-x-3 bg-darkcard p-3 rounded-xl border border-darkborder">
-                            <div class="w-6 h-6 rounded-md bg-coffee-400/20 text-coffee-300 flex items-center justify-center shrink-0 mt-0.5 font-bold">1</div>
+                    <!-- Conteúdo: Visão Admin -->
+                    <div id="content-role-admin" class="space-y-2.5 text-xs">
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="user-check" class="w-4 h-4 text-coffee-400 mt-0.5 shrink-0"></i>
                             <div>
-                                <h4 class="font-bold text-white text-sm">Escalas de Turnos no Bolso</h4>
-                                <p class="text-slate-400 mt-0.5">Visualização de horários semanais, folgas e trocas de turno com aprovação da chefia em 1 clique.</p>
+                                <span class="font-bold text-white">Ficha Cadastral & Contratos:</span>
+                                <p class="text-slate-400 mt-0.5">NIF, IBAN, contrato, exames médicos e certificação HACCP organizados num só lugar.</p>
                             </div>
                         </div>
-
-                        <div class="flex items-start space-x-3 bg-darkcard p-3 rounded-xl border border-darkborder">
-                            <div class="w-6 h-6 rounded-md bg-coffee-400/20 text-coffee-300 flex items-center justify-center shrink-0 mt-0.5 font-bold">2</div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="sliders" class="w-4 h-4 text-coffee-400 mt-0.5 shrink-0"></i>
                             <div>
-                                <h4 class="font-bold text-white text-sm">Férias & Feriados Compensatórios</h4>
-                                <p class="text-slate-400 mt-0.5">O sistema calcula automaticamente o saldo real (incluindo feriados trabalhados como 15 de Agosto). O funcionário pede pelo app e a gerência aprova sem desfalcar o turno.</p>
+                                <span class="font-bold text-white">Montador de Escalas com Alertas da ACT:</span>
+                                <p class="text-slate-400 mt-0.5">O sistema bloqueia e avisa se violar as <strong>11 horas mínimas de descanso</strong> entre turnos ou o limite semanal de 40h.</p>
                             </div>
                         </div>
-
-                        <div class="flex items-start space-x-3 bg-darkcard p-3 rounded-xl border border-darkborder">
-                            <div class="w-6 h-6 rounded-md bg-coffee-400/20 text-coffee-300 flex items-center justify-center shrink-0 mt-0.5 font-bold">3</div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="git-pull-request" class="w-4 h-4 text-coffee-400 mt-0.5 shrink-0"></i>
                             <div>
-                                <h4 class="font-bold text-white text-sm">Ponto Digital com Geolocalização</h4>
-                                <p class="text-slate-400 mt-0.5">Registro de ponto no Wi-Fi do 7g Roaster, cumprindo com 100% de rigor as obrigações da ACT e do Código do Trabalho em Portugal.</p>
+                                <span class="font-bold text-white">Aprovação de Trocas em 1 Clique:</span>
+                                <p class="text-slate-400 mt-0.5">Quando dois funcionários combinam uma troca, você só clica em "Autorizar" e a escala geral se atualiza sozinha.</p>
+                            </div>
+                        </div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="check-check" class="w-4 h-4 text-coffee-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-white">Comunicados com Confirmação de Leitura:</span>
+                                <p class="text-slate-400 mt-0.5">Avisos operacionais oficiais com recibo digital "Leu e Confirmou", sem depender do WhatsApp pessoal.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-300 text-xs flex items-center space-x-2">
-                        <i data-lucide="shield-check" class="w-4 h-4 shrink-0"></i>
-                        <span>Interaja com a tela do telemóvel ao lado para testar a experiência real!</span>
+                    <!-- Conteúdo: Visão Funcionário (Hidden por padrão) -->
+                    <div id="content-role-staff" class="space-y-2.5 text-xs hidden">
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="calendar" class="w-4 h-4 text-blue-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-white">Minha Escala Semanal no Bolso:</span>
+                                <p class="text-slate-400 mt-0.5">Horários, pausas e visualização de quais colegas estão no mesmo turno.</p>
+                            </div>
+                        </div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="repeat" class="w-4 h-4 text-blue-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-white">Troca de Turno Inteligente (3 Vias):</span>
+                                <p class="text-slate-400 mt-0.5">O funcionário propõe ao colega → o colega aceita → o gerente autoriza. Zero fofoca e tudo documentado.</p>
+                            </div>
+                        </div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="book-open" class="w-4 h-4 text-blue-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-white">Manuais de Bolso (SOPs):</span>
+                                <p class="text-slate-400 mt-0.5">Guias rápidos de serviço: como calibrar o moinho de espresso, checklist de fechamento e receitas padrão.</p>
+                            </div>
+                        </div>
+                        <div class="bg-darkcard p-3 rounded-xl border border-darkborder flex items-start space-x-3">
+                            <i data-lucide="wifi" class="w-4 h-4 text-blue-400 mt-0.5 shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-white">Ponto Digital no Wi-Fi da 7G:</span>
+                                <p class="text-slate-400 mt-0.5">Registro sem atrito perante a fiscalização do trabalho, apenas dentro das instalações.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- O Simulador Interativo de Celular -->
+                <!-- O Simulador Interativo do Telemóvel -->
                 <div class="lg:col-span-6 flex justify-center">
                     <div class="phone-frame flex flex-col justify-between text-slate-100">
                         <div class="phone-notch"></div>
@@ -395,10 +439,10 @@
                             </div>
                         </div>
 
-                        <!-- Conteúdo da Tela do Celular (Interativo) -->
+                        <!-- Conteúdo da Tela do Celular (Interativo com 4 Vistas) -->
                         <div class="flex-1 p-3.5 space-y-3 custom-scroll overflow-y-auto text-xs" id="phone-screen-content">
                             <!-- View 1: Escalas (Default) -->
-                            <div id="phone-view-escalas" class="space-y-3">
+                            <div id="phone-view-escalas" class="space-y-3 animate-fadeIn">
                                 <div class="bg-coffee-500/15 border border-coffee-400/30 p-2.5 rounded-xl flex items-center justify-between">
                                     <div>
                                         <p class="text-[10px] text-coffee-300 uppercase font-bold tracking-wider">Meu Próximo Turno</p>
@@ -410,8 +454,8 @@
 
                                 <div>
                                     <div class="flex items-center justify-between mb-2">
-                                        <span class="font-bold text-white text-[11px]">Escala da Semana (Outubro)</span>
-                                        <span class="text-[10px] text-slate-400">Cozinha 7G</span>
+                                        <span class="font-bold text-white text-[11px]">Escala da Semana</span>
+                                        <span class="text-[10px] text-slate-400">Descanso: 14h ✓</span>
                                     </div>
                                     <div class="space-y-1.5">
                                         <div class="p-2 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
@@ -435,27 +479,26 @@
                                             </div>
                                             <span class="text-[9px] text-slate-400">Escalado</span>
                                         </div>
-                                        <div class="p-2 rounded-lg bg-slate-800/40 border border-slate-700/40 flex items-center justify-between opacity-70">
-                                            <div class="flex items-center space-x-2">
-                                                <span class="w-5 text-[10px] font-bold text-slate-500">QUI</span>
-                                                <span class="text-[11px] font-medium text-slate-400">FOLGA SEMANAL</span>
-                                            </div>
-                                            <span class="text-[9px] text-slate-500">Folga</span>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Botão de Ação -->
-                                <button onclick="showPhoneView('ferias')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-center text-coffee-300 font-semibold text-[11px] transition flex items-center justify-center space-x-1.5">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>Consultar Saldo de Férias & Feriados</span>
-                                </button>
+                                <!-- Card de Proposta de Troca de Turno -->
+                                <div class="p-2.5 bg-slate-800/90 rounded-xl border border-slate-700 space-y-2">
+                                    <div class="flex justify-between items-center text-[10px]">
+                                        <span class="font-bold text-slate-300">Precisa folgar na Quinta?</span>
+                                        <span class="text-coffee-400">Troca em 3 Vias</span>
+                                    </div>
+                                    <button onclick="simularTrocaTurno()" class="w-full py-1.5 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg text-[10px] transition flex items-center justify-center space-x-1">
+                                        <i data-lucide="repeat" class="w-3 h-3"></i>
+                                        <span>Propor Troca com Rabin (Cozinha)</span>
+                                    </button>
+                                </div>
                             </div>
 
-                            <!-- View 2: Férias e Feriados (Hidden por padrão) -->
-                            <div id="phone-view-ferias" class="space-y-3 hidden">
+                            <!-- View 2: Férias e Feriados Compensatórios -->
+                            <div id="phone-view-ferias" class="space-y-3 hidden animate-fadeIn">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-white text-[11px]">Meu Saldo de Férias 2026</span>
+                                    <span class="font-bold text-white text-[11px]">Saldo de Férias 2026</span>
                                     <button onclick="showPhoneView('escalas')" class="text-[10px] text-coffee-400 underline">← Voltar</button>
                                 </div>
 
@@ -463,35 +506,66 @@
                                     <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 text-center">
                                         <div class="text-xs text-slate-400">Férias Disponíveis</div>
                                         <div class="text-lg font-bold text-white mt-0.5">18 Dias</div>
-                                        <div class="text-[9px] text-emerald-400">Ganhas no ano</div>
+                                        <div class="text-[9px] text-emerald-400">Direito adquirido</div>
                                     </div>
                                     <div class="bg-slate-800 p-2.5 rounded-xl border border-slate-700 text-center">
-                                        <div class="text-xs text-slate-400">Feriados a Compensar</div>
+                                        <div class="text-xs text-slate-400">Feriado Compensatório</div>
                                         <div class="text-lg font-bold text-amber-400 mt-0.5">+1 Dia</div>
-                                        <div class="text-[9px] text-amber-300">Trab. 15/Ago</div>
+                                        <div class="text-[9px] text-amber-300">Trab. 15/Agosto</div>
                                     </div>
                                 </div>
 
-                                <div class="p-2.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-2">
-                                    <div class="text-[10px] font-semibold text-slate-300">Próximo Pedido de Férias:</div>
+                                <div class="p-2.5 bg-slate-800/80 rounded-xl border border-slate-700 space-y-1.5">
+                                    <div class="text-[10px] font-semibold text-slate-300">Histórico de Pedidos:</div>
                                     <div class="text-[11px] text-white flex items-center justify-between">
                                         <span>01 a 21 de Setembro</span>
-                                        <span class="text-[9px] px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded font-medium">Aprovado pela Chefia</span>
+                                        <span class="text-[9px] px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded font-medium">Aprovado pelo Gerente</span>
                                     </div>
                                 </div>
 
-                                <div class="p-2.5 bg-coffee-500/10 border border-coffee-400/20 rounded-xl space-y-1.5">
-                                    <p class="text-[10px] text-coffee-300 font-medium">Deseja solicitar folga do feriado trabalhado?</p>
-                                    <button onclick="alert('Simulação de pedido de folga compensatória enviado com sucesso para aprovação da gerência!')" class="w-full py-1.5 bg-coffee-400 text-darkbg font-bold rounded-lg text-[10px] hover:bg-coffee-300 transition">
-                                        Marcar Folga Compensatória
-                                    </button>
+                                <button onclick="alert('Simulação de solicitação de férias enviada com sucesso para a gerência!')" class="w-full py-2 bg-coffee-400 text-darkbg font-bold rounded-xl text-[10px] hover:bg-coffee-300 transition">
+                                    Solicitar Próximas Férias
+                                </button>
+                            </div>
+
+                            <!-- View 3: Manuais de Bolso (SOPs) -->
+                            <div id="phone-view-sops" class="space-y-3 hidden animate-fadeIn">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-[11px]">Manuais de Serviço (SOPs)</span>
+                                    <button onclick="showPhoneView('escalas')" class="text-[10px] text-coffee-400 underline">← Voltar</button>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="p-2 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-between hover:border-coffee-400/40 cursor-pointer" onclick="alert('SOP: 1. Pesar 18g de café na balança\n2. Extrair 36g em 27-30s\n3. Ajustar granulometria se fluxo estiver rápido.')">
+                                        <div class="flex items-center space-x-2">
+                                            <i data-lucide="coffee" class="w-4 h-4 text-coffee-400"></i>
+                                            <span class="text-[11px] font-medium text-white">Calibração do Espresso Bar</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+                                    </div>
+
+                                    <div class="p-2 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-between hover:border-coffee-400/40 cursor-pointer" onclick="alert('Checklist: Desligar fornos, verificar sanitização de bancadas, trancar geladeiras e registrar temperaturas.')">
+                                        <div class="flex items-center space-x-2">
+                                            <i data-lucide="clipboard-check" class="w-4 h-4 text-emerald-400"></i>
+                                            <span class="text-[11px] font-medium text-white">Checklist de Fecho da Cozinha</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+                                    </div>
+
+                                    <div class="p-2 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-between hover:border-coffee-400/40 cursor-pointer" onclick="alert('Proporção: 1:8, infusão a frio por 16 horas, filtragem dupla e armazenamento a 4°C.')">
+                                        <div class="flex items-center space-x-2">
+                                            <i data-lucide="flame" class="w-4 h-4 text-blue-400"></i>
+                                            <span class="text-[11px] font-medium text-white">Receita Padrão: Cold Brew 7G</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- View 3: Ponto Digital -->
-                            <div id="phone-view-ponto" class="space-y-3 hidden">
+                            <!-- View 4: Ponto Digital -->
+                            <div id="phone-view-ponto" class="space-y-3 hidden animate-fadeIn">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-white text-[11px]">Registo de Ponto Digital</span>
+                                    <span class="font-bold text-white text-[11px]">Ponto Digital Oficial</span>
                                     <button onclick="showPhoneView('escalas')" class="text-[10px] text-coffee-400 underline">← Voltar</button>
                                 </div>
 
@@ -500,29 +574,33 @@
                                         <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
                                         <span>Conectado: Wi-Fi 7G_Staff_Roaster</span>
                                     </div>
-                                    <div class="text-2xl font-mono font-bold text-white" id="clock-time">09:14:32</div>
-                                    <div class="text-[10px] text-slate-400">Localização: Rua de França 52, Gaia</div>
+                                    <div class="text-2xl font-mono font-bold text-white" id="clock-time">09:30:15</div>
+                                    <div class="text-[10px] text-slate-400">Rua de França 52, Vila Nova de Gaia</div>
 
-                                    <button onclick="alert('Ponto registrado com sucesso às 09:14:32! Em conformidade com o Código do Trabalho.')" class="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl text-xs hover:brightness-110 shadow-lg shadow-emerald-500/20 transition flex items-center justify-center space-x-1.5">
+                                    <button onclick="alert('Ponto registrado com sucesso! Comprovativo digital arquivado para ACT.')" class="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl text-xs hover:brightness-110 shadow-lg shadow-emerald-500/20 transition flex items-center justify-center space-x-1.5">
                                         <i data-lucide="fingerprint" class="w-4 h-4"></i>
-                                        <span>Bater Ponto de Entrada</span>
+                                        <span>Registar Entrada</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Bottom Nav Bar do Celular -->
-                        <div class="px-2 py-2 border-t border-slate-800 bg-slate-900/95 grid grid-cols-3 gap-1 text-center text-[9px] text-slate-400 z-10">
-                            <button onclick="showPhoneView('escalas')" class="p-1.5 rounded-lg flex flex-col items-center hover:text-coffee-300 font-medium transition">
-                                <i data-lucide="calendar-days" class="w-4 h-4 mb-0.5"></i>
+                        <!-- Barra de Navegação Inferior do Celular -->
+                        <div class="px-2 py-2 border-t border-slate-800 bg-slate-900/95 grid grid-cols-4 gap-1 text-center text-[9px] text-slate-400 z-10">
+                            <button onclick="showPhoneView('escalas')" class="p-1 rounded-lg flex flex-col items-center hover:text-coffee-300 transition">
+                                <i data-lucide="calendar-days" class="w-3.5 h-3.5 mb-0.5"></i>
                                 <span>Escalas</span>
                             </button>
-                            <button onclick="showPhoneView('ferias')" class="p-1.5 rounded-lg flex flex-col items-center hover:text-coffee-300 font-medium transition">
-                                <i data-lucide="palmtree" class="w-4 h-4 mb-0.5"></i>
+                            <button onclick="showPhoneView('ferias')" class="p-1 rounded-lg flex flex-col items-center hover:text-coffee-300 transition">
+                                <i data-lucide="palmtree" class="w-3.5 h-3.5 mb-0.5"></i>
                                 <span>Férias</span>
                             </button>
-                            <button onclick="showPhoneView('ponto')" class="p-1.5 rounded-lg flex flex-col items-center hover:text-coffee-300 font-medium transition">
-                                <i data-lucide="clock" class="w-4 h-4 mb-0.5"></i>
+                            <button onclick="showPhoneView('sops')" class="p-1 rounded-lg flex flex-col items-center hover:text-coffee-300 transition">
+                                <i data-lucide="book-open" class="w-3.5 h-3.5 mb-0.5"></i>
+                                <span>Manuais</span>
+                            </button>
+                            <button onclick="showPhoneView('ponto')" class="p-1 rounded-lg flex flex-col items-center hover:text-coffee-300 transition">
+                                <i data-lucide="clock" class="w-3.5 h-3.5 mb-0.5"></i>
                                 <span>Ponto</span>
                             </button>
                         </div>
@@ -531,24 +609,24 @@
             </div>
         </section>
 
-        <!-- SLIDE 3: GestãoChef 7G Edition -->
-        <section id="slide-3" class="slide-panel hidden">
-            <div class="max-w-5xl mx-auto space-y-8">
+        <!-- SLIDE 3: GestãoChef 7G Edition (Fichas Técnicas & OCR) -->
+        <section id="slide-3" class="slide-panel hidden animate-fadeIn">
+            <div class="max-w-5xl mx-auto space-y-6">
                 <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-darkborder pb-4 gap-4">
                     <div>
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold mb-2">
                             <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
                             <span>Módulo 2 · GestãoChef 7G Edition</span>
                         </div>
-                        <h2 class="text-3xl font-bold text-white">Engenharia de Custos, Faturas OCR & CMV em Tempo Real</h2>
+                        <h2 class="text-3xl font-bold text-white">Engenharia de Custos, Faturas OCR & CMV Vivo</h2>
                     </div>
                     <div class="text-xs text-slate-400">
-                        Motor proprietário de leitura inteligente de faturas de fornecedores
+                        O cérebro financeiro da cozinha e do espresso bar
                     </div>
                 </div>
 
                 <div class="grid lg:grid-cols-12 gap-6 items-start">
-                    <!-- Coluna Esquerda: Demonstração OCR -->
+                    <!-- Coluna Esquerda: Leitura OCR -->
                     <div class="lg:col-span-5 bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
                         <div class="flex items-center justify-between">
                             <h3 class="text-sm font-bold text-white flex items-center space-x-2">
@@ -581,21 +659,21 @@
                                 <span>Alerta de Margem de Lucro</span>
                             </div>
                             <p class="text-slate-300 text-[11px]">
-                                O aumento do leite de aveia impactou 4 receitas de cafés especiais. A margem do <strong>Flat White Aveia</strong> caiu de 74% para 62%.
+                                O aumento do leite de aveia impactou 4 bebidas do cardápio. A margem do <strong>Flat White Aveia</strong> caiu de 74% para 62%.
                             </p>
                         </div>
 
-                        <button onclick="alert('Simulação: Preço sugerido ajustado em +0,20€ no sistema ou ficha de corte de desperdício gerada!')" class="w-full py-2.5 bg-coffee-400 text-darkbg font-bold rounded-xl text-xs hover:bg-coffee-300 transition text-center">
+                        <button onclick="alert('Simulação: Preço sugerido de venda atualizado ou ficha de corte de desperdício gerada!')" class="w-full py-2.5 bg-coffee-400 text-darkbg font-bold rounded-xl text-xs hover:bg-coffee-300 transition text-center">
                             Ver Ações Recomendadas de CMV
                         </button>
                     </div>
 
-                    <!-- Coluna Direita: Ficha Técnica Viva -->
+                    <!-- Coluna Direita: Ficha Técnica -->
                     <div class="lg:col-span-7 bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="text-sm font-bold text-white">Ficha Técnica Viva: 7G Brunch Especial</h3>
-                                <p class="text-xs text-slate-400">Atualizada automaticamente a cada fatura recebida</p>
+                                <p class="text-xs text-slate-400">Atualizada dinamicamente a cada fatura inserida</p>
                             </div>
                             <div class="text-right">
                                 <div class="text-xs text-slate-400">Preço de Venda</div>
@@ -603,7 +681,6 @@
                             </div>
                         </div>
 
-                        <!-- Tabela de Ingredientes -->
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs">
                                 <thead>
@@ -616,7 +693,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-darkborder/50 text-slate-300">
                                     <tr>
-                                        <td class="py-2 font-medium text-white">Pão Artesanal Sourdough</td>
+                                        <td class="py-2 font-medium text-white">Pão Sourdough Artesanal</td>
                                         <td class="py-2">2 fatias</td>
                                         <td class="py-2">0,35 € / fatia</td>
                                         <td class="py-2 text-right font-medium text-white">0,70 €</td>
@@ -649,7 +726,6 @@
                             </table>
                         </div>
 
-                        <!-- Resumo Financeiro da Ficha -->
                         <div class="pt-3 border-t border-darkborder grid grid-cols-3 gap-3 text-center">
                             <div class="bg-darkbg p-2.5 rounded-xl border border-darkborder">
                                 <div class="text-[10px] text-slate-400 uppercase font-semibold">Custo Real (CMV)</div>
@@ -672,133 +748,254 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: 7G Apartments Hub & Torrefação 360 -->
-        <section id="slide-4" class="slide-panel hidden">
+        <!-- SLIDE 4: 7G Torrefação 360° (Desmistificada) -->
+        <section id="slide-4" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-5xl mx-auto space-y-6">
-                <div class="text-center space-y-2">
-                    <span class="text-xs uppercase tracking-widest text-purple-400 font-bold">Integração Completa</span>
-                    <h2 class="text-3xl font-bold text-white">7G Apartments Hub & Torrefação Circular</h2>
-                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Conectando a governança dos 7 apartamentos com a produção de café e a cafeteria.</p>
+                <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-darkborder pb-4 gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-coffee-500/10 border border-coffee-400/30 text-coffee-300 text-xs font-semibold mb-2">
+                            <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+                            <span>Módulo 3 · 7G Torrefação 360°</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Controle da Quebra de Torra & Destino do Grão</h2>
+                    </div>
+                    <div class="text-xs text-slate-400">
+                        Da saca verde importada até à xícara do cliente e kit dos quartos
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Apartments Hub -->
+                <div class="grid md:grid-cols-2 gap-6 items-start">
+                    <!-- O Desafio Real da Torra -->
                     <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
-                        <div class="flex items-center justify-between border-b border-darkborder pb-3">
-                            <div class="flex items-center space-x-2">
-                                <i data-lucide="hotel" class="w-5 h-5 text-purple-400"></i>
-                                <h3 class="font-bold text-white text-sm">Governança dos 7 Apartamentos</h3>
+                        <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                            <i data-lucide="scale" class="w-4 h-4 text-coffee-400"></i>
+                            <span>A Quebra de Peso da Torra & Frescura</span>
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Ao torrar café cru, a água evapora e o grão perde entre <strong>14% a 16% de peso</strong>. Sem um sistema que calcule isso na hora, o custo por quilo e o estoque financeiro nunca batem certo.
+                        </p>
+
+                        <!-- Simulador de Torra Interativo -->
+                        <div class="bg-darkbg p-4 rounded-xl border border-darkborder space-y-3 text-xs">
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>Entrada de Grão Verde (Cru):</span>
+                                <span class="font-bold text-white">15,0 kg (Etiópia Guji)</span>
                             </div>
-                            <span class="text-xs text-slate-400">Status em Tempo Real</span>
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>Saída de Café Torrado:</span>
+                                <span class="font-bold text-coffee-300">12,8 kg</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-2">
+                                <div class="bg-coffee-400 h-2 rounded-full" style="width: 85.3%"></div>
+                            </div>
+                            <div class="flex justify-between text-[11px]">
+                                <span class="text-amber-400 font-semibold">Quebra: 14,6% (-2,2 kg água)</span>
+                                <span class="text-emerald-400 font-semibold">Custo Final: 16,40 € / kg</span>
+                            </div>
                         </div>
 
+                        <div class="p-3 bg-coffee-500/10 border border-coffee-400/20 rounded-xl text-xs space-y-1">
+                            <div class="font-bold text-coffee-300 flex items-center space-x-1.5">
+                                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                                <span>Alerta de Frescura (Peak Flavor):</span>
+                            </div>
+                            <p class="text-slate-300 text-[11px]">
+                                O lote atinge o pico aromático entre 7 e 30 dias após torra. O sistema avisa quando um lote deve ser priorizado no espresso bar antes que perca perfil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Divisão Automática nos 4 Canais -->
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
+                        <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                            <i data-lucide="share-2" class="w-4 h-4 text-purple-400"></i>
+                            <span>Divisão Automática em 4 Destinos</span>
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            O mesmo café torrado abastece 4 frentes simultâneas. O sistema divide o lote com 1 clique e atualiza o estoque de cada um:
+                        </p>
+
                         <div class="space-y-2 text-xs">
-                            <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Apartamento 1 (Estúdio Jardim)</div>
-                                    <div class="text-[10px] text-emerald-400">Limpo & Inspecionado · Pronto p/ Check-in</div>
+                            <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
+                                <div class="flex items-center space-x-2.5">
+                                    <div class="w-6 h-6 rounded bg-coffee-400/20 text-coffee-300 flex items-center justify-center font-bold text-[10px]">1</div>
+                                    <span class="text-slate-200">Loja Online & Prateleira (Sacos 250g)</span>
                                 </div>
-                                <span class="text-[10px] text-slate-300 font-mono">Hóspede às 15h</span>
-                            </div>
-
-                            <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Apartamento 2 (Duplex Vista)</div>
-                                    <div class="text-[10px] text-amber-300">Em Limpeza · Camareira: Rosa</div>
-                                </div>
-                                <span class="text-[10px] text-amber-400 font-mono">Reposição Café 7G ✓</span>
-                            </div>
-
-                            <div class="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Apartamento 3 (Terraço Superior)</div>
-                                    <div class="text-[10px] text-blue-300">Ocupado · Estadia até Sexta-feira</div>
-                                </div>
-                                <span class="text-[10px] text-slate-300 font-mono">Brunch Voucher Usado</span>
+                                <span class="font-bold text-white font-mono">6,0 kg (24 un)</span>
                             </div>
 
                             <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
-                                <div>
-                                    <div class="font-bold text-white">Apartamentos 4 a 7</div>
-                                    <div class="text-[10px] text-slate-400">4 Ocupados · 1 Manutenção Preventiva</div>
+                                <div class="flex items-center space-x-2.5">
+                                    <div class="w-6 h-6 rounded bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold text-[10px]">2</div>
+                                    <span class="text-slate-200">B2B Wholesale / Revenda Externa (1kg)</span>
                                 </div>
-                                <span class="text-[10px] text-emerald-400 font-bold">86% Ocupação</span>
+                                <span class="font-bold text-white font-mono">3,0 kg (3 sacos)</span>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
+                                <div class="flex items-center space-x-2.5">
+                                    <div class="w-6 h-6 rounded bg-blue-500/20 text-blue-300 flex items-center justify-center font-bold text-[10px]">3</div>
+                                    <span class="text-slate-200">Cafeteria / Espresso Bar (Consumo Interno)</span>
+                                </div>
+                                <span class="font-bold text-white font-mono">2,5 kg</span>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
+                                <div class="flex items-center space-x-2.5">
+                                    <div class="w-6 h-6 rounded bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold text-[10px]">4</div>
+                                    <span class="text-slate-200">Kits dos 7g Apartments (Cápsulas & Grão)</span>
+                                </div>
+                                <span class="font-bold text-white font-mono">1,3 kg (18 kits)</span>
                             </div>
                         </div>
 
-                        <p class="text-slate-400 text-xs">
-                            A governanta atualiza no tablet após arrumar o quarto: o estoque central dá baixa imediata nas cápsulas 7G e amenities.
-                        </p>
-                    </div>
-
-                    <!-- Torrefação 360 -->
-                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
-                        <div class="flex items-center justify-between border-b border-darkborder pb-3">
-                            <div class="flex items-center space-x-2">
-                                <i data-lucide="flame" class="w-5 h-5 text-coffee-400"></i>
-                                <h3 class="font-bold text-white text-sm">Rastreamento da Torrefação</h3>
-                            </div>
-                            <span class="text-xs text-coffee-400 font-mono">Lote #2026-ET04</span>
-                        </div>
-
-                        <div class="space-y-3 text-xs">
-                            <div class="bg-darkbg p-3 rounded-xl border border-darkborder space-y-1.5">
-                                <div class="flex justify-between font-bold text-white">
-                                    <span>Etiópia Guji Natural (Saca Verde)</span>
-                                    <span>60,0 kg</span>
-                                </div>
-                                <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                                    <div class="bg-coffee-400 h-1.5 rounded-full" style="width: 100%"></div>
-                                </div>
-                                <div class="flex justify-between text-[10px] text-slate-400">
-                                    <span>Perda na Torra (Quebra 14,5%)</span>
-                                    <span class="text-white font-medium">Peso Final Torrado: 51,3 kg</span>
-                                </div>
-                            </div>
-
-                            <div class="space-y-1.5">
-                                <div class="text-[11px] font-semibold text-slate-300">Destino Automático do Lote:</div>
-                                <div class="flex items-center justify-between p-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
-                                    <span>Loja Online & B2C (Sacos 250g)</span>
-                                    <span class="font-bold text-white">25,0 kg (100 pacotes)</span>
-                                </div>
-                                <div class="flex items-center justify-between p-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
-                                    <span>Cafeteria / Espresso Bar (Consumo Interno)</span>
-                                    <span class="font-bold text-white">20,0 kg</span>
-                                </div>
-                                <div class="flex items-center justify-between p-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
-                                    <span>Cápsulas & Kits 7G Apartments</span>
-                                    <span class="font-bold text-white">6,3 kg (42 kits hóspedes)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-2.5 bg-coffee-500/10 border border-coffee-400/20 rounded-xl text-center text-xs text-coffee-300">
-                            Tudo integrado: do armazém da torra até à chávena do cliente.
+                        <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center text-xs text-emerald-300 font-medium">
+                            Zero discrepâncias de estoque. A dona sabe exatamente o custo da torra vs. o lucro das vendas.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 5: Cockpit Executivo da Dona -->
-        <section id="slide-5" class="slide-panel hidden">
+        <!-- SLIDE 5: 7G Apartments Hub (Governança & Hóspedes) -->
+        <section id="slide-5" class="slide-panel hidden animate-fadeIn">
+            <div class="max-w-5xl mx-auto space-y-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-darkborder pb-4 gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-2">
+                            <i data-lucide="hotel" class="w-3.5 h-3.5"></i>
+                            <span>Módulo 4 · 7G Apartments Hub</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Quadro Visual da Governança & Experiência do Hóspede</h2>
+                    </div>
+                    <div class="text-xs text-slate-400">
+                        Fim do WhatsApp entre recepção e camareiras
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 items-start">
+                    <!-- Painel Interativo de Housekeeping -->
+                    <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                <i data-lucide="sparkle" class="w-4 h-4 text-purple-400"></i>
+                                <span>Quadro dos 7 Apartamentos (Ao Vivo)</span>
+                            </h3>
+                            <span class="text-[10px] text-slate-400">Clique para simular status</span>
+                        </div>
+
+                        <div class="space-y-2 text-xs" id="apartments-list">
+                            <!-- Apt 1 -->
+                            <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-between cursor-pointer hover:brightness-110" onclick="toggleAptStatus(1)">
+                                <div>
+                                    <div class="font-bold text-white">Apartamento 1 (Jardim)</div>
+                                    <div class="text-[10px] text-emerald-400 font-semibold" id="apt-status-1">● Limpo & Inspecionado</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 font-mono">Check-in às 15h</span>
+                            </div>
+
+                            <!-- Apt 2 -->
+                            <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between cursor-pointer hover:brightness-110" onclick="toggleAptStatus(2)">
+                                <div>
+                                    <div class="font-bold text-white">Apartamento 2 (Duplex Vista)</div>
+                                    <div class="text-[10px] text-amber-300 font-semibold" id="apt-status-2">● Em Limpeza (Rosa)</div>
+                                </div>
+                                <span class="text-[10px] text-amber-400 font-mono">Reposição Pendente</span>
+                            </div>
+
+                            <!-- Apt 3 -->
+                            <div class="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-between cursor-pointer hover:brightness-110" onclick="toggleAptStatus(3)">
+                                <div>
+                                    <div class="font-bold text-white">Apartamento 3 (Terraço)</div>
+                                    <div class="text-[10px] text-red-300 font-semibold" id="apt-status-3">● Ocupado (Hóspede)</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 font-mono">Check-out Sexta</span>
+                            </div>
+
+                            <!-- Apt 4 a 7 -->
+                            <div class="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-white">Apartamentos 4 a 7</div>
+                                    <div class="text-[10px] text-slate-400">3 Ocupados · 1 Check-out Concluído</div>
+                                </div>
+                                <span class="text-[10px] text-emerald-400 font-bold">86% Ocupação</span>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-800 rounded-xl border border-slate-700 text-xs flex items-center justify-between">
+                            <span class="text-slate-300">Baixa automática de café ao limpar:</span>
+                            <span class="px-2 py-0.5 bg-coffee-500/20 text-coffee-300 font-bold rounded text-[10px]">2 Kits 7G debitados</span>
+                        </div>
+                    </div>
+
+                    <!-- Guia do Hóspede & Manutenção Rápida -->
+                    <div class="space-y-4">
+                        <!-- Guia Digital do Hóspede -->
+                        <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                    <i data-lucide="qr-code" class="w-4 h-4 text-coffee-400"></i>
+                                    <span>Guia do Hóspede (QR Code no Quarto)</span>
+                                </h3>
+                                <span class="text-[10px] text-emerald-400 font-semibold">Web App Rápido</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                O hóspede aponta a câmera do telemóvel para o QR Code e tem acesso imediato sem precisar instalar aplicativo:
+                            </p>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="p-2 bg-darkbg rounded-lg border border-darkborder">
+                                    <div class="text-coffee-300 font-bold">📶 Wi-Fi 7G</div>
+                                    <div class="text-[10px] text-slate-400">Conexão em 1 clique</div>
+                                </div>
+                                <div class="p-2 bg-darkbg rounded-lg border border-darkborder">
+                                    <div class="text-amber-300 font-bold">☕ Máquina de Café</div>
+                                    <div class="text-[10px] text-slate-400">Guia de extração 7G</div>
+                                </div>
+                            </div>
+                            <div class="p-2.5 bg-coffee-500/10 border border-coffee-400/20 rounded-xl text-xs flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-white">Voucher Brunch Cafeteria</div>
+                                    <div class="text-[10px] text-coffee-300">10% OFF para hóspedes</div>
+                                </div>
+                                <span class="px-2 py-1 bg-coffee-400 text-darkbg font-bold rounded text-[10px]">Cross-selling</span>
+                            </div>
+                        </div>
+
+                        <!-- Chamados de Manutenção Rápida -->
+                        <div class="bg-darkcard border border-darkborder p-4 rounded-2xl text-xs space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white flex items-center space-x-1.5">
+                                    <i data-lucide="wrench" class="w-3.5 h-3.5 text-amber-400"></i>
+                                    <span>Manutenção Rápida com Foto</span>
+                                </span>
+                                <span class="text-[10px] text-amber-400 font-medium">1 Chamado Pendente</span>
+                            </div>
+                            <p class="text-slate-400 text-[11px]">
+                                A camareira viu uma avaria? Tira uma foto e envia em 10 segundos. O técnico recebe o chamado e o quarto não fica com defeito para o próximo hóspede.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Cockpit Executivo da Dona -->
+        <section id="slide-6" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-4xl mx-auto space-y-6">
                 <div class="text-center space-y-2">
                     <span class="text-xs uppercase tracking-widest text-emerald-400 font-bold">Torre de Controle</span>
                     <h2 class="text-3xl font-bold text-white">O Cockpit da Proprietária</h2>
-                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Todas as manhãs e todos os domingos à noite, a empresa inteira em 30 segundos.</p>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Todas as manhãs e todos os domingos à noite, a empresa inteira em 30 segundos no telemóvel.</p>
                 </div>
 
                 <div class="bg-darkcard border border-darkborder p-6 rounded-3xl space-y-6 glow-gold">
-                    <!-- Top Metrics Bar -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="bg-darkbg p-4 rounded-2xl border border-darkborder">
                             <div class="text-xs text-slate-400">Faturação do Dia</div>
                             <div class="text-2xl font-bold text-white mt-1">2.140 €</div>
                             <div class="text-[10px] text-emerald-400 mt-0.5 flex items-center space-x-1">
                                 <i data-lucide="trending-up" class="w-3 h-3"></i>
-                                <span>+14% vs domingo passado</span>
+                                <span>+14% vs domingo anterior</span>
                             </div>
                         </div>
                         <div class="bg-darkbg p-4 rounded-2xl border border-darkborder">
@@ -818,7 +1015,6 @@
                         </div>
                     </div>
 
-                    <!-- Divisão por Canal de Faturamento -->
                     <div class="p-4 rounded-2xl bg-darkbg border border-darkborder space-y-3">
                         <h4 class="text-xs font-bold text-white uppercase tracking-wider">Divisão de Receita (Tempo Real)</h4>
                         <div class="space-y-2">
@@ -852,18 +1048,17 @@
                         </div>
                     </div>
 
-                    <!-- Botão para Contabilidade -->
                     <div class="p-4 rounded-2xl bg-slate-800/50 border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="flex items-center space-x-3">
                             <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
                                 <i data-lucide="file-check" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h5 class="text-xs font-bold text-white">Fecho Pré-Contábil Pronto</h5>
-                                <p class="text-[11px] text-slate-400">Faturas organizadas, SAF-T e folha de ponto digital compilados para o contabilista.</p>
+                                <h5 class="text-xs font-bold text-white">Fecho Pré-Contábil Organizado</h5>
+                                <p class="text-[11px] text-slate-400">Faturas, despesas e horas trabalhadas compiladas para envio rápido ao contabilista.</p>
                             </div>
                         </div>
-                        <button onclick="alert('Relatório pré-contábil mensal gerado em PDF e CSV com 1 clique!')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold rounded-xl transition shrink-0">
+                        <button onclick="alert('Exportação pré-contábil gerada em PDF e CSV com 1 clique!')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold rounded-xl transition shrink-0">
                             Exportar para Contabilidade
                         </button>
                     </div>
@@ -871,8 +1066,8 @@
             </div>
         </section>
 
-        <!-- SLIDE 6: Calculadora Interativa de ROI -->
-        <section id="slide-6" class="slide-panel hidden">
+        <!-- SLIDE 7: Calculadora Interativa de ROI -->
+        <section id="slide-7" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-4xl mx-auto space-y-6">
                 <div class="text-center space-y-2">
                     <span class="text-xs uppercase tracking-widest text-coffee-400 font-bold">Retorno Financeiro</span>
@@ -882,7 +1077,6 @@
 
                 <div class="bg-darkcard border border-darkborder p-6 rounded-3xl space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Controles da Calculadora -->
                         <div class="space-y-4">
                             <div>
                                 <div class="flex justify-between text-xs font-bold mb-2">
@@ -890,11 +1084,6 @@
                                     <span class="text-coffee-400 font-mono text-sm" id="roi-staff-label">12 pessoas</span>
                                 </div>
                                 <input type="range" id="roi-staff-slider" min="6" max="25" value="12" class="w-full accent-coffee-400" oninput="updateROI()">
-                                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-                                    <span>6</span>
-                                    <span>12</span>
-                                    <span>25</span>
-                                </div>
                             </div>
 
                             <div>
@@ -903,28 +1092,17 @@
                                     <span class="text-coffee-400 font-mono text-sm" id="roi-rate-label">15 € / hora</span>
                                 </div>
                                 <input type="range" id="roi-rate-slider" min="10" max="30" value="15" class="w-full accent-coffee-400" oninput="updateROI()">
-                                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-                                    <span>10 €</span>
-                                    <span>15 €</span>
-                                    <span>30 €</span>
-                                </div>
                             </div>
 
                             <div>
                                 <div class="flex justify-between text-xs font-bold mb-2">
-                                    <span class="text-slate-300">Compras Mensais em Alimentos e Café:</span>
+                                    <span class="text-slate-300">Compras Mensais (Alimentos e Café):</span>
                                     <span class="text-coffee-400 font-mono text-sm" id="roi-purchases-label">12.000 € / mês</span>
                                 </div>
                                 <input type="range" id="roi-purchases-slider" min="5000" max="30000" step="1000" value="12000" class="w-full accent-coffee-400" oninput="updateROI()">
-                                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-                                    <span>5.000 €</span>
-                                    <span>12.000 €</span>
-                                    <span>30.000 €</span>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Resultados Calculados Dinamicamente -->
                         <div class="bg-darkbg p-5 rounded-2xl border border-darkborder flex flex-col justify-between space-y-4">
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center text-xs pb-2 border-b border-darkborder">
@@ -932,7 +1110,7 @@
                                     <span class="font-bold text-white" id="res-hours">30 horas</span>
                                 </div>
                                 <div class="flex justify-between items-center text-xs pb-2 border-b border-darkborder">
-                                    <span class="text-slate-400">Economia em Tempo de Liderança:</span>
+                                    <span class="text-slate-400">Economia Tempo da Liderança:</span>
                                     <span class="font-bold text-emerald-400" id="res-time-val">5.400 € / ano</span>
                                 </div>
                                 <div class="flex justify-between items-center text-xs pb-2 border-b border-darkborder">
@@ -940,17 +1118,17 @@
                                     <span class="font-bold text-amber-400" id="res-cmv-val">4.320 € / ano</span>
                                 </div>
                                 <div class="flex justify-between items-center text-xs pb-2 border-b border-darkborder">
-                                    <span class="text-slate-400">Economia em Softwares de Terceiros:</span>
+                                    <span class="text-slate-400">Softwares Avulsos Eliminados:</span>
                                     <span class="font-bold text-blue-400">1.800 € / ano</span>
                                 </div>
                             </div>
 
                             <div class="pt-2 border-t border-darkborder text-center">
-                                <div class="text-[11px] text-slate-400 uppercase font-semibold">Retorno Estimado Total na 7G</div>
+                                <div class="text-[11px] text-slate-400 uppercase font-semibold">Valor Total Gerado na 7G</div>
                                 <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-coffee-300 via-amber-300 to-emerald-400 mt-1" id="res-total-val">
                                     +11.520 € / ano
                                 </div>
-                                <div class="text-[10px] text-slate-500 mt-1">Além do ganho de tranquilidade e valorização da marca</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mais tranquilidade e valor de mercado para a empresa</div>
                             </div>
                         </div>
                     </div>
@@ -958,22 +1136,74 @@
             </div>
         </section>
 
-        <!-- SLIDE 7: Cronograma & Proposta de Piloto -->
-        <section id="slide-7" class="slide-panel hidden">
+        <!-- SLIDE 8: Oportunidade de Co-Sociedade (Venture Builder) -->
+        <section id="slide-8" class="slide-panel hidden animate-fadeIn">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-coffee-400 font-bold">Visão de Futuro</span>
+                    <h2 class="text-3xl font-bold text-white">Da Operação Interna a um Produto Global</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Como a 7G pode se tornar referência tecnológica e co-sócia de um novo ativo de mercado.</p>
+                </div>
+
+                <div class="bg-darkcard border border-darkborder p-6 rounded-3xl space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div class="space-y-4 text-xs leading-relaxed text-slate-300">
+                            <h3 class="text-base font-bold text-white">Por que o mercado precisa disso?</h3>
+                            <p>
+                                Dezenas de torrefações e cafeterias de especialidade no Porto, Lisboa, Madrid e Barcelona enfrentam exatamente os mesmos desafios: não existe nenhum software feito especificamente para o negócio híbrido de café especial, brunch e hospedagem.
+                            </p>
+                            <p>
+                                Ao validarmos o sistema com sucesso no 7G, temos em mãos um produto pronto para ser comercializado em modelo SaaS (assinatura mensal) para o mercado europeu.
+                            </p>
+                            <div class="p-3 bg-coffee-500/10 border border-coffee-400/20 rounded-xl space-y-1">
+                                <span class="font-bold text-coffee-300">A 7G como Vitrine Oficial:</span>
+                                <p class="text-slate-400 text-[11px]">A marca 7G ganha prestígio internacional como líder de inovação no setor de café especial.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card de Parceria -->
+                        <div class="bg-darkbg p-5 rounded-2xl border border-darkborder space-y-4">
+                            <div class="flex items-center justify-between border-b border-darkborder pb-3">
+                                <span class="font-bold text-white text-xs">Estrutura de Sociedade (Joint Venture)</span>
+                                <span class="px-2 py-0.5 text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded font-bold">Ganha-Ganha</span>
+                            </div>
+
+                            <div class="space-y-2.5 text-xs">
+                                <div class="p-2.5 bg-slate-800/80 rounded-xl border border-slate-700/60">
+                                    <div class="font-bold text-white">OneStepTo (Tecnologia & Produto)</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Desenvolvimento, código, manutenção de servidores e evolução contínua da plataforma.</div>
+                                </div>
+                                <div class="p-2.5 bg-slate-800/80 rounded-xl border border-slate-700/60">
+                                    <div class="font-bold text-white">7G (Ambiente de Validação & Prestígio)</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Laboratório real de testes, chancela oficial de marca e participação de lucros na comercialização.</div>
+                                </div>
+                            </div>
+
+                            <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center text-emerald-300 text-[11px] font-semibold">
+                                Uso vitalício gratuito para o 7G + nova fonte de receita passiva.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: Cronograma & Piloto de 30 Dias -->
+        <section id="slide-9" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-4xl mx-auto space-y-8">
                 <div class="text-center space-y-2">
-                    <span class="text-xs uppercase tracking-widest text-coffee-400 font-bold">Implementação Consciente</span>
-                    <h2 class="text-3xl font-bold text-white">Roteiro em 3 Fases & Proposta de Piloto</h2>
-                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Sem interromper 1 minuto do atendimento ou do funcionamento dos apartamentos.</p>
+                    <span class="text-xs uppercase tracking-widest text-coffee-400 font-bold">Implementação Sem Fricção</span>
+                    <h2 class="text-3xl font-bold text-white">Cronograma & Proposta de Piloto de 30 Dias</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Sem interromper nem 1 minuto o atendimento da cafeteria ou a estadia dos apartamentos.</p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="bg-darkcard border border-coffee-400/30 p-5 rounded-2xl relative">
                         <div class="w-7 h-7 rounded-lg bg-coffee-400 text-darkbg font-bold flex items-center justify-center text-xs mb-3">1</div>
                         <span class="text-[10px] uppercase font-bold text-coffee-400 tracking-wider">Semanas 1 a 4</span>
-                        <h3 class="text-base font-bold text-white mt-1">Staff & RH (Alívio Imediato)</h3>
+                        <h3 class="text-base font-bold text-white mt-1">Staff & Escalas (Alívio)</h3>
                         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                            Migração dos dados de funcionários. Ativação do 7G Staff App para escalas, ponto digital e saldo de férias/feriados.
+                            Cadastro da equipe, ativação do app no telemóvel para escalas, férias, feriados e manuais de serviço.
                         </p>
                         <div class="mt-4 pt-3 border-t border-darkborder text-[11px] text-emerald-400 font-medium">
                             ✓ Piloto de 30 dias na Cozinha e Balcão
@@ -985,7 +1215,7 @@
                         <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Semanas 5 a 8</span>
                         <h3 class="text-base font-bold text-white mt-1">GestãoChef & Torra</h3>
                         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                            Leitura de faturas por OCR. Fichas técnicas do cardápio de brunch e café. Controle de lotes da torrefação de café.
+                            OCR de faturas, fichas técnicas dinâmicas de brunch e controle de quebra e lotes da torrefação.
                         </p>
                         <div class="mt-4 pt-3 border-t border-darkborder text-[11px] text-slate-400">
                             ✓ CMV exato e fim de desperdícios
@@ -995,9 +1225,9 @@
                     <div class="bg-darkcard border border-darkborder p-5 rounded-2xl relative">
                         <div class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-bold flex items-center justify-center text-xs mb-3">3</div>
                         <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Semanas 9 a 12</span>
-                        <h3 class="text-base font-bold text-white mt-1">Apartments & Cockpit</h3>
+                        <h3 class="text-base font-bold text-white mt-1">Apartamentos & Cockpit</h3>
                         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                            Painel de governança dos 7 apartamentos, Cockpit da dona no telemóvel e relatórios pré-contábeis.
+                            Painel de governança dos 7 apartamentos, guia do hóspede, Cockpit executivo da dona e pré-contabilidade.
                         </p>
                         <div class="mt-4 pt-3 border-t border-darkborder text-[11px] text-slate-400">
                             ✓ Ecossistema 100% integrado
@@ -1005,15 +1235,15 @@
                     </div>
                 </div>
 
-                <!-- Card de Chamada para Ação Final -->
+                <!-- Card de Ação do Piloto -->
                 <div class="bg-gradient-to-r from-coffee-500/20 via-darkcard to-darkbg border border-coffee-400/40 p-6 rounded-3xl text-center space-y-4 glow-gold">
-                    <h3 class="text-xl font-bold text-white">Próximo Passo Proposto: O Piloto de 30 Dias sem Risco</h3>
+                    <h3 class="text-xl font-bold text-white">Proposta de Início: Piloto de 30 Dias sem Risco</h3>
                     <p class="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-                        Iniciamos a <strong>Fase 1 (App da Staff & Férias)</strong> exclusivamente com a equipe da cozinha e balcão. Se em 30 dias a gestão de escalas não for pelo menos <strong>50% mais rápida e organizada</strong>, encerramos sem qualquer compromisso.
+                        Iniciamos a <strong>Fase 1 (App da Staff & Escalas)</strong> apenas com a equipe da cozinha e balcão. Se em 30 dias a gestão de escalas e férias não se tornar pelo menos <strong>50% mais rápida e organizada</strong>, encerramos o processo sem qualquer fricção ou custo fixo acumulado.
                     </p>
                     <div class="pt-2">
-                        <button onclick="alert('Excelente! Proposta aprovada para apresentar o piloto de 30 dias à proprietária.')" class="bg-gradient-to-r from-coffee-400 to-coffee-500 text-darkbg font-bold px-8 py-3 rounded-xl text-sm hover:brightness-110 shadow-lg shadow-coffee-400/25 transition">
-                            Apresentar Piloto à Proprietária
+                        <button onclick="alert('Excelente decisão! Proposta aprovada para iniciar a configuração do piloto na cozinha e balcão.')" class="bg-gradient-to-r from-coffee-400 to-coffee-500 text-darkbg font-bold px-8 py-3 rounded-xl text-sm hover:brightness-110 shadow-lg shadow-coffee-400/25 transition">
+                            Aprovar Início do Piloto
                         </button>
                     </div>
                 </div>
@@ -1022,12 +1252,12 @@
 
     </main>
 
-    <!-- Bottom Navigation Bar & Slide Indicator -->
+    <!-- Rodapé de Navegação e Contador de Slides -->
     <footer class="border-t border-darkborder bg-darkcard/80 backdrop-blur-md px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between text-xs">
             <div class="flex items-center space-x-2 text-slate-400">
-                <span class="font-mono text-coffee-400 font-bold" id="slide-indicator">01 / 08</span>
-                <span class="hidden sm:inline">· Use as setas do teclado para navegar</span>
+                <span class="font-mono text-coffee-400 font-bold" id="slide-indicator">01 / 10</span>
+                <span class="hidden sm:inline">· Navegue com as setas do teclado</span>
             </div>
 
             <div class="flex items-center space-x-2">
@@ -1043,22 +1273,19 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts de Interatividade -->
     <script>
         let currentSlide = 0;
-        const totalSlides = 8;
+        const totalSlides = 10;
 
         function updateSlideUI() {
-            // Hide all slides
             for (let i = 0; i < totalSlides; i++) {
                 const el = document.getElementById(`slide-${i}`);
                 if (el) el.classList.add('hidden');
             }
-            // Show current slide
             const currentEl = document.getElementById(`slide-${currentSlide}`);
             if (currentEl) currentEl.classList.remove('hidden');
 
-            // Update nav buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 const s = parseInt(btn.getAttribute('data-slide'));
                 if (s === currentSlide) {
@@ -1068,7 +1295,6 @@
                 }
             });
 
-            // Update indicator
             document.getElementById('slide-indicator').textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1094,24 +1320,69 @@
             }
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
             if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
         });
 
-        // Phone Simulator View Switcher
+        // Alternador de Perspectiva Staff: Admin vs Funcionário
+        function toggleStaffRole(role) {
+            const btnAdmin = document.getElementById('tab-btn-admin');
+            const btnStaff = document.getElementById('tab-btn-staff');
+            const contentAdmin = document.getElementById('content-role-admin');
+            const contentStaff = document.getElementById('content-role-staff');
+
+            if (role === 'admin') {
+                btnAdmin.className = "flex-1 py-2 font-bold rounded-lg transition bg-coffee-500/20 text-coffee-300 border border-coffee-400/30";
+                btnStaff.className = "flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white";
+                contentAdmin.classList.remove('hidden');
+                contentStaff.classList.add('hidden');
+            } else {
+                btnStaff.className = "flex-1 py-2 font-bold rounded-lg transition bg-blue-500/20 text-blue-300 border border-blue-400/30";
+                btnAdmin.className = "flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white";
+                contentStaff.classList.remove('hidden');
+                contentAdmin.classList.add('hidden');
+            }
+        }
+
+        // Troca de Vistas no Celular da Staff
         function showPhoneView(view) {
             document.getElementById('phone-view-escalas').classList.add('hidden');
             document.getElementById('phone-view-ferias').classList.add('hidden');
+            document.getElementById('phone-view-sops').classList.add('hidden');
             document.getElementById('phone-view-ponto').classList.add('hidden');
 
             if (view === 'escalas') document.getElementById('phone-view-escalas').classList.remove('hidden');
             if (view === 'ferias') document.getElementById('phone-view-ferias').classList.remove('hidden');
+            if (view === 'sops') document.getElementById('phone-view-sops').classList.remove('hidden');
             if (view === 'ponto') document.getElementById('phone-view-ponto').classList.remove('hidden');
         }
 
-        // Live Clock
+        // Simulação de Troca de Turno em 3 Vias
+        function simularTrocaTurno() {
+            alert('Passo 1: Carla enviou proposta de troca de turno para Rabin.\nPasso 2: Rabin aceitou pelo telemóvel.\nPasso 3: Notificação enviada para o Gerente autorizar.\nResultado: Ao clicar em autorizar, a escala geral atualiza na hora!');
+        }
+
+        // Alternância Interativa dos Apartamentos
+        const aptStatuses = [
+            { label: '● Limpo & Inspecionado', color: 'text-emerald-400' },
+            { label: '● Em Limpeza (Camareira)', color: 'text-amber-300' },
+            { label: '● Ocupado (Hóspede)', color: 'text-red-300' },
+            { label: '● Check-out Pendente', color: 'text-blue-300' }
+        ];
+        let aptStates = [0, 1, 2];
+
+        function toggleAptStatus(aptId) {
+            const idx = aptId - 1;
+            aptStates[idx] = (aptStates[idx] + 1) % aptStatuses.length;
+            const el = document.getElementById(`apt-status-${aptId}`);
+            if (el) {
+                el.textContent = aptStatuses[aptStates[idx]].label;
+                el.className = `text-[10px] font-semibold ${aptStatuses[aptStates[idx]].color}`;
+            }
+        }
+
+        // Relógio do Ponto Digital
         setInterval(() => {
             const now = new Date();
             const timeStr = now.toTimeString().split(' ')[0];
@@ -1119,7 +1390,7 @@
             if (clockEl) clockEl.textContent = timeStr;
         }, 1000);
 
-        // ROI Calculator Logic
+        // Calculadora de ROI
         function updateROI() {
             const staff = parseInt(document.getElementById('roi-staff-slider').value);
             const rate = parseInt(document.getElementById('roi-rate-slider').value);
@@ -1129,7 +1400,6 @@
             document.getElementById('roi-rate-label').textContent = `${rate} € / hora`;
             document.getElementById('roi-purchases-label').textContent = `${purchases.toLocaleString('pt-PT')} € / mês`;
 
-            // Calculations
             const hoursSavedPerMonth = Math.round(staff * 2.5);
             const leadershipTimeYear = hoursSavedPerMonth * rate * 12;
             const cmvSavingsYear = Math.round(purchases * 0.03 * 12);
@@ -1142,7 +1412,6 @@
             document.getElementById('res-total-val').textContent = `+${totalSavingsYear.toLocaleString('pt-PT')} € / ano`;
         }
 
-        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
