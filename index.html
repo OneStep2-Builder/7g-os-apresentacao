@@ -748,23 +748,34 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: 7G Torrefação 360° (Desmistificada) -->
+                <!-- SLIDE 4: 7G Torrefação & Montra da Loja -->
         <section id="slide-4" class="slide-panel hidden animate-fadeIn">
             <div class="max-w-5xl mx-auto space-y-6">
                 <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-darkborder pb-4 gap-4">
                     <div>
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-coffee-500/10 border border-coffee-400/30 text-coffee-300 text-xs font-semibold mb-2">
                             <i data-lucide="flame" class="w-3.5 h-3.5"></i>
-                            <span>Módulo 3 · 7G Torrefação 360°</span>
+                            <span>Módulo 3 · 7G Torrefação & Gestão de Montra</span>
                         </div>
-                        <h2 class="text-3xl font-bold text-white">Controle da Quebra de Torra & Destino do Grão</h2>
+                        <h2 class="text-3xl font-bold text-white">Torra 360° & Reposição da Loja por Inventário</h2>
                     </div>
                     <div class="text-xs text-slate-400">
-                        Da saca verde importada até à xícara do cliente e kit dos quartos
+                        Comunicação direta Loja ⇄ Roaster sem recados no WhatsApp
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 items-start">
+                <!-- Seletor de Sub-Abas: Torra vs Montra da Loja -->
+                <div class="flex p-1 bg-darkcard rounded-xl border border-darkborder text-xs max-w-md mx-auto">
+                    <button onclick="toggleRoasterTab('torra')" id="roaster-tab-btn-torra" class="flex-1 py-2 font-bold rounded-lg transition bg-coffee-500/20 text-coffee-300 border border-coffee-400/30">
+                        🔥 Sessão de Torra & Quebra
+                    </button>
+                    <button onclick="toggleRoasterTab('montra')" id="roaster-tab-btn-montra" class="flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white">
+                        📦 Montra: Cafés & Equipamentos
+                    </button>
+                </div>
+
+                <!-- Aba 1: Torra & Quebra de Peso -->
+                <div id="roaster-tab-content-torra" class="grid md:grid-cols-2 gap-6 items-start">
                     <!-- O Desafio Real da Torra -->
                     <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
                         <h3 class="text-sm font-bold text-white flex items-center space-x-2">
@@ -809,7 +820,7 @@
                     <div class="bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
                         <h3 class="text-sm font-bold text-white flex items-center space-x-2">
                             <i data-lucide="share-2" class="w-4 h-4 text-purple-400"></i>
-                            <span>Divisão Automática em 4 Destinos</span>
+                            <span>Destino do Lote nos 4 Canais</span>
                         </h3>
                         <p class="text-xs text-slate-300 leading-relaxed">
                             O mesmo café torrado abastece 4 frentes simultâneas. O sistema divide o lote com 1 clique e atualiza o estoque de cada um:
@@ -850,7 +861,112 @@
                         </div>
 
                         <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-center text-xs text-emerald-300 font-medium">
-                            Zero discrepâncias de estoque. A dona sabe exatamente o custo da torra vs. o lucro das vendas.
+                            Zero discrepâncias de estoque. O torrador lança 1 vez e todos os setores são abastecidos.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba 2: Gestão de Montra & Equipamentos (Nova Solução do Usuário) -->
+                <div id="roaster-tab-content-montra" class="grid lg:grid-cols-12 gap-6 items-start hidden">
+                    <!-- Tabela da Montra da Loja -->
+                    <div class="lg:col-span-8 bg-darkcard border border-darkborder p-5 rounded-2xl space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                    <i data-lucide="store" class="w-4 h-4 text-coffee-400"></i>
+                                    <span>Montra da Loja & Pequeno Estoque de Balcão</span>
+                                </h3>
+                                <p class="text-xs text-slate-400">Controle por número de inventário (SKU) e estoque mínimo</p>
+                            </div>
+                            <span class="px-2 py-0.5 text-[10px] bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded font-medium">3 Itens em Alerta</span>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="text-slate-400 border-b border-darkborder text-[11px]">
+                                        <th class="pb-2 font-medium">Cód. Inventário</th>
+                                        <th class="pb-2 font-medium">Produto / Origem</th>
+                                        <th class="pb-2 font-medium text-center">Na Montra</th>
+                                        <th class="pb-2 font-medium text-center">Estoque Roaster</th>
+                                        <th class="pb-2 font-medium text-right">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-darkborder/50 text-slate-300">
+                                    <tr>
+                                        <td class="py-2.5 font-mono text-[11px] text-coffee-300">#CF-ET250</td>
+                                        <td class="py-2.5 font-medium text-white">Etiópia Guji 250g (Grão)</td>
+                                        <td class="py-2.5 text-center text-amber-400 font-bold">2 un <span class="text-[9px] text-slate-500">(Mín: 6)</span></td>
+                                        <td class="py-2.5 text-center text-slate-400">42 un</td>
+                                        <td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-[10px] rounded font-semibold">Repor +5</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-mono text-[11px] text-coffee-300">#CF-COL250</td>
+                                        <td class="py-2.5 font-medium text-white">Colômbia Huila 250g (Grão)</td>
+                                        <td class="py-2.5 text-center text-emerald-400 font-bold">7 un <span class="text-[9px] text-slate-500">(Mín: 6)</span></td>
+                                        <td class="py-2.5 text-center text-slate-400">30 un</td>
+                                        <td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] rounded">OK</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-mono text-[11px] text-coffee-300">#EQ-CHAL</td>
+                                        <td class="py-2.5 font-medium text-white">Chaleira Bico de Ganso (Gooseneck)</td>
+                                        <td class="py-2.5 text-center text-red-400 font-bold">1 un <span class="text-[9px] text-slate-500">(Mín: 3)</span></td>
+                                        <td class="py-2.5 text-center text-slate-400">8 un</td>
+                                        <td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-red-500/20 text-red-300 text-[10px] rounded font-semibold">Repor +2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-mono text-[11px] text-coffee-300">#EQ-FILT</td>
+                                        <td class="py-2.5 font-medium text-white">Filtros de Papel V60 02 (100 un)</td>
+                                        <td class="py-2.5 text-center text-amber-400 font-bold">2 cx <span class="text-[9px] text-slate-500">(Mín: 5)</span></td>
+                                        <td class="py-2.5 text-center text-slate-400">18 cx</td>
+                                        <td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-[10px] rounded font-semibold">Repor +4</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 font-mono text-[11px] text-coffee-300">#EQ-MOIN</td>
+                                        <td class="py-2.5 font-medium text-white">Moinho Manual de Precisão C3</td>
+                                        <td class="py-2.5 text-center text-emerald-400 font-bold">2 un <span class="text-[9px] text-slate-500">(Mín: 2)</span></td>
+                                        <td class="py-2.5 text-center text-slate-400">5 un</td>
+                                        <td class="py-2.5 text-right"><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] rounded">OK</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Botão de Disparo do Pedido de Reposição -->
+                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                            <span class="text-[11px] text-slate-400">O barista não precisa digitar textos no WhatsApp.</span>
+                            <button onclick="simularReposicaoMontra()" class="w-full sm:w-auto px-5 py-2.5 bg-coffee-400 hover:bg-coffee-300 text-darkbg font-bold rounded-xl text-xs transition flex items-center justify-center space-x-1.5 shadow-lg shadow-coffee-400/20">
+                                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                <span>Disparar Pedido de Reposição ao Roaster</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card Explicativo: Por que isso é revolucionário -->
+                    <div class="lg:col-span-4 bg-darkcard border border-darkborder p-5 rounded-2xl space-y-3.5">
+                        <div class="flex items-center space-x-2 text-coffee-300 font-bold text-xs uppercase tracking-wider">
+                            <i data-lucide="zap" class="w-4 h-4 text-coffee-400"></i>
+                            <span>Fim dos Recados Perdidos</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-white">Como a Comunicação Funciona:</h4>
+                        
+                        <div class="space-y-2.5 text-xs text-slate-300">
+                            <div class="flex items-start space-x-2.5">
+                                <span class="w-5 h-5 rounded-full bg-slate-800 text-coffee-300 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
+                                <p><strong>Contagem em 1 Minuto:</strong> O barista olha a montra e ajusta os números no celular.</p>
+                            </div>
+                            <div class="flex items-start space-x-2.5">
+                                <span class="w-5 h-5 rounded-full bg-slate-800 text-coffee-300 font-bold flex items-center justify-center shrink-0 text-[10px]">2</span>
+                                <p><strong>Alerta no Painel do Roaster:</strong> A equipe da torra recebe a lista exata do que separar por código.</p>
+                            </div>
+                            <div class="flex items-start space-x-2.5">
+                                <span class="w-5 h-5 rounded-full bg-slate-800 text-coffee-300 font-bold flex items-center justify-center shrink-0 text-[10px]">3</span>
+                                <p><strong>Transferência com 1 Toque:</strong> O torrador confirma a entrega; o estoque central diminui e a montra aumenta na hora.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[11px] text-emerald-300">
+                            ✓ Nunca mais um cliente ouve "acabou a chaleira" enquanto há caixas guardadas no armazém da torra.
                         </div>
                     </div>
                 </div>
@@ -1324,6 +1440,38 @@
             if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
             if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
         });
+
+                // Alternador de Sub-Abas da Torrefação & Montra
+        function toggleRoasterTab(tab) {
+            const btnTorra = document.getElementById('roaster-tab-btn-torra');
+            const btnMontra = document.getElementById('roaster-tab-btn-montra');
+            const contentTorra = document.getElementById('roaster-tab-content-torra');
+            const contentMontra = document.getElementById('roaster-tab-content-montra');
+
+            if (tab === 'torra') {
+                btnTorra.className = "flex-1 py-2 font-bold rounded-lg transition bg-coffee-500/20 text-coffee-300 border border-coffee-400/30";
+                btnMontra.className = "flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white";
+                contentTorra.classList.remove('hidden');
+                contentMontra.classList.add('hidden');
+            } else {
+                btnMontra.className = "flex-1 py-2 font-bold rounded-lg transition bg-coffee-500/20 text-coffee-300 border border-coffee-400/30";
+                btnTorra.className = "flex-1 py-2 font-bold rounded-lg transition text-slate-400 hover:text-white";
+                contentMontra.classList.remove('hidden');
+                contentTorra.classList.add('hidden');
+            }
+        }
+
+        // Simulação do Pedido de Reposição da Montra
+        function simularReposicaoMontra() {
+            alert('📦 Pedido de Reposição enviado ao Roaster!
+
+Itens Solicitados:
+• 5x #CF-ET250 (Etiópia Guji 250g)
+• 2x #EQ-CHAL (Chaleira Gooseneck)
+• 4x #EQ-FILT (Filtros V60 02)
+
+A equipe da torrefação recebeu a notificação com os códigos de inventário para separar e descer para a montra da loja!');
+        }
 
         // Alternador de Perspectiva Staff: Admin vs Funcionário
         function toggleStaffRole(role) {

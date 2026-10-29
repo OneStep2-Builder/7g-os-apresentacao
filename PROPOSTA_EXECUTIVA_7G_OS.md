@@ -111,6 +111,24 @@ O 7g Roaster possui uma fábrica artesanal de café dentro da sua operação. O 
 * **Distribuição Automática com 1 Clique:** O torrefador distribui os quilos torrados entre os 4 destinos, alimentando o estoque de cada setor sem qualquer lançamento manual duplicado.
 * **Alerta de Maturação:** O sistema avisa quando um lote deve ser colocado no balcão para garantir o café sempre fresco ao cliente.
 
+### B) Gestão de Montra & Reposição da Loja (Chaleiras, Filtros e Cafés)
+Além do café verde e torrado, a 7G comercializa equipamentos de café de especialidade (chaleiras bico de ganso, filtros V60, moinhos manuais, balanças, aeropress e canecas) que ficam expostos na **montra da loja**.
+
+* **O Gargalo Atual:** A equipe da loja precisa contar os itens visualmente, enviar mensagens no WhatsApp para a equipe da torrefação dizendo quanto café sobrou na vitrine e quantas chaleiras ou filtros ainda restam. A equipe do Roaster precisa parar suas atividades, ler as mensagens, separar os produtos e anotar em folhas de papel. Muitas vezes a mensagem é esquecida, e o cliente chega à loja querendo comprar um equipamento que não está exposto, mesmo havendo estoque no armazém da torra.
+* **A Solução com o 7G OS (Controle por Número de Inventário / SKU):**
+  1. **Dois Níveis de Estoque Transparentes:**
+     * *Estoque Central (Armazém do Roaster):* Onde ficam as caixas fechadas de produtos e os lotes de café recém-embalados.
+     * *Estoque da Montra (Balcão da Loja):* O pequeno estoque de apoio e os produtos expostos para venda imediata.
+  2. **Catálogo Padronizado por Número de Inventário:**
+     * Exemplo: `#CF-ET250` (Etiópia Guji 250g), `#EQ-CHAL` (Chaleira Gooseneck), `#EQ-FILT` (Filtros V60 02), `#EQ-MOIN` (Moinho Manual).
+  3. **Estoque Mínimo Inteligente na Vitrine:**
+     * Cada item tem seu limite mínimo configurado (ex: mínimo de 3 chaleiras e 6 pacotes de cada origem de café na montra).
+     * Quando a quantidade cai abaixo do mínimo, o sistema destaca em amarelo: *"Necessário Repor"*.
+  4. **Pedido de Reposição em 1 Toque (Loja ➔ Roaster):**
+     * O barista confere a montra em 1 minuto pelo telemóvel e clica em **"Solicitar Reposição"**.
+     * O painel da torrefação recebe uma lista clara e formatada com os códigos e quantidades exatas a separar.
+     * Ao entregar os produtos no balcão, o operador da torra clica em **"Confirmar Transferência"**, atualizando ambos os estoques instantaneamente. Sem mensagens soltas, sem erros e com controle total para a direção.
+
 ---
 
 ## 5. DETALHAMENTO DO 7G APARTMENTS HUB (Governança & Hóspede)
