@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!--ARTIFACT-START-->
+<title>Oficina de Móveis 7G</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: oficina em três colunas — consola de pedidos | bancada 3D | peças e medidas. Empilha no telemóvel. */
+:root{
+  --bg:#f1ede6; --panel:#fffdf9; --panel-2:#f7f2ea; --line:#e2d8c8; --ink:#241a10; --muted:#7a6a58;
+  --accent:#8c602a; --accent-ink:#fffaf2; --accent-soft:#f0e2c9; --sel:#d9a43a; --stage:#ebe4d8; --grid1:#cbbfac; --grid2:#ddd3c3;
+  --ok:#3f7a52; --warn:#b26a1e;
+  --f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#140c06; --panel:#1e140b; --panel-2:#26190e; --line:#3a2a19; --ink:#f3e9da; --muted:#b09a7f;
+  --accent:#c5a059; --accent-ink:#1a1006; --accent-soft:#3a2a15; --sel:#e8b84f; --stage:#1a120a; --grid1:#4c311a; --grid2:#2e1f11;
+  --ok:#7fbf8e; --warn:#e2a35a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#140c06; --panel:#1e140b; --panel-2:#26190e; --line:#3a2a19; --ink:#f3e9da; --muted:#b09a7f;
+  --accent:#c5a059; --accent-ink:#1a1006; --accent-soft:#3a2a15; --sel:#e8b84f; --stage:#1a120a; --grid1:#4c311a; --grid2:#2e1f11;
+  --ok:#7fbf8e; --warn:#e2a35a; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-ui)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+.app{height:100%;display:grid;grid-template-rows:auto 1fr;}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line);background:var(--panel)}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.brand b{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.brand span{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .sp{flex:1}
+.btn{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:7px 12px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.on{background:var(--accent-soft);border-color:var(--accent)}
+.btn.sm{padding:4px 9px;font-size:12px}
+
+.main{min-height:0;display:grid;grid-template-columns:minmax(260px,320px) minmax(0,1fr) minmax(300px,370px)}
+.col{min-height:0;display:flex;flex-direction:column;background:var(--panel)}
+.col.left{border-right:1px solid var(--line)}
+.col.right{border-left:1px solid var(--line)}
+.colhead{padding:12px 16px 8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+/* consola */
+.log{flex:1;min-height:0;overflow:auto;padding:4px 16px 12px;display:flex;flex-direction:column;gap:10px}
+.msg{font-size:13px;border-radius:10px;padding:9px 11px;max-width:100%;overflow-wrap:anywhere}
+.msg.user{background:var(--accent-soft);align-self:flex-end;border-bottom-right-radius:3px}
+.msg.sys{background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:3px}
+.msg.sys ul{margin:6px 0 0;padding-left:16px}
+.msg .who{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);display:block;margin-bottom:2px}
+.prompt{border-top:1px solid var(--line);padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px}
+.prompt textarea{width:100%;min-height:86px;resize:vertical;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 11px;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px dashed var(--line);background:none;border-radius:999px;padding:3px 9px;font-size:11.5px;color:var(--muted)}
+.chip:hover{color:var(--ink);border-color:var(--accent)}
+.prompt .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hint{font-size:11.5px;color:var(--muted)}
+
+/* palco 3D */
+.stage{position:relative;min-height:0;background:var(--stage);overflow:hidden}
+#view{position:absolute;inset:0}
+#view canvas{display:block;width:100%;height:100%;touch-action:none}
+.hud{position:absolute;left:12px;top:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none;flex-wrap:wrap}
+.hud > *{pointer-events:auto}
+.tag{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px}
+.tag b{font-weight:700}
+.views{display:flex;gap:4px;flex-wrap:wrap}
+.views .btn{padding:5px 9px;font-size:12px;background:var(--panel)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(12px,12px)}
+.legend{position:absolute;left:12px;bottom:12px;display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;max-width:calc(100% - 24px)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.15)}
+
+/* painel direito */
+.tabs{display:flex;gap:4px;padding:0 16px 8px}
+.tabs button{flex:1;border:1px solid var(--line);background:var(--panel-2);padding:6px;border-radius:8px;font-weight:600;font-size:12.5px}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pane{flex:1;min-height:0;overflow:auto;padding:0 16px 16px}
+.insp{border:1px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:12px;margin-bottom:12px}
+.insp h3{margin:0;font-size:15px;line-height:1.25}
+.insp .meta{font-size:12px;color:var(--muted);margin:2px 0 10px}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.fld{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fld label{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.fld input,.fld select{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:6px 7px;font-size:13px;min-width:0}
+.fld input[type=number]{font-family:var(--f-num)}
+.insp .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.empty{border:1px dashed var(--line);border-radius:12px;padding:12px;color:var(--muted);font-size:12.5px;margin-bottom:12px}
+.search{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;margin-bottom:8px}
+.grp{margin-top:10px}
+.grp > .gh{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:4px 2px;border-bottom:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:6px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:6px}
+.prow:hover{background:var(--panel-2)}
+.prow.sel{background:var(--accent-soft)}
+.prow.hid{opacity:.45}
+.code{font-family:var(--f-num);font-size:11px;font-weight:600;border-radius:5px;padding:1px 5px;border:1px solid var(--line);background:var(--panel-2)}
+.code.A{border-style:dashed}
+.pname{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pname small{color:var(--warn);font-weight:700;margin-left:4px}
+.pdim{font-family:var(--f-num);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.eye{border:none;background:none;padding:2px 4px;color:var(--muted);font-size:13px}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pgrid .fld.wide{grid-column:1/-1}
+.chk{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 0}
+.sum{margin-top:14px;font-size:12.5px;color:var(--muted)}
+
+/* folha de impressão */
+#sheetWrap{position:fixed;inset:0;z-index:50;background:rgba(20,12,6,.72);overflow:auto;padding-bottom:40px}
+.sheet-bar{position:sticky;top:0;z-index:2;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--line);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet-bar .sp{flex:1}
+.pages{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 16px}
+/* o papel é sempre branco: é uma folha para imprimir */
+.page{background:#fff;color:#1b140d;width:210mm;max-width:100%;min-height:297mm;padding:12mm 12mm 10mm;box-shadow:0 10px 40px rgba(0,0,0,.35);font:10.5px/1.4 var(--f-ui);display:flex;flex-direction:column;gap:8mm}
+.page h1{font-size:20px;margin:0;letter-spacing:-.01em}
+.page h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 3mm;border-bottom:1.5px solid #1b140d;padding-bottom:1.5mm}
+.ph{display:grid;grid-template-columns:1fr auto;gap:4mm;border-bottom:2px solid #1b140d;padding-bottom:3mm}
+.ph .r{text-align:right;font-family:var(--f-num);font-size:10px;color:#5b4a38}
+.ph .sub{color:#5b4a38;font-size:11px;margin-top:1mm}
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm}
+.figs figure{margin:0;border:1px solid #d6cbbb;border-radius:2mm;overflow:hidden;background:#fff}
+.figs img{display:block;width:100%;height:auto}
+.figs figcaption{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1.5mm 2.5mm;border-top:1px solid #e6ddcf;display:flex;justify-content:space-between;color:#3d2f20}
+.figs figcaption span{font-weight:500;letter-spacing:0;text-transform:none;color:#7a6a58}
+.kv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2mm 6mm}
+.kv div{border-bottom:1px solid #e6ddcf;padding:1mm 0}
+.kv b{display:block;font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:#7a6a58}
+.kv span{font-family:var(--f-num);font-size:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:9.5px}
+.tbl th{text-align:left;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:#5b4a38;border-bottom:1.5px solid #1b140d;padding:1.2mm 1.5mm}
+.tbl td{border-bottom:1px solid #e6ddcf;padding:1.1mm 1.5mm;vertical-align:top}
+.tbl td.n{font-family:var(--f-num);text-align:right;white-space:nowrap}
+.tbl tr{break-inside:avoid}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6mm}
+.steps{margin:0;padding-left:5mm}
+.steps li{margin-bottom:1.2mm}
+.foot{margin-top:auto;display:flex;justify-content:space-between;font-size:9px;color:#7a6a58;border-top:1px solid #d6cbbb;padding-top:2mm}
+.tblwrap{overflow-x:auto}
+
+@media (max-width: 1080px){
+  .main{grid-template-columns:minmax(0,1fr) minmax(300px,360px);grid-template-rows:minmax(420px,62vh) auto}
+  .col.left{grid-column:1/-1;grid-row:2;border-right:none;border-top:1px solid var(--line)}
+  .stage{grid-column:1;grid-row:1}
+  .col.right{grid-row:1}
+  .app{height:auto;min-height:100%}
+  .log{max-height:320px}
+}
+@media (max-width: 720px){
+  .main{display:flex;flex-direction:column}
+  .stage{height:58vh;min-height:340px;flex:none}
+  .col.right{border-left:none;border-top:1px solid var(--line)}
+  .pane{max-height:none;overflow:visible}
+  .col.left{order:-1;border-top:none;border-bottom:1px solid var(--line)}
+  .log{max-height:240px}
+  .page{padding:6mm;min-height:0}
+  .figs,.cols2{grid-template-columns:1fr}
+  .kv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .brand span{display:none}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  .app{display:none!important}
+  #sheetWrap{position:static;background:none;overflow:visible;padding:0}
+  .sheet-bar{display:none!important}
+  .pages{padding:0;gap:0;display:block}
+  .page{box-shadow:none;width:210mm;min-height:297mm;max-width:none;break-after:page;page-break-after:always}
+  .page:last-child{break-after:auto;page-break-after:auto}
+  .figs{grid-template-columns:repeat(2,1fr)}
+  .cols2{grid-template-columns:repeat(2,1fr)}
+  .kv{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+<!--HEAD-END-->
+</head>
+<body>
+<!--BODY-START-->
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand"><b>Oficina de Móveis 7G</b><span id="projName">Mesa auxiliar de serviço</span></div>
+    <div class="sp"></div>
+    <button class="btn" id="btnExplode" type="button" aria-pressed="false">Vista explodida</button>
+    <button class="btn" id="btnReset" type="button">Repor edições</button>
+    <button class="btn pri" id="btnSheet" type="button">Folha de construção</button>
+  </header>
+  <div class="main">
+    <section class="col left" aria-label="Consola de pedidos">
+      <div class="colhead"><span class="eyebrow">Consola</span><button class="btn sm" id="btnClear" type="button">Limpar</button></div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <form class="prompt" id="promptForm">
+        <label class="eyebrow" for="promptIn">Descreve o móvel ou a alteração</label>
+        <textarea id="promptIn" placeholder="Ex.: cria uma estante de 80 × 180 cm com 5 prateleiras"></textarea>
+        <div class="chips" id="chips"></div>
+        <div class="row"><span class="hint">Enter para gerar · Shift+Enter nova linha</span><button class="btn pri" type="submit">Gerar</button></div>
+      </form>
+    </section>
+
+    <section class="stage" aria-label="Modelo 3D">
+      <div id="view"></div>
+      <div class="hud">
+        <div class="tag" id="dimTag">—</div>
+        <div class="views">
+          <button class="btn" type="button" data-view="iso">3D</button>
+          <button class="btn" type="button" data-view="front">Frente</button>
+          <button class="btn" type="button" data-view="side">Lado</button>
+          <button class="btn" type="button" data-view="top">Topo</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="tip" id="tip" hidden></div>
+    </section>
+
+    <section class="col right" aria-label="Peças e medidas">
+      <div class="colhead"><span class="eyebrow">Projeto</span><span class="hint num" id="countTag"></span></div>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tabParts" aria-selected="true">Peças</button>
+        <button type="button" role="tab" id="tabParams" aria-selected="false">Medidas gerais</button>
+      </div>
+      <div class="pane" id="paneParts">
+        <div id="insp"></div>
+        <input class="search" id="search" type="search" placeholder="Procurar peça (ex.: gaveta, balde, tampo)">
+        <div id="plist"></div>
+      </div>
+      <div class="pane" id="paneParams" hidden></div>
+    </section>
+  </div>
+</div>
+
+<div id="sheetWrap" hidden>
+  <div class="sheet-bar">
+    <b>Folha de construção</b>
+    <span class="hint" id="printHint"></span>
+    <div class="sp"></div>
+    <button class="btn pri" id="btnPrint" type="button">Imprimir / guardar PDF</button>
+    <button class="btn" id="btnCloseSheet" type="button">Fechar</button>
+  </div>
+  <div class="pages" id="pages"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* ===================== MATERIAIS ===================== */
+const MATS = {
+  betula:   {nome:"Contraplacado de bétula", cor:0xdcc49a, tipo:"chapa"},
+  carvalho: {nome:"Carvalho lamelado (envernizado)", cor:0xa0703f, tipo:"chapa"},
+  lacado:   {nome:"MDF hidrófugo lacado verde-café", cor:0x3e6a5a, tipo:"chapa"},
+  lacadoB:  {nome:"MDF hidrófugo lacado branco", cor:0xeeeae2, tipo:"chapa"},
+  lacadoP:  {nome:"MDF hidrófugo lacado preto", cor:0x2a2622, tipo:"chapa"},
+  macico:   {nome:"Pinho maciço", cor:0xd8b47a, tipo:"chapa"},
+  hdf:      {nome:"HDF", cor:0x9b8566, tipo:"chapa"},
+  inox:     {nome:"Aço inox", cor:0xb9c0c4, tipo:"acc", metal:.55, rough:.35},
+  branco:   {nome:"Branco (papel / cerâmica)", cor:0xf6f4ef, tipo:"acc"},
+  preto:    {nome:"Preto", cor:0x2b2826, tipo:"acc"},
+  azeite:   {nome:"Vidro — azeite", cor:0x8f9440, tipo:"acc", rough:.3},
+  vinagre:  {nome:"Vidro — vinagre", cor:0x6a2a35, tipo:"acc", rough:.3},
+  borracha: {nome:"Borracha", cor:0x34302c, tipo:"acc"}
+};
+const CHAPAS = Object.keys(MATS).filter(k=>MATS[k].tipo==="chapa");
+
+/* ===================== AJUDAS ===================== */
+const R = v => Math.round(v);
+const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
+function part(list, id, nome, grupo, mat, x,y,z, w,h,d, extra){
+  list.push(Object.assign({id,nome,grupo,mat,x,y,z,w:Math.max(1,w),h:Math.max(1,h),d:Math.max(1,d),forma:"caixa",tipo:"corte",orla:""}, extra||{}));
+}
+function acc(list,id,nome,grupo,mat,x,y,z,w,h,d,extra){ part(list,id,nome,grupo,mat,x,y,z,w,h,d,Object.assign({tipo:"acessorio"},extra||{})); }
+function ferr(list,id,nome,grupo,mat,x,y,z,w,h,d,extra){ part(list,id,nome,grupo,mat,x,y,z,w,h,d,Object.assign({tipo:"ferragem"},extra||{})); }
+const fmt = n => String(R(n)).replace(/\B(?=(\d{3})+(?!\d))/g," ");
+
+/* ===================== MODELO: MESA AUXILIAR DE SERVIÇO ===================== */
+const GAVETAS = [
+  {nome:"Talheres", k:4, nota:"Garfos · facas · colheres de sopa · colheres de sobremesa"},
+  {nome:"Colheres de café", k:3, nota:"Colheres de café · pacotes de açúcar · mexedores"},
+  {nome:"Guardanapos", k:2, nota:"Guardanapos de papel e de pano"},
+  {nome:"Utensílios", k:3, nota:"Abre-garrafas · pinças · blocos de pedidos"},
+  {nome:"Reserva", k:1, nota:"Arrumação geral"}
+];
+const CORREDICAS=[250,300,350,400,450,500,550,600];
+
+function genEstacao(p){
+  const L=[]; const W=p.W, H=p.H, D=p.D, t=p.t, tt=p.tampoE, pl=p.plinto, c=6;
+  const n=clamp(Math.round(p.nGavetas),1,6);
+  const mC=p.matCorpo, mT=p.matTampo, mF=p.matFrentes;
+  const latY = p.rodas ? pl : 0;
+  const yTop = H-tt;                     // face inferior do tampo
+  const yGav = yTop - p.gavetaH;         // fundo da zona de gavetas
+  const y1 = yGav - t;                   // face inferior da prateleira fixa sob gavetas
+  const y0 = pl + t;                     // face superior da base
+
+  // Estrutura
+  part(L,"lat-e","Lateral esquerda","Estrutura",mC,0,latY,0,t,yTop-latY,D,{orla:"frente"});
+  part(L,"lat-d","Lateral direita","Estrutura",mC,W-t,latY,0,t,yTop-latY,D,{orla:"frente"});
+  part(L,"base","Base","Estrutura",mC,t,pl,c,W-2*t,t,D-c,{orla:"frente"});
+  part(L,"costas","Costas","Estrutura","hdf",t,pl,0,W-2*t,yTop-pl,c,{nota:"Encaixe em rasgo ou aparafusada"});
+  part(L,"trav-sup","Travessa superior traseira","Estrutura",mC,t,yTop-100,c,W-2*t,100,t,{nota:"Fixa o tampo e esquadra o corpo"});
+  part(L,"prat-gav","Prateleira fixa sob gavetas","Estrutura",mC,t,y1,c,W-2*t,t,D-c,{orla:"frente"});
+  if(!p.rodas){
+    part(L,"rodape","Rodapé frontal","Estrutura",mC,t,0,D-50-t,W-2*t,pl,t,{nota:"Recuado 50 mm (espaço para os pés)"});
+    part(L,"rodape-t","Rodapé traseiro","Estrutura",mC,t,0,c+10,W-2*t,pl,t);
+  }
+
+  // Tampo
+  const bal=p.balanco;
+  part(L,"tampo","Tampo de trabalho","Tampo",mT,-bal,yTop,0,W+2*bal,tt,D+t+12,{orla:mT==="carvalho"||mT==="macico"?"— (maciço, boleado 3 mm)":"4 lados",nota:"Balanço lateral "+bal+" mm"});
+
+  // Zona de gavetas
+  const Wi=W-2*t, bw=(Wi-(n-1)*t)/n;
+  const slide = CORREDICAS.filter(s=>s<=D-c-12).pop()||250;
+  const fw=(W-3*(n+1))/n;
+  for(let i=0;i<n;i++){
+    const bx=t+i*(bw+t);
+    if(i<n-1) part(L,"div-gav-"+(i+1),"Divisória entre gavetas "+(i+1)+"/"+(i+2),"Estrutura",mC,bx+bw,yGav,c,t,p.gavetaH,D-c,{orla:"frente"});
+    const g=GAVETAS[Math.min(i,GAVETAS.length-1)];
+    const G="Gaveta "+(i+1)+" · "+g.nome;
+    const fx=3+i*(fw+3), fy=yGav-t/2+2, fh=(yTop-2)-fy;
+    part(L,"g"+(i+1)+"-frente","Frente da gaveta "+(i+1),G,mF,fx,fy,D,fw,fh,t,{orla:"4 lados",nota:g.nota});
+    ferr(L,"g"+(i+1)+"-pux","Puxador gaveta "+(i+1),G,"inox",fx+fw/2-Math.min(160,fw*.45)/2,fy+fh/2-6,D+t,Math.min(160,fw*.45),12,22,{nota:"Puxador barra inox, entre-eixos 128 mm"});
+    const tg=15, bwb=bw-26, bh=p.gavetaH-35, by=yGav+10, z0=D-slide, x0=bx+13;
+    part(L,"g"+(i+1)+"-lat-e","Lateral esq. gaveta "+(i+1),G,"betula",x0,by,z0,tg,bh,slide,{orla:"topo"});
+    part(L,"g"+(i+1)+"-lat-d","Lateral dir. gaveta "+(i+1),G,"betula",x0+bwb-tg,by,z0,tg,bh,slide,{orla:"topo"});
+    part(L,"g"+(i+1)+"-tras","Traseira gaveta "+(i+1),G,"betula",x0+tg,by,z0,bwb-2*tg,bh,tg,{orla:"topo"});
+    part(L,"g"+(i+1)+"-contra","Contrafrente gaveta "+(i+1),G,"betula",x0+tg,by,D-tg,bwb-2*tg,bh,tg,{orla:"topo"});
+    part(L,"g"+(i+1)+"-fundo","Fundo gaveta "+(i+1),G,"hdf",x0+tg-8,by+8,z0+tg-8,bwb-2*tg+16,6,slide-2*tg+16,{nota:"Em rasgo de 8 mm"});
+    const iw=bwb-2*tg, k=g.k, cw=(iw-(k-1)*8)/k;
+    for(let j=0;j<k-1;j++){
+      part(L,"g"+(i+1)+"-sep-"+(j+1),"Separador "+(j+1)+" gaveta "+(i+1),G,"betula",x0+tg+(j+1)*cw+j*8,by+14,z0+tg,8,Math.max(20,bh-35),slide-2*tg,{nota:"Organizador — "+g.nome.toLowerCase()});
+    }
+    ferr(L,"g"+(i+1)+"-corr","Corrediças "+slide+" mm (par) gaveta "+(i+1),G,"inox",x0-12,by+10,z0,bwb+24,4,slide,{invisivel:true,nota:"Telescópicas, extração total, 30 kg"});
+  }
+
+  // Zona inferior
+  const lh=y1-y0;
+  const divX=t+Wi*clamp(p.divisao,20,80)/100-t/2;
+  part(L,"div-inf","Divisória inferior","Zona inferior",mC,divX,y0,c,t,lh,D-c,{orla:"frente"});
+  part(L,"prat-e","Prateleira do nicho aberto","Zona inferior",mC,t,y0+lh/2-t/2,c,divX-t,t,D-c-20,{orla:"frente",nota:"Tabuleiros de serviço, cestos de pão, jarros"});
+  const doorsOn=!!p.portas;
+  part(L,"prat-d","Prateleira do armário","Zona inferior",mC,divX+t,y0+lh/2-t/2,c,W-t-(divX+t),t,D-c-(doorsOn?30:20),{orla:"frente",nota:"Regulável — suportes de 5 mm"});
+  // acessórios do nicho
+  const nW=divX-t;
+  const trW=Math.min(380,nW-40), trD=Math.min(480,D-c-40);
+  for(let k=0;k<3;k++) acc(L,"tab-"+(k+1),"Tabuleiro de serviço "+(k+1),"Acessórios · nicho","inox",t+(nW-trW)/2,y0+lh/2+t/2+k*8,c+20,trW,6,trD);
+  const jr=Math.min(120,nW/3);
+  acc(L,"jarro-1","Jarro de água 1","Acessórios · nicho","inox",t+30,y0,D-c-jr-40,jr,Math.min(220,lh/2-30),jr,{forma:"cil",taper:.9});
+  acc(L,"jarro-2","Jarro de água 2","Acessórios · nicho","inox",t+60+jr,y0,D-c-jr-40,jr,Math.min(220,lh/2-30),jr,{forma:"cil",taper:.9});
+
+  if(doorsOn){
+    const rx0=divX+t/2+1.5, rW=W-1.5-rx0, nd=rW>620?2:1, dw=(rW-3*(nd-1))/nd;
+    const dy=pl+2, dh=(y1+t/2-2)-dy;
+    for(let k=0;k<nd;k++){
+      const x=rx0+k*(dw+3);
+      part(L,"porta-"+(k+1),"Porta "+(k+1),"Portas",mF,x,dy,D,dw,dh,t,{orla:"4 lados",nota:"Armário para bules, menus, toalhas e reservas"});
+      const hx = nd===2 ? (k===0? x+dw-40 : x+28) : x+28;
+      ferr(L,"porta-"+(k+1)+"-pux","Puxador porta "+(k+1),"Portas","inox",hx,dy+dh-40-128,D+t,12,Math.min(160,dh*.4),22);
+    }
+  }
+
+  // Alçado
+  if(p.alcado){
+    const aH=p.alcadoH, aD=Math.min(p.alcadoD,D), yA=H, topA=H+aH;
+    const AG="Alçado";
+    part(L,"alc-lat-e","Lateral esq. do alçado",AG,mC,0,yA,0,t,aH-t,aD,{orla:"frente"});
+    part(L,"alc-lat-d","Lateral dir. do alçado",AG,mC,W-t,yA,0,t,aH-t,aD,{orla:"frente"});
+    part(L,"alc-cimo","Cimo do alçado",AG,mC,0,topA-t,0,W,t,aD,{orla:"frente + topos"});
+    part(L,"alc-costas","Costas do alçado",AG,"hdf",t,yA,0,W-2*t,aH-t,c);
+    const compH=Math.round((aH-t)*0.58);
+    const shY=yA+compH;
+    part(L,"alc-prat","Prateleira do alçado",AG,mC,t,shY,c,W-2*t,t,aD-c,{orla:"frente",nota:"Açucareiros, palhinhas, menus"});
+    const xa=t+Wi*0.4-t/2, xb=t+Wi*0.6-t/2;
+    part(L,"alc-div-1","Divisória temperos | guardanapos",AG,mC,xa,yA,c,t,compH,aD-c,{orla:"frente"});
+    part(L,"alc-div-2","Divisória guardanapos | baldes",AG,mC,xb,yA,c,t,compH,aD-c,{orla:"frente"});
+    const dz=aD-c;
+
+    // Temperos
+    const nt=clamp(Math.round(p.nTemperos),0,10), sW=xa-t;
+    if(nt>0){
+      const cwid=Math.min(160,(sW-10*(nt+1))/nt), cdep=Math.min(150,dz-16);
+      for(let i=0;i<nt;i++){
+        const x=t+10+i*(cwid+10), z=c+(dz-cdep)/2, GT="Acessórios · temperos";
+        acc(L,"galh-"+(i+1),"Galheteiro "+(i+1)+" (tabuleiro)",GT,"carvalho",x,yA,z,cwid,14,cdep,{nota:"Leva sal, pimenta, azeite e vinagre à mesa"});
+        const r=Math.min(cwid,cdep)/2-8, sd=Math.min(38,r*0.85), bd=Math.min(46,r*0.95), hmax=compH-30;
+        const q=[[.27,.3,"sal","Saleiro","branco",sd,Math.min(75,hmax)],[.73,.3,"pim","Pimenteiro","preto",sd,Math.min(75,hmax)],
+                 [.27,.72,"az","Azeite","azeite",bd,Math.min(150,hmax)],[.73,.72,"vin","Vinagre","vinagre",bd,Math.min(150,hmax)]];
+        q.forEach(e=>acc(L,"galh-"+(i+1)+"-"+e[2],e[3]+" "+(i+1),GT,e[4],x+cwid*e[0]-e[5]/2,yA+14,z+cdep*e[1]-e[5]/2,e[5],e[6],e[5],{forma:"cil",taper:1}));
+      }
+    }
+    // Guardanapos
+    const gW=xb-(xa+t);
+    acc(L,"guard","Guardanapos (pilha)","Acessórios · guardanapos","branco",xa+t+(gW-Math.min(gW-20,170))/2,yA,c+10,Math.min(gW-20,170),Math.min(compH-30,110),Math.min(dz-20,170));
+    // Baldes de talheres
+    const nb=clamp(Math.round(p.nBaldes),0,16), bW=W-t-(xb+t);
+    if(nb>0){
+      let rows=1, per=nb, dia=Math.min(110,(bW-10*(per+1))/per);
+      if(dia<75 && dz>=2*80+30){ rows=2; per=Math.ceil(nb/2); dia=Math.min(110,(bW-10*(per+1))/per,(dz-10*3)/2); }
+      dia=Math.max(40,dia);
+      const bh=Math.min(140,compH-25);
+      for(let i=0;i<nb;i++){
+        const row=Math.floor(i/per), col=i%per;
+        const z = rows===1 ? c+(dz-dia)/2 : c+10+row*(dia+10);
+        acc(L,"balde-"+(i+1),"Balde de talheres "+(i+1),"Acessórios · baldes","inox",xb+t+10+col*(dia+10),yA,z,dia,bh,dia,{forma:"cil",taper:.82,nota:"Leva os talheres às mesas"});
+      }
+    }
+    // Utensílios na prateleira do alçado
+    const upH=topA-t-(shY+t), uy=shY+t;
+    if(upH>40){
+      const ad=Math.min(80,dz-20);
+      acc(L,"acuc-1","Açucareiro 1","Acessórios · utensílios","branco",t+40,uy,c+(dz-ad)/2,ad,Math.min(95,upH-15),ad,{forma:"cil",taper:1.05});
+      acc(L,"acuc-2","Açucareiro 2","Acessórios · utensílios","branco",t+60+ad,uy,c+(dz-ad)/2,ad,Math.min(95,upH-15),ad,{forma:"cil",taper:1.05});
+      acc(L,"palh","Porta-palhinhas","Acessórios · utensílios","inox",W/2-35,uy,c+(dz-70)/2,70,Math.min(130,upH-10),70,{forma:"cil"});
+      acc(L,"menus","Porta-menus","Acessórios · utensílios","carvalho",W-t-260,uy,c+(dz-60)/2,220,Math.min(120,upH-10),60);
+    }
+  }
+
+  // Apoio no chão
+  if(p.rodas){
+    [[45,45],[W-45,45],[45,D-45],[W-45,D-45]].forEach((q,i)=>ferr(L,"rod-"+(i+1),"Rodízio "+(i+1)+(i<2?"":" (com travão)"),"Ferragens","borracha",q[0]-35,0,q[1]-35,70,pl,70,{forma:"cil",nota:"Ø75 mm, giratório, placa 4 furos"}));
+  } else {
+    [[t/2,30],[W-t/2,30],[t/2,D-30],[W-t/2,D-30]].forEach((q,i)=>ferr(L,"sap-"+(i+1),"Sapata niveladora "+(i+1),"Ferragens","borracha",q[0]-12,-1,q[1]-12,24,4,24,{forma:"cil",nota:"Regulável ±15 mm"}));
+  }
+  return L;
+}
+function extrasEstacao(p){
+  const e=[{view:"front",a:[p.W+p.balanco,0,p.D],b:[p.W+p.balanco,p.H,p.D],side:"right",label:"Altura de trabalho "+p.H}];
+  if(p.alcado) e.push({view:"side",a:[0,p.H,0],b:[0,p.H+p.alcadoH,0],side:"far",label:"Alçado "+p.alcadoH});
+  return e;
+}
+
+/* ===================== MODELO: ESTANTE ===================== */
+function genEstante(p){
+  const L=[], {W,H,D,t}=p, c=6, pl=p.plinto, n=clamp(Math.round(p.nPrateleiras),0,12), m=p.matCorpo;
+  part(L,"lat-e","Lateral esquerda","Estrutura",m,0,0,0,t,H,D,{orla:"frente"});
+  part(L,"lat-d","Lateral direita","Estrutura",m,W-t,0,0,t,H,D,{orla:"frente"});
+  part(L,"cimo","Cimo","Estrutura",m,t,H-t,0,W-2*t,t,D,{orla:"frente"});
+  part(L,"base","Base","Estrutura",m,t,pl,c,W-2*t,t,D-c,{orla:"frente"});
+  part(L,"rodape","Rodapé","Estrutura",m,t,0,D-30-t,W-2*t,pl,t);
+  if(p.costas) part(L,"costas","Costas","Estrutura","hdf",t,pl,0,W-2*t,H-t-pl,c);
+  const yb=pl+t, yt=H-t, gap=(yt-yb-n*t)/(n+1);
+  for(let i=0;i<n;i++) part(L,"prat-"+(i+1),"Prateleira "+(i+1),"Prateleiras",m,t+1,yb+gap*(i+1)+t*i,c,W-2*t-2,t,D-c-10,{orla:"frente",nota:"Regulável — suportes de 5 mm"});
+  ferr(L,"fix","Esquadro anti-queda","Ferragens","inox",W/2-20,H-60,-2,40,40,2,{nota:"Fixar à parede"});
+  return L;
+}
+/* ===================== MODELO: MESA ===================== */
+function genMesa(p){
+  const L=[], {W,D,H}=p, tt=p.tampoE, pe=p.perna, r=p.recuo, a=p.aro, at=22;
+  part(L,"tampo","Tampo","Tampo",p.matTampo,0,H-tt,0,W,tt,D,{orla:"4 lados"});
+  [[r,r],[W-r-pe,r],[r,D-r-pe],[W-r-pe,D-r-pe]].forEach((q,i)=>part(L,"perna-"+(i+1),"Perna "+(i+1),"Estrutura",p.matEstrutura,q[0],0,q[1],pe,H-tt,pe));
+  const ya=H-tt-a, zf=r+(pe-at)/2, xl=r+(pe-at)/2;
+  part(L,"aro-f","Aro frontal","Estrutura",p.matEstrutura,r+pe,ya,D-r-pe+(pe-at)/2,W-2*(r+pe),a,at);
+  part(L,"aro-t","Aro traseiro","Estrutura",p.matEstrutura,r+pe,ya,zf,W-2*(r+pe),a,at);
+  part(L,"aro-e","Aro lateral esq.","Estrutura",p.matEstrutura,xl,ya,r+pe,at,a,D-2*(r+pe));
+  part(L,"aro-d","Aro lateral dir.","Estrutura",p.matEstrutura,W-r-pe+(pe-at)/2,ya,r+pe,at,a,D-2*(r+pe));
+  [[r,r],[W-r-pe,r],[r,D-r-pe],[W-r-pe,D-r-pe]].forEach((q,i)=>ferr(L,"sap-"+(i+1),"Sapata "+(i+1),"Ferragens","borracha",q[0]+pe/2-12,-1,q[1]+pe/2-12,24,4,24,{forma:"cil"}));
+  return L;
+}
+/* ===================== MODELO: BANCO ===================== */
+function genBanco(p){
+  const L=[], {W,D,H}=p, st=p.assentoE, pe=p.perna, tv=p.travessaY, ts=20;
+  part(L,"assento","Assento","Assento",p.matTampo,0,H-st,0,W,st,D,{orla:"4 lados"});
+  const P=[[0,0],[W-pe,0],[0,D-pe],[W-pe,D-pe]];
+  P.forEach((q,i)=>part(L,"perna-"+(i+1),"Perna "+(i+1),"Estrutura",p.matEstrutura,q[0]+10,0,q[1]+10,pe,H-st,pe));
+  part(L,"trav-f","Travessa frontal","Estrutura",p.matEstrutura,pe+10,tv,D-pe-10+(pe-ts)/2,W-2*pe-20,40,ts);
+  part(L,"trav-t","Travessa traseira","Estrutura",p.matEstrutura,pe+10,tv,10+(pe-ts)/2,W-2*pe-20,40,ts);
+  part(L,"trav-e","Travessa lateral esq.","Estrutura",p.matEstrutura,10+(pe-ts)/2,tv+60,pe+10,ts,40,D-2*pe-20);
+  part(L,"trav-d","Travessa lateral dir.","Estrutura",p.matEstrutura,W-pe-10+(pe-ts)/2,tv+60,pe+10,ts,40,D-2*pe-20);
+  return L;
+}
+
+/* ===================== CATÁLOGO ===================== */
+const TPL = {
+  estacao:{
+    nome:"Mesa auxiliar de serviço",
+    sub:"Estação de empregado para restauração e cafetaria",
+    gen:genEstacao, extras:extrasEstacao,
+    def:{W:1500,H:900,D:550,t:18,tampoE:30,balanco:20,plinto:90,gavetaH:140,nGavetas:3,divisao:42,portas:true,alcado:true,alcadoH:340,alcadoD:220,nBaldes:6,nTemperos:4,rodas:false,matCorpo:"betula",matTampo:"carvalho",matFrentes:"lacado"},
+    schema:[
+      {k:"W",l:"Largura total",u:"mm",min:700,max:3000,step:10},{k:"H",l:"Altura de trabalho",u:"mm",min:700,max:1100,step:5},
+      {k:"D",l:"Profundidade do corpo",u:"mm",min:350,max:800,step:10},{k:"t",l:"Espessura da chapa",u:"mm",min:12,max:30,step:1},
+      {k:"tampoE",l:"Espessura do tampo",u:"mm",min:18,max:50,step:1},{k:"balanco",l:"Balanço lateral do tampo",u:"mm",min:0,max:100,step:5},
+      {k:"plinto",l:"Rodapé / altura rodízio",u:"mm",min:40,max:160,step:5},{k:"gavetaH",l:"Altura das gavetas",u:"mm",min:80,max:250,step:5},
+      {k:"nGavetas",l:"Nº de gavetas",u:"",min:1,max:6,step:1},{k:"divisao",l:"Nicho aberto (% largura)",u:"%",min:20,max:80,step:1},
+      {k:"alcadoH",l:"Altura do alçado",u:"mm",min:200,max:700,step:10},{k:"alcadoD",l:"Profundidade do alçado",u:"mm",min:120,max:400,step:10},
+      {k:"nBaldes",l:"Baldes de talheres",u:"",min:0,max:16,step:1},{k:"nTemperos",l:"Galheteiros de temperos",u:"",min:0,max:10,step:1},
+      {k:"alcado",l:"Alçado superior (temperos, guardanapos, baldes)",t:"bool"},{k:"portas",l:"Portas no armário inferior",t:"bool"},
+      {k:"rodas",l:"Sobre rodízios",t:"bool"},
+      {k:"matCorpo",l:"Material do corpo",t:"mat"},{k:"matTampo",l:"Material do tampo",t:"mat"},{k:"matFrentes",l:"Frentes e portas",t:"mat"}
+    ],
+    passos:[
+      "Cortar e orlar todas as peças segundo a lista de corte; marcar cada peça com a sua referência (P01, P02…).",
+      "Abrir rasgos de 8 mm nas laterais das gavetas para o fundo, e furação de 5 mm (sistema 32) nas laterais e divisória para as prateleiras reguláveis.",
+      "Montar o corpo: laterais + base + rodapés + prateleira fixa sob gavetas com cavilhas 8×35 e cola; esquadrar e fixar as costas e a travessa superior.",
+      "Colocar as divisórias entre gavetas e a divisória inferior; aparafusar pela base e pela prateleira fixa.",
+      "Fixar o tampo por baixo com cantoneiras ou ferragem de tampo (furos ovalizados para a madeira trabalhar).",
+      "Montar as caixas das gavetas, colar os separadores do organizador e instalar as corrediças; aplicar as frentes com folga de 3 mm.",
+      "Montar o alçado (laterais, cimo, costas, divisórias, prateleira) e fixá-lo ao tampo por baixo com 6 parafusos 4×50.",
+      "Montar as portas com dobradiças de copa, regular folgas, colocar puxadores, sapatas ou rodízios. Selar o tampo com óleo/verniz alimentar."
+    ]
+  },
+  estante:{
+    nome:"Estante", sub:"Estante de arrumação com prateleiras reguláveis", gen:genEstante,
+    def:{W:800,H:1800,D:300,t:18,plinto:60,nPrateleiras:4,costas:true,matCorpo:"betula"},
+    schema:[{k:"W",l:"Largura",u:"mm",min:300,max:2400,step:10},{k:"H",l:"Altura",u:"mm",min:400,max:2600,step:10},{k:"D",l:"Profundidade",u:"mm",min:150,max:600,step:10},
+      {k:"t",l:"Espessura da chapa",u:"mm",min:12,max:30,step:1},{k:"plinto",l:"Rodapé",u:"mm",min:30,max:150,step:5},{k:"nPrateleiras",l:"Nº de prateleiras",u:"",min:0,max:12,step:1},
+      {k:"costas",l:"Com costas",t:"bool"},{k:"matCorpo",l:"Material",t:"mat"}],
+    passos:["Cortar e orlar as peças.","Furação de 5 mm nas laterais para as prateleiras.","Montar laterais, cimo, base e rodapé com cavilhas e cola; esquadrar.","Pregar ou aparafusar as costas.","Colocar prateleiras e fixar a estante à parede com o esquadro anti-queda."]
+  },
+  mesa:{
+    nome:"Mesa", sub:"Mesa com tampo, quatro pernas e aro", gen:genMesa,
+    def:{W:1200,D:700,H:750,tampoE:28,perna:60,recuo:40,aro:90,matTampo:"carvalho",matEstrutura:"macico"},
+    schema:[{k:"W",l:"Comprimento",u:"mm",min:400,max:3000,step:10},{k:"D",l:"Largura",u:"mm",min:400,max:1200,step:10},{k:"H",l:"Altura",u:"mm",min:400,max:1100,step:5},
+      {k:"tampoE",l:"Espessura do tampo",u:"mm",min:18,max:60,step:1},{k:"perna",l:"Secção da perna",u:"mm",min:30,max:120,step:5},{k:"recuo",l:"Recuo das pernas",u:"mm",min:0,max:200,step:5},
+      {k:"aro",l:"Altura do aro",u:"mm",min:40,max:150,step:5},{k:"matTampo",l:"Material do tampo",t:"mat"},{k:"matEstrutura",l:"Material da estrutura",t:"mat"}],
+    passos:["Cortar pernas e aros; abrir encaixes respiga-mecha ou furar para cavilhas.","Colar os aros às pernas, primeiro os laterais e depois os longos; esquadrar.","Fixar o tampo com grampos de tampo (deixar a madeira trabalhar).","Lixar, aplicar acabamento e colocar sapatas."]
+  },
+  banco:{
+    nome:"Banco", sub:"Banco simples com travessas", gen:genBanco,
+    def:{W:400,D:350,H:450,assentoE:30,perna:40,travessaY:140,matTampo:"carvalho",matEstrutura:"macico"},
+    schema:[{k:"W",l:"Largura",u:"mm",min:250,max:1500,step:10},{k:"D",l:"Profundidade",u:"mm",min:250,max:600,step:10},{k:"H",l:"Altura",u:"mm",min:250,max:850,step:5},
+      {k:"assentoE",l:"Espessura do assento",u:"mm",min:18,max:60,step:1},{k:"perna",l:"Secção da perna",u:"mm",min:25,max:80,step:5},{k:"travessaY",l:"Altura das travessas",u:"mm",min:60,max:400,step:5},
+      {k:"matTampo",l:"Material do assento",t:"mat"},{k:"matEstrutura",l:"Material da estrutura",t:"mat"}],
+    passos:["Cortar pernas, travessas e assento.","Furar e encavilhar as travessas às pernas.","Fixar o assento por baixo com parafusos 4×40.","Lixar e aplicar acabamento."]
+  }
+};
+
+/* ===================== ESTADO ===================== */
+const KEY="oficina-moveis-7g.v1";
+let state=null;
+function fresh(tpl){ return {tpl, params:Object.assign({},TPL[tpl].def), ov:{}, log:[]}; }
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s && TPL[s.tpl]) { s.params=Object.assign({},TPL[s.tpl].def,s.params); return s; } }catch(e){} return null; }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+let parts=[]; let selId=null;
+function compute(){
+  const T=TPL[state.tpl];
+  const base=T.gen(state.params);
+  let nc=0,na=0,nf=0;
+  const gi=new Map(); base.forEach(p=>{ if(!gi.has(p.grupo)) gi.set(p.grupo,gi.size); });
+  const ord=base.map((p,i)=>[p,i]).sort((a,b)=>(gi.get(a[0].grupo)-gi.get(b[0].grupo))||(a[1]-b[1])).map(x=>x[0]);
+  parts=ord.map(p=>{
+    const o=state.ov[p.id]; const q=Object.assign({},p);
+    q.orig={w:p.w,h:p.h,d:p.d,mat:p.mat};
+    if(o){
+      if(o.w!=null) q.w=o.w; if(o.h!=null) q.h=o.h; if(o.d!=null) q.d=o.d;
+      q.x+=o.dx||0; q.y+=o.dy||0; q.z+=o.dz||0;
+      if(o.mat) q.mat=o.mat; q.oculta=!!o.oculta;
+      q.editada = o.w!=null||o.h!=null||o.d!=null||!!o.dx||!!o.dy||!!o.dz||!!o.mat;
+    }
+    if(q.tipo==="corte") q.code="P"+String(++nc).padStart(2,"0");
+    else if(q.tipo==="acessorio") q.code="A"+String(++na).padStart(2,"0");
+    else q.code="F"+String(++nf).padStart(2,"0");
+    return q;
+  });
+}
+
+/* ===================== INTERPRETADOR DE PEDIDOS ===================== */
+const NUMW={um:1,uma:1,dois:2,duas:2,tres:3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10,onze:11,doze:12};
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+function toMM(v,u){ v=parseFloat(String(v).replace(",",".")); if(!u) return v; u=u[0]==="m"&&u.slice(0,2)!=="mm"&&u.slice(0,3)!=="mil" ? "m" : (u.startsWith("c")?"cm":"mm"); return u==="m"?v*1000:u==="cm"?v*10:v; }
+function parsePrompt(txt){
+  let s=" "+norm(txt)+" ";
+  const out={tipo:null,set:{},notes:[],cria:/\b(cria|criar|crie|faz|fazer|faca|constroi|construir|desenha|desenhar|gera|gerar|quero|novo|nova|preciso)\b/.test(s)};
+  if(/\b(mesa auxiliar|auxiliar|estacao de servico|estacao do empregado|movel de (apoio|servico)|aparador|buffet|restauracao|cafetaria|talheres|empregado)\b/.test(s)) out.tipo="estacao";
+  else if(/\b(estante|livreiro|biblioteca)\b/.test(s)) out.tipo="estante";
+  else if(/\b(banco|banqueta|banquinho|mocho)\b/.test(s)) out.tipo="banco";
+  else if(/\bmesa\b/.test(s)) out.tipo="mesa";
+
+  // expressões por extenso
+  s=s.replace(/\b(um|1) metro e meio\b/g," 1500mm ").replace(/\bmeio metro\b/g," 500mm ").replace(/\bdois metros\b/g," 2000mm ").replace(/\bum metro\b/g," 1000mm ");
+  const dims=[];
+  const tri=s.match(/(\d+(?:[.,]\d+)?)\s*[x×*]\s*(\d+(?:[.,]\d+)?)\s*[x×*]\s*(\d+(?:[.,]\d+)?)\s*(mm|cm|m)?\b/);
+  if(tri){
+    let u=tri[4]; const vals=[tri[1],tri[2],tri[3]].map(v=>parseFloat(v.replace(",",".")));
+    if(!u) u = Math.max(...vals)<10?"m":Math.max(...vals)<400?"cm":"mm";
+    const mm=vals.map(v=>toMM(v,u));
+    out.set.W=mm[0]; out.set.D=mm[1]; out.set.H=mm[2];
+    s=s.replace(tri[0]," ");
+  } else {
+    const duo=s.match(/(\d+(?:[.,]\d+)?)\s*[x×*]\s*(\d+(?:[.,]\d+)?)\s*(mm|cm|m)?\b/);
+    if(duo){
+      let u=duo[3]; const vals=[duo[1],duo[2]].map(v=>parseFloat(v.replace(",",".")));
+      if(!u) u = Math.max(...vals)<10?"m":Math.max(...vals)<400?"cm":"mm";
+      const mm=vals.map(v=>toMM(v,u)); const tp=out.tipo||state.tpl;
+      out.set.W=mm[0]; if(tp==="estante") out.set.H=mm[1]; else out.set.D=mm[1];
+      s=s.replace(duo[0]," ");
+    }
+  }
+  const re=/(\d+(?:[.,]\d+)?)\s*(mm|milimetros?|cm|centimetros?|metros?|m)(?![a-z])/g; let m;
+  const KW=[["H",/(altura( de trabalho)?|alto|alta|altos)\s*(de|com|a)?\s*$/],["D",/(profundidade|fundo|funda|profunda)\s*(de|com)?\s*$/],["W",/(largura|comprimento|comprida|comprido|larga|largo)\s*(de|com)?\s*$/],
+            ["t",/(espessura|grossura|chapa)\s*(de|com)?\s*$/],["gavetaH",/gavetas?\s*(de|com)?\s*$/],["alcadoH",/(alcado|parte de cima|parte superior)\s*(de|com)?\s*$/],["tampoE",/tampo\s*(de|com)?\s*$/],["plinto",/(rodape|plinto)\s*(de|com)?\s*$/]];
+  const KWA=[["H",/^\s*(de )?(altura|alto|alta)/],["D",/^\s*(de )?(profundidade|fundo)/],["W",/^\s*(de )?(largura|comprimento)/],["t",/^\s*(de )?espessura/]];
+  const untagged=[];
+  while((m=re.exec(s))){
+    const val=toMM(m[1],m[2]); const before=s.slice(Math.max(0,m.index-32),m.index); const after=s.slice(m.index+m[0].length,m.index+m[0].length+22);
+    let k=null;
+    for(const [kk,r] of KWA) if(r.test(after)){k=kk;break;}
+    if(!k) for(const [kk,r] of KW) if(r.test(before)){k=kk;break;}
+    if(k) out.set[k]=val; else untagged.push(val);
+  }
+  ["W","D","H"].forEach(k=>{ if(out.set[k]==null && untagged.length) out.set[k]=untagged.shift(); });
+  dims.push(...untagged);
+
+  const cre=/\b(\d+|um|uma|dois|duas|tres|quatro|cinco|seis|sete|oito|nove|dez|onze|doze)\s+(?:[a-z]+\s+){0,2}?(baldes?|gavetas?|prateleiras?|galheteiros?|temperos?|portas?)\b/g;
+  while((m=cre.exec(s))){
+    const n=isNaN(+m[1])?NUMW[m[1]]:+m[1]; const w=m[2];
+    if(w.startsWith("balde")) out.set.nBaldes=n;
+    else if(w.startsWith("gaveta")) out.set.nGavetas=n;
+    else if(w.startsWith("prateleira")) out.set.nPrateleiras=n;
+    else if(w.startsWith("galheteiro")||w.startsWith("tempero")) out.set.nTemperos=n;
+    else if(w.startsWith("porta")) out.set.portas=n>0;
+  }
+  if(/\bsem (rodas|rodizios|rodinhas)\b/.test(s)) out.set.rodas=false; else if(/\b(rodas|rodizios|rodinhas|movel sobre rodas)\b/.test(s)) out.set.rodas=true;
+  if(/\bsem (alcado|parte de cima|parte superior|prateleira superior)\b/.test(s)) out.set.alcado=false; else if(/\b(com alcado|alcado|parte de cima)\b/.test(s)) out.set.alcado=true;
+  if(/\bsem portas\b/.test(s)) out.set.portas=false;
+  if(/\bsem costas\b/.test(s)) out.set.costas=false;
+  // materiais
+  const corMat = /\b(frentes?|portas?)\b[^.]*?\b(verdes?|brancas?|pretas?|carvalho|betula)\b/.exec(s);
+  if(corMat){ const c=corMat[2]; out.set.matFrentes = c.startsWith("verde")?"lacado":c.startsWith("branc")?"lacadoB":c.startsWith("pret")?"lacadoP":c==="carvalho"?"carvalho":"betula"; }
+  if(/\btampo (em |de )?(carvalho|madeira macica)\b/.test(s)) out.set.matTampo="carvalho";
+  if(/\btampo (em |de )?(betula|contraplacado)\b/.test(s)) out.set.matTampo="betula";
+  if(/\b(corpo|estrutura|tudo) (em |de )?(carvalho)\b/.test(s)) { out.set.matCorpo="carvalho"; out.set.matEstrutura="carvalho"; }
+  if(/\b(corpo|estrutura|tudo) (em |de )?(betula|contraplacado)\b/.test(s)) { out.set.matCorpo="betula"; }
+  if(/\b(corpo|estrutura|tudo) (em |de )?pinho\b/.test(s)) { out.set.matCorpo="macico"; out.set.matEstrutura="macico"; }
+  // menções de funções (informativas)
+  ["talheres","colheres de cafe","guardanapos","baldes","temperos","sal"].forEach(w=>{ if(s.includes(w)) out.notes.push(w); });
+  return out;
+}
+const LABEL={W:"largura",H:"altura",D:"profundidade",t:"espessura da chapa",gavetaH:"altura das gavetas",alcadoH:"altura do alçado",tampoE:"espessura do tampo",plinto:"rodapé",
+  nBaldes:"baldes de talheres",nGavetas:"gavetas",nPrateleiras:"prateleiras",nTemperos:"galheteiros",portas:"portas",rodas:"rodízios",alcado:"alçado",costas:"costas",matFrentes:"frentes",matTampo:"tampo",matCorpo:"corpo",matEstrutura:"estrutura"};
+function describeVal(k,v){ if(typeof v==="boolean") return v?"sim":"não"; if(/^mat/.test(k)) return MATS[v].nome; if(/^n[A-Z]/.test(k)) return String(v); return fmt(v)+" mm"; }
+
+function runPrompt(txt,force){
+  const r=parsePrompt(txt);
+  const changes=[]; let created=false;
+  const switching = r.tipo && (r.tipo!==state.tpl || r.cria || force);
+  if(switching){ const log=state.log; state=fresh(r.tipo); state.log=log; created=true; selId=null; }
+  const T=TPL[state.tpl]; const ignored=[];
+  for(const [k,v] of Object.entries(r.set)){
+    const sc=T.schema.find(f=>f.k===k);
+    if(!sc){ if(!(k==="matEstrutura"||k==="matCorpo")) ignored.push(LABEL[k]||k); continue; }
+    let val=v; if(sc.min!=null && typeof v==="number") val=clamp(Math.round(v),sc.min,sc.max);
+    state.params[k]=val; changes.push(LABEL[k]+": "+describeVal(k,val)+(val!==v&&typeof v==="number"?" (ajustado ao limite)":""));
+  }
+  compute();
+  const ncut=parts.filter(p=>p.tipo==="corte").length;
+  let head;
+  if(created) head="Criei: "+T.nome.toLowerCase()+" — "+summary()+".";
+  else if(changes.length) head="Atualizei o projeto — "+summary()+".";
+  else head="Não encontrei medidas nem alterações neste pedido. Experimenta, por exemplo, «largura 1800 mm», «com rodas», «8 baldes» ou «cria uma estante de 80 × 180 cm».";
+  const li=changes.map(c=>"<li>"+esc(c)+"</li>").join("");
+  let extra="";
+  if(created && state.tpl==="estacao") extra="<li>Gavetas com organizador: "+GAVETAS.slice(0,state.params.nGavetas).map(g=>g.nome.toLowerCase()).join(", ")+"</li><li>Alçado com galheteiros (sal, pimenta, azeite, vinagre), guardanapos e baldes de talheres</li><li>Nicho aberto para tabuleiros e armário com portas para outros utensílios</li>";
+  if(ignored.length) extra+="<li>Não se aplica a este móvel: "+esc(ignored.join(", "))+"</li>";
+  addMsg("sys",esc(head)+((li||extra)?"<ul>"+li+extra+"</ul>":"")+"<div class='hint' style='margin-top:6px'>"+ncut+" peças de corte · seleciona qualquer peça para mudar as medidas.</div>");
+  rebuild(created);
+}
+function summary(){
+  const p=state.params;
+  if(state.tpl==="estacao") return fmt(p.W)+" × "+fmt(p.D)+" mm, altura de trabalho "+fmt(p.H)+" mm, "+p.nGavetas+" gavetas"+(p.alcado?", alçado de "+fmt(p.alcadoH)+" mm com "+p.nBaldes+" baldes e "+p.nTemperos+" galheteiros":"")+(p.rodas?", sobre rodízios":"");
+  if(state.tpl==="estante") return fmt(p.W)+" × "+fmt(p.D)+" × "+fmt(p.H)+" mm com "+p.nPrateleiras+" prateleiras";
+  return fmt(p.W)+" × "+fmt(p.D)+" × "+fmt(p.H)+" mm";
+}
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+
+/* ===================== 3D ===================== */
+const viewEl=document.getElementById("view");
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+viewEl.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(32,1,10,60000);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=.12; controls.maxPolarAngle=Math.PI*0.95;
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a7a66,0.55));
+const sun=new THREE.DirectionalLight(0xffffff,0.55); sun.position.set(1800,3200,2600); scene.add(sun);
+const fill=new THREE.DirectionalLight(0xffffff,0.22); fill.position.set(-2400,1200,-900); scene.add(fill);
+const group=new THREE.Group(); scene.add(group);
+let grid=null;
+const edgeMat=new THREE.LineBasicMaterial({color:0x2b1b0e,transparent:true,opacity:.35});
+let meshes=[]; let modelCenter=new THREE.Vector3(); let explodeT=0, explodeTarget=0;
+
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function applyTheme(){
+  scene.background=new THREE.Color(cssVar("--stage")||"#ebe4d8");
+  if(grid){ scene.remove(grid); grid.geometry.dispose(); }
+  grid=new THREE.GridHelper(8000,80,new THREE.Color(cssVar("--grid1")||"#cbbfac"),new THREE.Color(cssVar("--grid2")||"#ddd3c3"));
+  grid.position.y=-2; scene.add(grid);
+  const dark=(cssVar("--bg")||"").toLowerCase()==="#140c06";
+  edgeMat.color.set(dark?0x0b0603:0x2b1b0e); edgeMat.opacity=dark?.55:.35;
+}
+function buildScene(){
+  meshes.forEach(m=>{ m.geometry.dispose(); m.material.dispose(); m.children.forEach(c=>c.geometry.dispose()); group.remove(m); });
+  meshes=[];
+  const vis=parts.filter(p=>!p.oculta && !p.invisivel);
+  const bb=bbox(vis);
+  group.position.set(-(bb.min[0]+bb.max[0])/2,0,-(bb.min[2]+bb.max[2])/2);
+  modelCenter.set((bb.min[0]+bb.max[0])/2,(bb.min[1]+bb.max[1])/2,(bb.min[2]+bb.max[2])/2);
+  for(const p of vis){
+    const M=MATS[p.mat]||MATS.betula;
+    const g2 = p.forma==="cil" ? new THREE.CylinderGeometry(p.w/2,(p.w/2)*(p.taper||1),p.h,32) : new THREE.BoxGeometry(p.w,p.h,p.d);
+    const mat=new THREE.MeshStandardMaterial({color:M.cor,roughness:M.rough!=null?M.rough:.82,metalness:M.metal||0});
+    const mesh=new THREE.Mesh(g2,mat);
+    mesh.position.set(p.x+p.w/2,p.y+p.h/2,p.z+p.d/2);
+    mesh.userData={part:p,base:mesh.position.clone()};
+    if(p.forma!=="cil" || p.w>60){ const e=new THREE.LineSegments(new THREE.EdgesGeometry(g2,25),edgeMat); mesh.add(e); }
+    group.add(mesh); meshes.push(mesh);
+  }
+  applyExplode(); highlight();
+  const vb=bbox(vis);
+  document.getElementById("dimTag").innerHTML="<b>"+esc(TPL[state.tpl].nome)+"</b> · <span class='num'>"+fmt(vb.max[0]-vb.min[0])+" × "+fmt(vb.max[2]-vb.min[2])+" × "+fmt(vb.max[1]-Math.max(0,vb.min[1]))+" mm</span> <span class='hint'>(L × P × A)</span>";
+}
+function bbox(list){
+  const mn=[Infinity,Infinity,Infinity], mx=[-Infinity,-Infinity,-Infinity];
+  list.forEach(p=>{ mn[0]=Math.min(mn[0],p.x); mn[1]=Math.min(mn[1],p.y); mn[2]=Math.min(mn[2],p.z); mx[0]=Math.max(mx[0],p.x+p.w); mx[1]=Math.max(mx[1],p.y+p.h); mx[2]=Math.max(mx[2],p.z+p.d); });
+  if(!list.length) return {min:[0,0,0],max:[1,1,1]};
+  return {min:mn,max:mx};
+}
+function applyExplode(){
+  const k=explodeT*0.55;
+  meshes.forEach(m=>{ const b=m.userData.base; const v=b.clone().sub(modelCenter); m.position.set(b.x+v.x*k, b.y+v.y*k*1.1, b.z+v.z*k*1.6); });
+}
+function highlight(){
+  meshes.forEach(m=>{ const p=m.userData.part; const s=p.id===selId, h=p.id===hoverId&&!s;
+    m.material.emissive.set(s?0xd9a43a:h?0x8c602a:0x000000); m.material.emissiveIntensity=s?.55:h?.25:0; });
+}
+function fitCamera(dir,cam,aspect){
+  cam=cam||camera; aspect=aspect||(cam.aspect||1);
+  const box=new THREE.Box3().setFromObject(group); const sph=box.getBoundingSphere(new THREE.Sphere());
+  const fov=cam.fov*Math.PI/180; const fovH=2*Math.atan(Math.tan(fov/2)*aspect);
+  const dist=sph.radius/Math.sin(Math.min(fov,fovH)/2)*1.02;
+  const d=new THREE.Vector3(...dir).normalize();
+  cam.position.copy(sph.center).addScaledVector(d,dist);
+  cam.near=dist/50; cam.far=dist*20; cam.updateProjectionMatrix(); cam.lookAt(sph.center);
+  if(cam===camera){ controls.target.copy(sph.center); controls.update(); }
+}
+const VIEWS={iso:[1,.62,1.35],front:[0,.02,1],side:[1,.02,0],top:[0,1,.0001]};
+function resize(){ const r=viewEl.getBoundingClientRect(); if(!r.width||!r.height) return; renderer.setSize(r.width,r.height,false); camera.aspect=r.width/r.height; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(viewEl);
+function loop(){
+  requestAnimationFrame(loop);
+  if(Math.abs(explodeT-explodeTarget)>.001){ explodeT+=(explodeTarget-explodeT)*.14; applyExplode(); }
+  controls.update(); renderer.render(scene,camera);
+}
+
+// seleção por clique
+const ray=new THREE.Raycaster(), ptr=new THREE.Vector2(); let down=null, hoverId=null;
+const tip=document.getElementById("tip");
+function pick(ev){
+  const r=renderer.domElement.getBoundingClientRect();
+  ptr.set(((ev.clientX-r.left)/r.width)*2-1, -((ev.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ptr,camera); const hit=ray.intersectObjects(meshes,false)[0];
+  return hit?hit.object.userData.part:null;
+}
+renderer.domElement.addEventListener("pointerdown",e=>{down=[e.clientX,e.clientY];});
+renderer.domElement.addEventListener("pointerup",e=>{
+  if(!down) return; const moved=Math.hypot(e.clientX-down[0],e.clientY-down[1]); down=null;
+  if(moved<5){ const p=pick(e); select(p?p.id:null,true); }
+});
+renderer.domElement.addEventListener("pointermove",e=>{
+  if(e.pointerType!=="mouse") return;
+  const p=pick(e); const id=p?p.id:null;
+  if(id!==hoverId){ hoverId=id; highlight(); }
+  if(p){ const r=viewEl.getBoundingClientRect(); tip.hidden=false; tip.style.left=(e.clientX-r.left)+"px"; tip.style.top=(e.clientY-r.top)+"px";
+    tip.textContent=p.code+" · "+p.nome+" — "+R(p.w)+" × "+R(p.h)+" × "+R(p.d)+" mm"; }
+  else tip.hidden=true;
+});
+renderer.domElement.addEventListener("pointerleave",()=>{tip.hidden=true; hoverId=null; highlight();});
+
+/* ===================== UI: LISTA DE PEÇAS / INSPETOR ===================== */
+const $=id=>document.getElementById(id);
+function select(id,fromView){
+  selId=id; highlight(); renderList(); renderInspector();
+  if(id && fromView){ const row=document.querySelector('.prow[data-id="'+CSS.escape(id)+'"]'); if(row) row.scrollIntoView({block:"nearest"}); showTab("parts"); }
+}
+function renderList(){
+  const q=norm($("search").value.trim());
+  const groups=new Map();
+  parts.forEach(p=>{ if(p.invisivel) return; if(q && !norm(p.nome+" "+p.grupo+" "+p.code).includes(q)) return; if(!groups.has(p.grupo)) groups.set(p.grupo,[]); groups.get(p.grupo).push(p); });
+  let h="";
+  groups.forEach((list,g)=>{
+    h+="<div class='grp'><div class='gh'><span>"+esc(g)+"</span><span class='num'>"+list.length+"</span></div>";
+    list.forEach(p=>{
+      h+="<div class='prow"+(p.id===selId?" sel":"")+(p.oculta?" hid":"")+"' data-id='"+esc(p.id)+"' role='button' tabindex='0'>"+
+        "<span class='code "+p.code[0]+"'>"+p.code+"</span><span class='pname'>"+esc(p.nome)+(p.editada?"<small>editada</small>":"")+"</span>"+
+        "<span class='pdim'>"+R(p.w)+"×"+R(p.h)+"×"+R(p.d)+"</span>"+
+        "<button class='eye' type='button' data-eye='"+esc(p.id)+"' aria-label='"+(p.oculta?"Mostrar":"Ocultar")+" "+esc(p.nome)+"'>"+(p.oculta?"◌":"●")+"</button></div>";
+    });
+    h+="</div>";
+  });
+  $("plist").innerHTML=h||"<div class='empty'>Nenhuma peça corresponde à procura.</div>";
+  const nc=parts.filter(p=>p.tipo==="corte"&&!p.oculta).length, na=parts.filter(p=>p.tipo!=="corte"&&!p.invisivel).length;
+  $("countTag").textContent=nc+" peças · "+na+" acessórios";
+}
+$("plist").addEventListener("click",e=>{
+  const eye=e.target.closest("[data-eye]");
+  if(eye){ const id=eye.dataset.eye; const o=state.ov[id]=state.ov[id]||{}; o.oculta=!o.oculta; commit(); return; }
+  const row=e.target.closest(".prow"); if(row) select(row.dataset.id===selId?null:row.dataset.id);
+});
+$("plist").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ const row=e.target.closest(".prow"); if(row){ e.preventDefault(); select(row.dataset.id); } } });
+$("search").addEventListener("input",renderList);
+
+function renderInspector(){
+  const p=parts.find(q=>q.id===selId);
+  if(!p){ $("insp").innerHTML="<div class='empty'>Clica numa peça no modelo 3D ou na lista para ver a referência e alterar as medidas. Usa «Medidas gerais» para mudar o móvel inteiro.</div>"; return; }
+  const matOpts=(p.tipo==="corte"?CHAPAS:Object.keys(MATS)).map(k=>"<option value='"+k+"'"+(k===p.mat?" selected":"")+">"+esc(MATS[k].nome)+"</option>").join("");
+  const o=state.ov[p.id]||{};
+  const f=(k,l,v)=>"<div class='fld'><label for='in-"+k+"'>"+l+"</label><input id='in-"+k+"' type='number' step='1' data-k='"+k+"' value='"+R(v)+"'></div>";
+  $("insp").innerHTML="<div class='insp'><div style='display:flex;gap:8px;align-items:center'><span class='code "+p.code[0]+"'>"+p.code+"</span><h3>"+esc(p.nome)+"</h3></div>"+
+   "<div class='meta'>"+esc(p.grupo)+(p.nota?" · "+esc(p.nota):"")+(p.orla?" · orla: "+esc(p.orla):"")+"</div>"+
+   "<div class='fgrid'>"+f("w","Largura X",p.w)+f("h","Altura Y",p.h)+f("d","Profund. Z",p.d)+"</div>"+
+   "<div class='fgrid' style='margin-top:8px'>"+f("dx","Mover X",o.dx||0)+f("dy","Mover Y",o.dy||0)+f("dz","Mover Z",o.dz||0)+"</div>"+
+   "<div class='fld' style='margin-top:8px'><label for='in-mat'>Material</label><select id='in-mat'>"+matOpts+"</select></div>"+
+   "<div class='acts'><button class='btn sm' type='button' id='btnPartReset'"+(p.editada?"":" disabled")+">Repor peça</button>"+
+   "<button class='btn sm' type='button' id='btnPartHide'>"+(p.oculta?"Mostrar":"Ocultar")+"</button>"+
+   "<button class='btn sm' type='button' id='btnPartClose'>Fechar</button></div>"+
+   (p.editada?"<div class='hint' style='margin-top:6px'>Original: "+R(p.orig.w)+" × "+R(p.orig.h)+" × "+R(p.orig.d)+" mm</div>":"")+"</div>";
+  $("insp").querySelectorAll("input[data-k]").forEach(inp=>inp.addEventListener("change",()=>{
+    const k=inp.dataset.k; let v=parseFloat(inp.value); if(isNaN(v)) return;
+    const ov=state.ov[p.id]=state.ov[p.id]||{};
+    if(k==="w"||k==="h"||k==="d"){ v=Math.max(1,v); ov[k]= Math.abs(v-p.orig[k])<.5?null:v; } else ov[k]=v;
+    commit();
+  }));
+  $("in-mat").addEventListener("change",e=>{ const ov=state.ov[p.id]=state.ov[p.id]||{}; ov.mat=e.target.value===p.orig.mat?null:e.target.value; commit(); });
+  $("btnPartReset").addEventListener("click",()=>{ const hid=state.ov[p.id]&&state.ov[p.id].oculta; state.ov[p.id]=hid?{oculta:true}:{}; commit(); });
+  $("btnPartHide").addEventListener("click",()=>{ const ov=state.ov[p.id]=state.ov[p.id]||{}; ov.oculta=!ov.oculta; commit(); });
+  $("btnPartClose").addEventListener("click",()=>select(null));
+}
+function renderParams(){
+  const T=TPL[state.tpl], p=state.params;
+  let h="<p class='hint' style='margin:0 0 10px'>"+esc(T.sub)+". Mudar estas medidas recalcula todas as peças; as edições feitas peça a peça mantêm-se.</p><div class='pgrid'>";
+  T.schema.forEach(f=>{
+    if(f.t==="bool") h+="<label class='chk fld wide'><input type='checkbox' id='pp-"+f.k+"' data-pk='"+f.k+"'"+(p[f.k]?" checked":"")+"> "+esc(f.l)+"</label>";
+    else if(f.t==="mat") h+="<div class='fld wide'><label for='pp-"+f.k+"'>"+esc(f.l)+"</label><select id='pp-"+f.k+"' data-pk='"+f.k+"'>"+CHAPAS.map(k=>"<option value='"+k+"'"+(k===p[f.k]?" selected":"")+">"+esc(MATS[k].nome)+"</option>").join("")+"</select></div>";
+    else h+="<div class='fld'><label for='pp-"+f.k+"'>"+esc(f.l)+(f.u?" ("+f.u+")":"")+"</label><input id='pp-"+f.k+"' type='number' data-pk='"+f.k+"' min='"+f.min+"' max='"+f.max+"' step='"+f.step+"' value='"+p[f.k]+"'></div>";
+  });
+  h+="</div><div class='sum' id='matSum'></div>";
+  $("paneParams").innerHTML=h;
+  $("paneParams").querySelectorAll("[data-pk]").forEach(el=>el.addEventListener("change",()=>{
+    const f=T.schema.find(s=>s.k===el.dataset.pk);
+    if(f.t==="bool") state.params[f.k]=el.checked;
+    else if(f.t==="mat") state.params[f.k]=el.value;
+    else { let v=parseFloat(el.value); if(isNaN(v)) return; v=clamp(v,f.min,f.max); el.value=v; state.params[f.k]=v; }
+    commit();
+  }));
+  renderMatSum();
+}
+function renderMatSum(){
+  const el=$("matSum"); if(!el) return;
+  const m=materialSummary();
+  el.innerHTML="<div class='eyebrow' style='margin-bottom:4px'>Chapa necessária (estimativa)</div>"+m.map(r=>"<div style='display:flex;justify-content:space-between;gap:8px'><span>"+esc(r.nome)+" "+r.esp+" mm</span><span class='num'>"+r.m2.toFixed(2)+" m² · "+r.chapas+" ch.</span></div>").join("");
+}
+function showTab(t){
+  $("tabParts").setAttribute("aria-selected",t==="parts"); $("tabParams").setAttribute("aria-selected",t==="params");
+  $("paneParts").hidden=t!=="parts"; $("paneParams").hidden=t!=="params";
+}
+$("tabParts").addEventListener("click",()=>showTab("parts"));
+$("tabParams").addEventListener("click",()=>showTab("params"));
+
+function renderLegend(){
+  const used=new Map(); parts.forEach(p=>{ if(!p.oculta&&!p.invisivel&&MATS[p.mat].tipo==="chapa") used.set(p.mat,1); });
+  $("legend").innerHTML=[...used.keys()].map(k=>"<span><i style='background:#"+MATS[k].cor.toString(16).padStart(6,"0")+"'></i>"+esc(MATS[k].nome)+"</span>").join("");
+}
+
+function commit(){ compute(); save(); rebuild(false); }
+function rebuild(refit){
+  if(selId && !parts.find(p=>p.id===selId)) selId=null;
+  buildScene(); renderList(); renderInspector(); renderParams(); renderLegend();
+  $("projName").textContent=TPL[state.tpl].sub;
+  if(refit) fitCamera(VIEWS.iso);
+  save();
+}
+
+/* ===================== CONSOLA ===================== */
+function addMsg(who,html){ state.log.push({who,html}); if(state.log.length>40) state.log.shift(); renderLog(); save(); }
+function renderLog(){
+  $("log").innerHTML=state.log.map(m=>"<div class='msg "+m.who+"'><span class='who'>"+(m.who==="user"?"Tu":"Oficina")+"</span>"+m.html+"</div>").join("");
+  $("log").scrollTop=$("log").scrollHeight;
+}
+$("promptForm").addEventListener("submit",e=>{ e.preventDefault(); const v=$("promptIn").value.trim(); if(!v) return; addMsg("user",esc(v)); $("promptIn").value=""; runPrompt(v); });
+$("promptIn").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); $("promptForm").requestSubmit(); } });
+const CHIPS=["largura 1800 mm","com rodas","8 baldes","4 gavetas","alçado de 420 mm","frentes brancas","sem portas","cria uma estante de 80 × 180 cm com 5 prateleiras","cria uma mesa 120x70x75 cm","cria um banco de 45 cm de altura"];
+$("chips").innerHTML=CHIPS.map(c=>"<button type='button' class='chip'>"+esc(c)+"</button>").join("");
+$("chips").addEventListener("click",e=>{ const b=e.target.closest(".chip"); if(!b) return; $("promptIn").value=b.textContent; $("promptIn").focus(); });
+$("btnClear").addEventListener("click",()=>{ state.log=[]; renderLog(); save(); });
+
+document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>fitCamera(VIEWS[b.dataset.view])));
+$("btnExplode").addEventListener("click",()=>{ explodeTarget=explodeTarget?0:1; $("btnExplode").classList.toggle("on",!!explodeTarget); $("btnExplode").setAttribute("aria-pressed",!!explodeTarget); });
+$("btnReset").addEventListener("click",()=>{ state.ov={}; commit(); addMsg("sys","Repus todas as peças às medidas calculadas."); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ if(!$("sheetWrap").hidden) closeSheet(); else select(null); } });
+
+/* ===================== LISTA DE CORTE / MATERIAIS ===================== */
+function cutRows(){
+  const rows=new Map();
+  parts.filter(p=>p.tipo==="corte"&&!p.oculta).forEach(p=>{
+    const s=[p.w,p.h,p.d].map(R).sort((a,b)=>b-a);
+    const key=s.join("x")+"|"+p.mat+"|"+(p.orla||"")+"|"+p.nome.replace(/\b(esquerd[ao]|direit[ao]|esq\.|dir\.)\s*/gi,"").replace(/\s\d+(\/\d+)?$/,"").replace(/ gaveta \d+$/,"");
+    if(!rows.has(key)) rows.set(key,{refs:[],nomes:[],qt:0,c:s[0],l:s[1],e:s[2],mat:p.mat,orla:p.orla,nota:p.nota||""});
+    const r=rows.get(key); r.refs.push(p.code); r.nomes.push(p.nome); r.qt++;
+  });
+  return [...rows.values()];
+}
+function materialSummary(){
+  const m=new Map();
+  parts.filter(p=>p.tipo==="corte"&&!p.oculta).forEach(p=>{
+    const s=[p.w,p.h,p.d].sort((a,b)=>b-a); const k=p.mat+"|"+R(s[2]);
+    if(!m.has(k)) m.set(k,{nome:MATS[p.mat].nome,esp:R(s[2]),area:0}); m.get(k).area+=s[0]*s[1]/1e6;
+  });
+  return [...m.values()].map(r=>({nome:r.nome,esp:r.esp,m2:r.area*1.15,chapas:Math.max(1,Math.ceil(r.area*1.15/(2.44*1.22)))}));
+}
+function hardware(){
+  const out=[]; const p=state.params; const vis=parts.filter(q=>!q.oculta);
+  const cnt=(re)=>vis.filter(q=>re.test(q.id)).length;
+  const corr=vis.filter(q=>/-corr$/.test(q.id));
+  if(corr.length){ const L=R(corr[0].d); out.push(["Corrediças telescópicas de extração total "+L+" mm (par)",corr.length,"Carga 30 kg, com amortecimento"]); }
+  const portas=vis.filter(q=>/^porta-\d$/.test(q.id));
+  if(portas.length){ const nh=portas.reduce((a,q)=>a+(q.h>900?3:2),0); out.push(["Dobradiças de copa Ø35 mm, sobreposição total, 110°",nh,"Com amortecimento"]); }
+  const pux=cnt(/-pux$/); if(pux) out.push(["Puxador barra inox, entre-eixos 128 mm",pux,"Parafusos M4 incluídos"]);
+  const rod=cnt(/^rod-/); if(rod) out.push(["Rodízio giratório Ø75 mm, placa 4 furos",rod,"2 com travão"]);
+  const sap=cnt(/^sap-/); if(sap) out.push(["Sapata niveladora / feltro",sap,""]);
+  const prat=vis.filter(q=>/prat-(e|d|\d)/.test(q.id)&&q.tipo==="corte").length; if(prat) out.push(["Suportes de prateleira Ø5 mm",prat*4,""]);
+  const nc=vis.filter(q=>q.tipo==="corte").length;
+  out.push(["Cavilhas de faia 8×35 mm",Math.ceil(nc*2.5/10)*10,"Com cola PVA D3"]);
+  out.push(["Parafusos para aglomerado 4×40 mm",Math.ceil(nc*5/25)*25,""]);
+  out.push(["Parafusos 3,5×16 mm (ferragens)",Math.ceil((pux*2+corr.length*12+portas.length*8+rod*4+20)/50)*50,""]);
+  if(state.tpl==="estacao") out.push(["Cantoneiras / ferragem de tampo",8,"Furos ovalizados"]);
+  if(state.tpl==="mesa"||state.tpl==="banco") out.push(["Grampos de tampo",state.tpl==="mesa"?8:4,""]);
+  const a=new Map(); vis.filter(q=>q.tipo==="acessorio").forEach(q=>{ const k=q.nome.replace(/\s\d+(\s\(.*\))?$/,"").replace(/ \d+$/,""); a.set(k,(a.get(k)||0)+1); });
+  return {ferr:out.filter(r=>r[1]!==0),acc:[...a.entries()]};
+}
+
+/* ===================== FOLHA DE CONSTRUÇÃO ===================== */
+let pr=null;
+function renderSnapshot(kind,dir,w,h,opts){
+  opts=opts||{};
+  if(!pr){ pr=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); pr.setPixelRatio(2); }
+  pr.setSize(w,h,false);
+  let cam;
+  const box=new THREE.Box3().setFromObject(group);
+  if(kind==="ortho"){
+    const d=new THREE.Vector3(...dir).normalize();
+    const size=box.getSize(new THREE.Vector3()), c=box.getCenter(new THREE.Vector3());
+    let vw,vh; if(Math.abs(d.z)>.9){vw=size.x;vh=size.y;} else if(Math.abs(d.x)>.9){vw=size.z;vh=size.y;} else {vw=size.x;vh=size.z;}
+    const m=1.42; let hw=vw*m/2, hh=vh*m/2; if(hw/hh>w/h) hh=hw*h/w; else hw=hh*w/h;
+    cam=new THREE.OrthographicCamera(-hw,hw,hh,-hh,1,100000);
+    cam.position.copy(c).addScaledVector(d,20000);
+    if(Math.abs(d.y)>.9) cam.up.set(0,0,-1);
+    cam.lookAt(c); cam.updateProjectionMatrix();
+  } else {
+    cam=new THREE.PerspectiveCamera(30,w/h,10,100000);
+    fitCamera(dir,cam,w/h);
+    cam.position.sub(cam.position.clone().sub(box.getCenter(new THREE.Vector3())).multiplyScalar(opts.zoom!=null?opts.zoom:0));
+  }
+  pr.render(scene,cam);
+  const cv=document.createElement("canvas"); cv.width=w*2; cv.height=h*2; const ctx=cv.getContext("2d");
+  ctx.drawImage(pr.domElement,0,0);
+  const P=(v)=>{ const q=new THREE.Vector3(v[0],v[1],v[2]).add(group.position).project(cam); return [(q.x+1)/2*cv.width,(1-q.y)/2*cv.height]; };
+  if(opts.dims) opts.dims.forEach(dm=>drawDim(ctx,P(dm.a),P(dm.b),dm.off,dm.label));
+  if(opts.labels){
+    ctx.font="600 17px 'IBM Plex Mono', monospace"; ctx.textAlign="center"; ctx.textBaseline="middle";
+    meshes.forEach(m=>{ const p=m.userData.part; if(p.tipo!=="corte") return;
+      const wp=m.getWorldPosition(new THREE.Vector3()).project(cam); const x=(wp.x+1)/2*cv.width, y=(1-wp.y)/2*cv.height;
+      const t=p.code.slice(1).replace(/^0/,""); const r=t.length>1?15:13;
+      ctx.fillStyle="rgba(255,255,255,.92)"; ctx.strokeStyle="#1b140d"; ctx.lineWidth=1.6; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle="#1b140d"; ctx.fillText(t,x,y+1); });
+  }
+  return cv.toDataURL("image/png");
+}
+function drawDim(ctx,A,B,off,label){
+  const s=2; const ox=off[0]*s, oy=off[1]*s;
+  const a=[A[0]+ox,A[1]+oy], b=[B[0]+ox,B[1]+oy];
+  ctx.strokeStyle="#8c602a"; ctx.fillStyle="#8c602a"; ctx.lineWidth=2;
+  const ext=(P,Q)=>{ const len=Math.hypot(Q[0]-P[0],Q[1]-P[1])||1; const ux=(Q[0]-P[0])/len, uy=(Q[1]-P[1])/len; ctx.beginPath(); ctx.moveTo(P[0]+ux*8,P[1]+uy*8); ctx.lineTo(Q[0]+ux*10,Q[1]+uy*10); ctx.stroke(); };
+  ext(A,a); ext(B,b);
+  ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+  const ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  [a,b].forEach(p=>{ ctx.save(); ctx.translate(p[0],p[1]); ctx.rotate(ang+Math.PI/4); ctx.beginPath(); ctx.moveTo(-9,0); ctx.lineTo(9,0); ctx.lineWidth=3; ctx.stroke(); ctx.restore(); });
+  const mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2;
+  ctx.save(); ctx.translate(mx,my); let rot=ang; if(rot>Math.PI/2) rot-=Math.PI; if(rot<-Math.PI/2) rot+=Math.PI; ctx.rotate(rot);
+  ctx.font="600 22px 'IBM Plex Mono', monospace"; ctx.textAlign="center"; ctx.textBaseline="middle";
+  const tw=ctx.measureText(label).width+14; ctx.fillStyle="#fff"; ctx.fillRect(-tw/2,-15,tw,30); ctx.fillStyle="#5b3d17"; ctx.fillText(label,0,1); ctx.restore();
+}
+function openSheet(){
+  // preparar cena para papel
+  const prevBg=scene.background, prevSel=selId, prevHover=hoverId, prevEx=explodeT;
+  selId=null; hoverId=null; highlight(); grid.visible=false; scene.background=new THREE.Color(0xffffff);
+  const prevEdge=[edgeMat.color.getHex(),edgeMat.opacity]; edgeMat.color.set(0x1b140d); edgeMat.opacity=.7;
+  explodeT=0; applyExplode();
+  const vis=parts.filter(p=>!p.oculta&&!p.invisivel); const bb=bbox(vis); const mn=bb.min, mx=bb.max;
+  const W=R(mx[0]-mn[0]), D=R(mx[2]-mn[2]), Ht=R(mx[1]-Math.max(0,mn[1]));
+  const extras=(TPL[state.tpl].extras?TPL[state.tpl].extras(state.params):[]);
+  const fx=(v)=>extras.filter(e=>e.view===v);
+  const IW=620, IH=440;
+  const imgs={};
+  imgs.iso=renderSnapshot("persp",[1,.6,1.35],IW,IH);
+  imgs.iso2=renderSnapshot("persp",[-1.35,.45,1],IW,IH);
+  imgs.front=renderSnapshot("ortho",[0,0,1],IW,IH,{dims:[
+    {a:[mn[0],mn[1],mx[2]],b:[mx[0],mn[1],mx[2]],off:[0,26],label:fmt(W)},
+    {a:[mn[0],Math.max(0,mn[1]),mx[2]],b:[mn[0],mx[1],mx[2]],off:[-30,0],label:fmt(Ht)}
+  ].concat(fx("front").map(e=>({a:e.a,b:e.b,off:[30,0],label:e.label})))});
+  imgs.side=renderSnapshot("ortho",[1,0,0],IW,IH,{dims:[
+    {a:[mx[0],mn[1],mn[2]],b:[mx[0],mn[1],mx[2]],off:[0,26],label:fmt(D)},
+    {a:[mx[0],Math.max(0,mn[1]),mx[2]],b:[mx[0],mx[1],mx[2]],off:[-30,0],label:fmt(Ht)}
+  ].concat(fx("side").map(e=>({a:[mx[0],e.a[1],mn[2]],b:[mx[0],e.b[1],mn[2]],off:[30,0],label:e.label})))});
+  imgs.top=renderSnapshot("ortho",[0,1,0],IW,IH,{dims:[
+    {a:[mn[0],mx[1],mx[2]],b:[mx[0],mx[1],mx[2]],off:[0,26],label:fmt(W)},
+    {a:[mn[0],mx[1],mn[2]],b:[mn[0],mx[1],mx[2]],off:[-30,0],label:fmt(D)}
+  ]});
+  explodeT=1; applyExplode();
+  imgs.exp=renderSnapshot("persp",[1,.75,1.5],IW,IH,{labels:true});
+  // repor
+  explodeT=prevEx; applyExplode(); edgeMat.color.setHex(prevEdge[0]); edgeMat.opacity=prevEdge[1];
+  scene.background=prevBg; grid.visible=true; selId=prevSel; hoverId=prevHover; highlight();
+
+  const T=TPL[state.tpl], p=state.params, today=new Date().toLocaleDateString("pt-PT");
+  const ref="7G-"+state.tpl.slice(0,3).toUpperCase()+"-"+W+"x"+D+"x"+Ht;
+  const cr=cutRows(), ms=materialSummary(), hw=hardware();
+  const ncut=cr.reduce((a,r)=>a+r.qt,0);
+  const header=(pg,tot)=>"<div class='ph'><div><h1>"+esc(T.nome)+"</h1><div class='sub'>"+esc(T.sub)+" · "+esc(summary())+"</div></div><div class='r'>Ref. "+ref+"<br>"+today+"<br>Folha "+pg+"/"+tot+"</div></div>";
+  const foot="<div class='foot'><span>Oficina de Móveis 7G · cotas em milímetros · desenhos sem escala</span><span>Confirmar medidas em obra antes de cortar</span></div>";
+  const kv=[["Largura total",fmt(W)+" mm"],["Profundidade total",fmt(D)+" mm"],["Altura total",fmt(Ht)+" mm"],["Peças de corte",ncut]];
+  if(state.tpl==="estacao") kv.push(["Altura de trabalho",fmt(p.H)+" mm"],["Gavetas",p.nGavetas+" × "+p.gavetaH+" mm"],["Baldes · galheteiros",(p.alcado?p.nBaldes:0)+" · "+(p.alcado?p.nTemperos:0)],["Apoio",p.rodas?"Rodízios Ø75":"Sapatas niveladoras"]);
+  const fig=(src,t,s)=>"<figure><img src='"+src+"' alt='"+esc(t)+"'><figcaption>"+esc(t)+"<span>"+esc(s)+"</span></figcaption></figure>";
+  let p1="<section class='page'>"+header(1,2)+
+    "<div class='figs'>"+fig(imgs.iso,"Perspetiva","frente / direita")+fig(imgs.iso2,"Perspetiva","frente / esquerda")+
+    fig(imgs.front,"Alçado frontal","cotas gerais")+fig(imgs.side,"Alçado lateral","vista da direita")+
+    fig(imgs.top,"Planta","vista de cima")+fig(imgs.exp,"Vista explodida","nº = referência P da lista de corte")+"</div>"+
+    "<div><h2>Especificações</h2><div class='kv'>"+kv.map(r=>"<div><b>"+esc(r[0])+"</b><span>"+esc(String(r[1]))+"</span></div>").join("")+"</div></div>"+foot+"</section>";
+  let funcs="";
+  if(state.tpl==="estacao"){
+    const g=GAVETAS.slice(0,p.nGavetas).map((x,i)=>"<li><b>Gaveta "+(i+1)+" — "+esc(x.nome)+":</b> "+esc(x.nota)+" ("+x.k+" divisões)</li>").join("");
+    funcs="<div><h2>Organização das áreas</h2><ul class='steps'>"+g+
+      (p.alcado?"<li><b>Alçado esquerdo:</b> "+p.nTemperos+" galheteiros com sal, pimenta, azeite e vinagre, prontos a levar às mesas</li><li><b>Alçado central:</b> guardanapos</li><li><b>Alçado direito:</b> "+p.nBaldes+" baldes de talheres para levar às mesas</li><li><b>Prateleira do alçado:</b> açucareiros, porta-palhinhas, porta-menus</li>":"")+
+      "<li><b>Nicho aberto:</b> tabuleiros de serviço, jarros de água, cestos de pão</li>"+(p.portas?"<li><b>Armário com portas:</b> bules, menus, toalhas e reservas</li>":"")+"</ul></div>";
+  }
+  let p2="<section class='page'>"+header(2,2)+
+    "<div><h2>Lista de corte</h2><div class='tblwrap'><table class='tbl'><thead><tr><th>Ref.</th><th>Peça</th><th>Qtd</th><th>Comp.</th><th>Larg.</th><th>Esp.</th><th>Material</th><th>Orla</th></tr></thead><tbody>"+
+    cr.map(r=>"<tr><td class='num'>"+r.refs.join(", ")+"</td><td>"+esc(uniqName(r.nomes))+"</td><td class='n'>"+r.qt+"</td><td class='n'>"+fmt(r.c)+"</td><td class='n'>"+fmt(r.l)+"</td><td class='n'>"+r.e+"</td><td>"+esc(MATS[r.mat].nome)+"</td><td>"+esc(r.orla||"—")+"</td></tr>").join("")+
+    "</tbody></table></div></div>"+
+    "<div class='cols2'><div><h2>Ferragens</h2><table class='tbl'><tbody>"+hw.ferr.map(r=>"<tr><td>"+esc(r[0])+(r[2]?"<br><span style='color:#7a6a58'>"+esc(r[2])+"</span>":"")+"</td><td class='n'>"+r[1]+"</td></tr>").join("")+"</tbody></table>"+
+    (hw.acc.length?"<h2 style='margin-top:5mm'>Acessórios de serviço</h2><table class='tbl'><tbody>"+hw.acc.map(r=>"<tr><td>"+esc(r[0])+"</td><td class='n'>"+r[1]+"</td></tr>").join("")+"</tbody></table>":"")+"</div>"+
+    "<div><h2>Material (com 15% de desperdício)</h2><table class='tbl'><tbody>"+ms.map(r=>"<tr><td>"+esc(r.nome)+" "+r.esp+" mm</td><td class='n'>"+r.m2.toFixed(2)+" m²</td><td class='n'>"+r.chapas+" ch. 2440×1220</td></tr>").join("")+"</tbody></table>"+
+    "<h2 style='margin-top:5mm'>Sequência de montagem</h2><ol class='steps'>"+T.passos.map(s=>"<li>"+esc(s)+"</li>").join("")+"</ol></div></div>"+
+    funcs+foot+"</section>";
+  $("pages").innerHTML=p1+p2;
+  $("sheetWrap").hidden=false; $("sheetWrap").scrollTop=0;
+}
+function uniqName(n){ if(n.length===1) return n[0]; const base=n[0].replace(/\b(esquerd[ao]|direit[ao]|esq\.|dir\.)\s*/gi,"").replace(/\s\d+(\/\d+)?$/,"").replace(/ gaveta \d+$/," gaveta").trim(); return base.charAt(0).toUpperCase()+base.slice(1)+" ("+n.length+")"; }
+function closeSheet(){ $("sheetWrap").hidden=true; }
+$("btnSheet").addEventListener("click",openSheet);
+$("btnCloseSheet").addEventListener("click",closeSheet);
+const inFrame=(()=>{ try{ return window.self!==window.top; }catch(e){ return true; } })();
+if(inFrame){ $("btnPrint").hidden=true; $("printHint").textContent="Para imprimir ou guardar em PDF, abre o ficheiro oficina-moveis.html no navegador e usa este botão (ou Ctrl+P)."; }
+else $("printHint").textContent="A4 vertical · 2 folhas";
+$("btnPrint").addEventListener("click",()=>window.print());
+
+/* ===================== ARRANQUE ===================== */
+const PEDIDO="Mesa auxiliar de restauração com mais ou menos um metro e meio e áreas para colocar talheres separados, colheres de café, guardanapos, pequenos baldes para levar talheres às mesas, uma área para diversos temperos e sal para levar às mesas e outros utensílios de cafetaria/restaurante.";
+state=load();
+applyTheme();
+if(!state){ state=fresh("estacao"); addMsg("user",esc(PEDIDO)); runPrompt(PEDIDO,true); }
+else { compute(); renderLog(); rebuild(true); }
+resize(); fitCamera(VIEWS.iso);
+loop();
+const mq=window.matchMedia("(prefers-color-scheme: dark)"); if(mq.addEventListener) mq.addEventListener("change",applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+})();
+</script>
+<!--BODY-END-->
+</body>
+</html>
